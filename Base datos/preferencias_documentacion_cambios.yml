@@ -1,0 +1,282 @@
+#Preferencias compras 
+        - usar_depositos_asignados: habilita en el modulo de compra agregar depositos a los insumos
+        - usar_descuentos_compras: habilita en el modulo de compra el usar descuentos 
+        - importacion: modulo de compras habilita tipo origen, moneda, cotizacion, 
+        embarque y compras_ordenes, tambien agrega en funciones compras referente a gastos asociados y cotizacion de despacho
+        - obliga_oc: obliga que la orden de compra este asignada al crear una factura en el modulo de compras
+        - multimoneda_local: permite que en compras de origen local se permita compras en otras monedas
+        tambien afecta compras ordenes
+
+#Preferencias proveedores
+        - agente_retencion: habilita en los distintos fomularios de proveedores la opcion de ser un agente de retencion
+        - dias_entrega: habilita los dias de entrega estimados para proveedores locales si esta activo la importacion este campo se completa en la orden de compra si se activa  y tambien agrega al formulario
+        de proveedores el campo dias_entrega
+        - importacion: 
+                [ * ] En el formulario de proveedores habilita las opciones de tipo origen, moneda y pais y los valida en funciones proveedor
+                [ * ] En el formulario de comras ordenes verifica la cotizacion de las monedas especificamente en add_prodtmp_ne.php y actualiza 
+                el costo referencial con la cotizacion asociada a esa orden de compra
+                [ * ] Al crear una orden de compra verifica si fue especificado el tipo de origen, ademas activa los campos de moneda,cotizacion y tipo origen
+                [ * ] Ademas en compras ordenes habilita la parte referente a el modulo de embarcacion
+                [ * ] En funciones compras, al registrar la compra el embarque pasa a estado finalizado si es que importacion esta activo
+        - cta_cte: habilita la cuenta proveedor deuda y mercaderia serian cuentas contables
+        - acuerdos_comerciales_archivo: habilita la carga del pdf y ademas desde hasta que serian fechas de vencimiento
+        para dicho archivo
+        sin_factura: desabilita el sin factura y obliga a marcar persona fisica
+        proveedores.persona= 1=Física 2=Jurídica 0=sin preferencia
+        - tipo_compra: habilita en el formulario de proveedores con sus validaciones para precargar si el proveedor es contado o credito
+        - tipo_servicio: es para referencia de que servicio presta el proveedor ademas habilita un (ABM- Agregar Borrar Modificar, CRUD Create Remove Update Delete )
+        para agregar mas tipos de servicios, y en compras_ordenes_add.php habilita el filtro por tipo de servicios para los proveedores
+        - obliga_ruc: por defecto S que obliga el ruc pero para ramirez se cambia a N ya que no tienen el ruc de todos los proveedores
+        - ruc_duplicado: habilita que el ruc sea duplicado en la  base de datos
+        - razon_social_duplicado: habilita que la razon social sea duplicada en la base de datos
+#Preferencias insumos listas
+        - medidas_referenciales: habilita en compras ordenes, en el modul ode compras y en proveedores las medidas referenciales medida2 y medida3
+        - medidas_edi: habilita en compras ordenes, en el modul ode compras y en proveedores la medida referencial para el estándar EDI
+        - configuraciones_alternativas: habilita el regimen sanitario rs y rspa, habilita descuento, modifica precio, maneja lote, regimen turismo, maneja codigo alternativo, respeta precio sugerido
+        - codigo_fob: habilita el codigo FOB que seria una lista para una tabla con codigos nativos del proveedor seria para un futuro
+        crear un abm que consuma un txt separados por ; que tenga el codigo nativo del proveedor y el id del proveedor, ver la tabla para mayor claridad en la explicacion
+        - medidas_fisicas: habilita las medidas fisicas del insumo es decir el alto ancho largo peso del articulo
+        - costo_promedio: reemplaza el ultimo costo en funciones_compras.php para que al comprar algo nuevo use el costo promedio como
+        ultimo costo es decir promediando el costo CIF con el stock actual en ese momento, es decir el costo es dinamico con respecto a la 
+        fluctuacion del stock
+#Preferencias compras ordenes
+        - facturas_multiples: habilita que el autocompletado de las ordenes de compra permita multi facturas asociadas pero de momento solo lo prepara porque al finalizar
+        la compra se pone la orden de compra como completa para otra vez anular la multi compra, pero es necesario activarlo para el buen funcionamiento de embarcaciones que
+        es necesario para las importaciones
+        - descuento: habilitael descuento por item en la orden de compra
+        - facturas_finalizadas: muestra en compras_ordenes.php el apartado de Ordenes de Compra Finalizadas y Completas que seria una grilla en la cual podemos acceder a un detalle de cada orden de compra 
+        el reporte se encuentra en otro
+        - mostrar_codigo_origen: en la impresion de la orden de compra reemplaza el idinsumo por el id del codigo origen
+        del proveedor
+        - ocultar_tk_vincular: es para ocultar los votones de vincular y la de tk para no mostrar los botones 
+        que no son necesarios
+#Preferencias cotizacion
+        - cotiza_dia_anterior
+        - editar_fecha
+#Preferencias_categorias
+        - margen_seguridad: activa margen seguridad en categoria, sub categoria y sub categoria secundaria
+        - sub_categoria_secundaria: activa sub categoria seguridad en sub categoria y en insumos
+#preferencias_devolucion
+        - devolucion_importacion: activa el circuito de devolucion en gestion -> ordenes retiro y ademas en nota de credito desactiva la devloucion
+        ya que el movimiento de stock se hace en ordenes retiro, la idea es que en deposito se gestione la  devolucion y que esto genere ordenes de retiro 
+        a las que puede estar asociado una nota de credito, al selecionar nota de credito por devolucion te permite buscar por facturas de venta
+        que tengan devoluciones  y luego confirmamos el monto
+        //modulos 
+        importacion -> polizas , vehiculos, propietarios, cod Origen
+        gestion -> adm Depositos, Ordenes retiro, Nc Clientes
+#preferencias_deposito
+        -usa almacenamiento: activa los almacenamientos del deposito para editarlos y crealos, no tiene relacion 
+        con el conteo_deposito que es un modulo que usa estas tablas es decir para usar el conteo fefo del modulo
+        nuevo de conteo se debe activar esta preferencia
+        -autosel_compras: activa el deposito por defecto en el modulo de compras para el deposito automatico y tambien
+       
+        -autosel_devoluciones: activa el deposito por defecto en devoluciones
+        -conteo_por_producto: activa el coonteo de stock por producto que fue requerido por el cliente de RDE, similar al conteo normal 
+        pero utilizando los almacenamientos correspondientes
+
+
+
+
+
+#modo compras anterior
+
+        UPDATE `preferencias_cotizacion` SET `cotiza_dia_anterior` = 'N' WHERE `preferencias_cotizacion`.`idpref` = 1; 
+        UPDATE `preferencias_compras` SET `multimoneda_local` = 'N' WHERE `preferencias_compras`.`idprefe` = 1; 
+        UPDATE `preferencias_depositos` SET `autosel_devoluciones` = 'N' WHERE `preferencias_depositos`.`idpref` = 1; 
+        UPDATE `preferencias_depositos` SET `conteo_por_producto` = 'N' WHERE `preferencias_depositos`.`idpref` = 1; 
+
+        UPDATE 
+        `preferencias_compras` 
+        SET 
+        `importacion` = 'N' 
+        WHERE 
+        `preferencias_compras`.`idprefe` = 1;
+
+        UPDATE `preferencias_compras` SET `costo_cero` = 'N' WHERE `preferencias_compras`.`idprefe` = 1; 
+
+
+        UPDATE 
+        `preferencias_proveedores` 
+        SET 
+        `agente_retencion` = 'N', 
+        `tipo_servicio` = 'N', 
+        `cta_cte` = 'N', 
+        `importacion` = 'N', 
+        `acuerdos_comerciales_archivo` = 'N', 
+        `dias_entrega` = 'N' 
+        WHERE 
+        `preferencias_proveedores`.`idpreferencia` = 1;
+
+
+        UPDATE 
+        `preferencias_insumos_listas` 
+        SET 
+        `medidas_referenciales` = 'N', 
+        `medidas_edi` = 'N', 
+        `configuraciones_alternativas` = 'N', 
+        `codigo_fob` = 'N', 
+        `medidas_fisicas` = 'N' 
+        WHERE 
+        `preferencias_insumos_listas`.`idpreferencia` = 1;
+
+        UPDATE 
+        `preferencias_compras_orden` 
+        SET 
+        `facturas_multiples` = 'N', 
+        `facturas_finalizadas` = 'N' 
+        WHERE 
+        `preferencias_compras_orden`.`idpreferencia` = 1;
+
+
+        UPDATE 
+        `preferencias_cotizacion` 
+        SET 
+        `cotiza_dia_anterior` = 'N', 
+        `editar_fecha` = 'N' 
+        WHERE 
+        `preferencias_cotizacion`.`idpref` = 1;
+
+        UPDATE 
+        `preferencias_categorias` 
+        SET 
+        `margen_seguridad` = 'N', 
+        `sub_categoria_secundaria` = 'N' 
+        WHERE 
+        `preferencias_categorias`.`idpref` = 1;
+
+        UPDATE 
+        `preferencias_devolucion` 
+        SET 
+        `devolucion_importacion` = '0' 
+        WHERE 
+        `preferencias_devolucion`.`idpref` = 1;
+
+        UPDATE 
+        `preferencias_depositos` 
+        SET 
+        `usa_almacenamiento` = 'N' 
+        WHERE 
+        `preferencias_depositos`.`idpref` = 1;
+
+        UPDATE 
+        `preferencias_cotizacion` 
+        SET 
+        `usa_cot_compra` = 'N' 
+        WHERE 
+        `preferencias_cotizacion`.`idpref` = 1;
+
+
+
+
+#modo compras importacion
+
+        UPDATE `preferencias_cotizacion` SET `cotiza_dia_anterior` = 'N' WHERE `preferencias_cotizacion`.`idpref` = 1; 
+
+        UPDATE `preferencias_compras` SET `multimoneda_local` = 'S' WHERE `preferencias_compras`.`idprefe` = 1; 
+
+        UPDATE `preferencias_depositos` SET `autosel_devoluciones` = 'S' WHERE `preferencias_depositos`.`idpref` = 1; 
+
+        UPDATE `preferencias_depositos` SET `conteo_por_producto` = 'S' WHERE `preferencias_depositos`.`idpref` = 1; 
+
+        UPDATE 
+        `preferencias_compras` 
+        SET 
+        `importacion` = 'S' 
+        WHERE 
+        `preferencias_compras`.`idprefe` = 1;
+
+        UPDATE `preferencias_compras` SET `costo_cero` = 'S' WHERE `preferencias_compras`.`idprefe` = 1; 
+
+
+        UPDATE 
+        `preferencias_proveedores` 
+        SET 
+        `agente_retencion` = 'S', 
+        `tipo_servicio` = 'S', 
+        `cta_cte` = 'S', 
+        `importacion` = 'S', 
+        `acuerdos_comerciales_archivo` = 'S', 
+        `dias_entrega` = 'S' 
+        WHERE 
+        `preferencias_proveedores`.`idpreferencia` = 1;
+
+
+        UPDATE 
+        `preferencias_insumos_listas` 
+        SET 
+        `medidas_referenciales` = 'S', 
+        `medidas_edi` = 'S', 
+        `configuraciones_alternativas` = 'S', 
+        `codigo_fob` = 'S', 
+        `medidas_fisicas` = 'S' 
+        WHERE 
+        `preferencias_insumos_listas`.`idpreferencia` = 1;
+
+        UPDATE 
+        `preferencias_compras_orden` 
+        SET 
+        `facturas_multiples` = 'S', 
+        `facturas_finalizadas` = 'S' 
+        WHERE 
+        `preferencias_compras_orden`.`idpreferencia` = 1;
+
+
+        UPDATE 
+        `preferencias_cotizacion` 
+        SET 
+        `cotiza_dia_anterior` = 'S', 
+        `editar_fecha` = 'S' 
+        WHERE 
+        `preferencias_cotizacion`.`idpref` = 1;
+
+        UPDATE 
+        `preferencias_categorias` 
+        SET 
+        `margen_seguridad` = 'S', 
+        `sub_categoria_secundaria` = 'S' 
+        WHERE 
+        `preferencias_categorias`.`idpref` = 1;
+
+        UPDATE 
+        `preferencias_devolucion` 
+        SET 
+        `devolucion_importacion` = '1' 
+        WHERE 
+        `preferencias_devolucion`.`idpref` = 1;
+
+        UPDATE 
+        `preferencias_depositos` 
+        SET 
+        `usa_almacenamiento` = 'S' 
+        WHERE 
+        `preferencias_depositos`.`idpref` = 1;
+
+
+        UPDATE 
+        `preferencias_cotizacion` 
+        SET 
+        `usa_cot_compra` = 'S' 
+        WHERE 
+        `preferencias_cotizacion`.`idpref` = 1;
+
+cambiar a requiere el filtro en conteo
+
+
+modo compras anterior inserts 
+INSERT INTO `preferencias_compras` (`idprefe`, `usar_lote`, `usar_vto`, `estado`, `obliga_tipocomprobante`, `obliga_cdc`, `tipocomprobante_def`, `usar_depositos_asignados`, `usar_descuentos_compras`, `importacion`, `obliga_oc`, `multimoneda_local`, `cot_fecha_fact`, `permite_precio_venta_manual`, `costo_cero`) VALUES
+(1, 'S', 'S', 1, 'S', 'N', NULL, 'S', 'S', 'N', 'N', 'N', 'S', 'N', 'N');
+
+INSERT INTO `preferencias_proveedores` (`idpreferencia`, `idempresa`, `agente_retencion`, `tipo_servicio`, `cta_cte`, `importacion`, `acuerdos_comerciales_archivo`, `sin_factura`, `tipo_compra`, `dias_entrega`, `obliga_ruc`, `ruc_duplicado`, `razon_social_duplicado`) VALUES
+(1, 1, 'N', 'N', 'N', 'N', 'N', 'N', 'S', 'N', 'N', 'S', 'S');
+INSERT INTO `preferencias_insumos_listas` (`idpreferencia`, `medidas_referenciales`, `medidas_edi`, `configuraciones_alternativas`, `codigo_fob`, `medidas_fisicas`, `costo_promedio`, `usa_iva_variable`) VALUES
+(1, 'N', 'N', 'N', 'N', 'N', 'N', 'S');
+INSERT INTO `preferencias_compras_orden` (`idpreferencia`, `facturas_multiples`, `descuento`, `facturas_finalizadas`, `mostrar_codigo_origen`, `insumos_proveedor`, `ocultar_tk_vincular`) VALUES
+(1, 'N', 'N', 'N', 'S', 'S', 'S');
+INSERT INTO `preferencias_cotizacion` (`idpref`, `cotiza_dia_anterior`, `editar_fecha`, `usa_cot_compra`) VALUES
+(1, 'N', 'N', 'N');
+INSERT INTO `preferencias_categorias` (`idpref`, `margen_seguridad`, `sub_categoria_secundaria`) VALUES
+(1, 'N', 'N');
+INSERT INTO `preferencias_devolucion` (`idpref`, `devolucion_importacion`) VALUES
+(1, 0);
+INSERT INTO `preferencias_depositos` (`idpref`, `usa_almacenamiento`, `autosel_compras`) VALUES
+(1, 'N', 'S');

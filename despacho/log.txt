@@ -1,0 +1,640 @@
+
+Select nombresub,descripcion,pagina,idsubmod,target_blank,
+registrado_el 
+from modulo_detalle 
+inner join modulo_usuario on modulo_usuario.submodulo=modulo_detalle.idsubmod
+where 
+modulo_usuario.idmodulo=21
+and modulo_usuario.submodulo <> 2
+and modulo_usuario.estado=1 
+and  modulo_detalle.mostrar = 1 
+and modulo_usuario.idusu=27
+and modulo_detalle.mostrar_nav = 'S'
+
+order by nombresub asc
+
+====================================================================================================
+
+Select nombresub,descripcion,pagina,idsubmod,target_blank,
+registrado_el 
+from modulo_detalle 
+inner join modulo_usuario on modulo_usuario.submodulo=modulo_detalle.idsubmod
+where 
+modulo_usuario.idmodulo=2
+and modulo_usuario.submodulo <> 2
+and modulo_usuario.estado=1 
+and  modulo_detalle.mostrar = 1 
+and modulo_usuario.idusu=27
+and modulo_detalle.mostrar_nav = 'S'
+
+order by nombresub asc
+
+====================================================================================================
+
+Select nombresub,descripcion,pagina,idsubmod,target_blank,
+registrado_el 
+from modulo_detalle 
+inner join modulo_usuario on modulo_usuario.submodulo=modulo_detalle.idsubmod
+where 
+modulo_usuario.idmodulo=28
+and modulo_usuario.submodulo <> 2
+and modulo_usuario.estado=1 
+and  modulo_detalle.mostrar = 1 
+and modulo_usuario.idusu=27
+and modulo_detalle.mostrar_nav = 'S'
+
+order by nombresub asc
+
+====================================================================================================
+
+Select nombresub,descripcion,pagina,idsubmod,target_blank,
+registrado_el 
+from modulo_detalle 
+inner join modulo_usuario on modulo_usuario.submodulo=modulo_detalle.idsubmod
+where 
+modulo_usuario.idmodulo=4
+and modulo_usuario.submodulo <> 2
+and modulo_usuario.estado=1 
+and  modulo_detalle.mostrar = 1 
+and modulo_usuario.idusu=27
+and modulo_detalle.mostrar_nav = 'S'
+
+order by nombresub asc
+
+====================================================================================================
+
+Select nombresub,descripcion,pagina,idsubmod,target_blank,
+registrado_el 
+from modulo_detalle 
+inner join modulo_usuario on modulo_usuario.submodulo=modulo_detalle.idsubmod
+where 
+modulo_usuario.idmodulo=29
+and modulo_usuario.submodulo <> 2
+and modulo_usuario.estado=1 
+and  modulo_detalle.mostrar = 1 
+and modulo_usuario.idusu=27
+and modulo_detalle.mostrar_nav = 'S'
+
+order by nombresub asc
+
+====================================================================================================
+
+Select nombresub,descripcion,pagina,idsubmod,target_blank,
+registrado_el 
+from modulo_detalle 
+inner join modulo_usuario on modulo_usuario.submodulo=modulo_detalle.idsubmod
+where 
+modulo_usuario.idmodulo=39
+and modulo_usuario.submodulo <> 2
+and modulo_usuario.estado=1 
+and  modulo_detalle.mostrar = 1 
+and modulo_usuario.idusu=27
+and modulo_detalle.mostrar_nav = 'S'
+
+order by nombresub asc
+
+====================================================================================================
+
+Select nombresub,descripcion,pagina,idsubmod,target_blank,
+registrado_el 
+from modulo_detalle 
+inner join modulo_usuario on modulo_usuario.submodulo=modulo_detalle.idsubmod
+where 
+modulo_usuario.idmodulo=25
+and modulo_usuario.submodulo <> 2
+and modulo_usuario.estado=1 
+and  modulo_detalle.mostrar = 1 
+and modulo_usuario.idusu=27
+and modulo_detalle.mostrar_nav = 'S'
+
+order by nombresub asc
+
+====================================================================================================
+
+Select nombresub,descripcion,pagina,idsubmod,target_blank,
+registrado_el 
+from modulo_detalle 
+inner join modulo_usuario on modulo_usuario.submodulo=modulo_detalle.idsubmod
+where 
+modulo_usuario.idmodulo=33
+and modulo_usuario.submodulo <> 2
+and modulo_usuario.estado=1 
+and  modulo_detalle.mostrar = 1 
+and modulo_usuario.idusu=27
+and modulo_detalle.mostrar_nav = 'S'
+
+order by nombresub asc
+
+====================================================================================================
+
+Select nombresub,descripcion,pagina,idsubmod,target_blank,
+registrado_el 
+from modulo_detalle 
+inner join modulo_usuario on modulo_usuario.submodulo=modulo_detalle.idsubmod
+where 
+modulo_usuario.idmodulo=1
+and modulo_usuario.submodulo <> 2
+and modulo_usuario.estado=1 
+and  modulo_detalle.mostrar = 1 
+and modulo_usuario.idusu=27
+and modulo_detalle.mostrar_nav = 'S'
+
+order by nombresub asc
+
+====================================================================================================
+
+Select nombresub,descripcion,pagina,idsubmod,target_blank,
+registrado_el 
+from modulo_detalle 
+inner join modulo_usuario on modulo_usuario.submodulo=modulo_detalle.idsubmod
+where 
+modulo_usuario.idmodulo=42
+and modulo_usuario.submodulo <> 2
+and modulo_usuario.estado=1 
+and  modulo_detalle.mostrar = 1 
+and modulo_usuario.idusu=27
+and modulo_detalle.mostrar_nav = 'S'
+
+order by nombresub asc
+
+====================================================================================================
+
+Select nombresub,descripcion,pagina,idsubmod,target_blank,
+registrado_el 
+from modulo_detalle 
+inner join modulo_usuario on modulo_usuario.submodulo=modulo_detalle.idsubmod
+where 
+modulo_usuario.idmodulo=11
+and modulo_usuario.submodulo <> 2
+and modulo_usuario.estado=1 
+and  modulo_detalle.mostrar = 1 
+and modulo_usuario.idusu=27
+and modulo_detalle.mostrar_nav = 'S'
+
+order by nombresub asc
+
+====================================================================================================
+
+Select nombresub,descripcion,pagina,idsubmod,target_blank,
+registrado_el 
+from modulo_detalle 
+inner join modulo_usuario on modulo_usuario.submodulo=modulo_detalle.idsubmod
+where 
+modulo_usuario.idmodulo=31
+and modulo_usuario.submodulo <> 2
+and modulo_usuario.estado=1 
+and  modulo_detalle.mostrar = 1 
+and modulo_usuario.idusu=27
+and modulo_detalle.mostrar_nav = 'S'
+
+order by nombresub asc
+
+====================================================================================================
+
+Select nombresub,descripcion,pagina,idsubmod,target_blank,
+registrado_el 
+from modulo_detalle 
+inner join modulo_usuario on modulo_usuario.submodulo=modulo_detalle.idsubmod
+where 
+modulo_usuario.idmodulo=36
+and modulo_usuario.submodulo <> 2
+and modulo_usuario.estado=1 
+and  modulo_detalle.mostrar = 1 
+and modulo_usuario.idusu=27
+and modulo_detalle.mostrar_nav = 'S'
+
+order by nombresub asc
+
+====================================================================================================
+
+Select nombresub,descripcion,pagina,idsubmod,target_blank,
+registrado_el 
+from modulo_detalle 
+inner join modulo_usuario on modulo_usuario.submodulo=modulo_detalle.idsubmod
+where 
+modulo_usuario.idmodulo=6
+and modulo_usuario.submodulo <> 2
+and modulo_usuario.estado=1 
+and  modulo_detalle.mostrar = 1 
+and modulo_usuario.idusu=27
+and modulo_detalle.mostrar_nav = 'S'
+
+order by nombresub asc
+
+====================================================================================================
+
+Select nombresub,descripcion,pagina,idsubmod,target_blank,
+registrado_el 
+from modulo_detalle 
+inner join modulo_usuario on modulo_usuario.submodulo=modulo_detalle.idsubmod
+where 
+modulo_usuario.idmodulo=30
+and modulo_usuario.submodulo <> 2
+and modulo_usuario.estado=1 
+and  modulo_detalle.mostrar = 1 
+and modulo_usuario.idusu=27
+and modulo_detalle.mostrar_nav = 'S'
+
+order by nombresub asc
+
+====================================================================================================
+
+Select nombresub,descripcion,pagina,idsubmod,target_blank,
+registrado_el 
+from modulo_detalle 
+inner join modulo_usuario on modulo_usuario.submodulo=modulo_detalle.idsubmod
+where 
+modulo_usuario.idmodulo=17
+and modulo_usuario.submodulo <> 2
+and modulo_usuario.estado=1 
+and  modulo_detalle.mostrar = 1 
+and modulo_usuario.idusu=27
+and modulo_detalle.mostrar_nav = 'S'
+
+order by nombresub asc
+
+====================================================================================================
+
+Select nombresub,descripcion,pagina,idsubmod,target_blank,
+registrado_el 
+from modulo_detalle 
+inner join modulo_usuario on modulo_usuario.submodulo=modulo_detalle.idsubmod
+where 
+modulo_usuario.idmodulo=18
+and modulo_usuario.submodulo <> 2
+and modulo_usuario.estado=1 
+and  modulo_detalle.mostrar = 1 
+and modulo_usuario.idusu=27
+and modulo_detalle.mostrar_nav = 'S'
+
+order by nombresub asc
+
+====================================================================================================
+
+Select nombresub,descripcion,pagina,idsubmod,target_blank,
+registrado_el 
+from modulo_detalle 
+inner join modulo_usuario on modulo_usuario.submodulo=modulo_detalle.idsubmod
+where 
+modulo_usuario.idmodulo=12
+and modulo_usuario.submodulo <> 2
+and modulo_usuario.estado=1 
+and  modulo_detalle.mostrar = 1 
+and modulo_usuario.idusu=27
+and modulo_detalle.mostrar_nav = 'S'
+
+order by nombresub asc
+
+====================================================================================================
+
+Select nombresub,descripcion,pagina,idsubmod,target_blank,
+registrado_el 
+from modulo_detalle 
+inner join modulo_usuario on modulo_usuario.submodulo=modulo_detalle.idsubmod
+where 
+modulo_usuario.idmodulo=16
+and modulo_usuario.submodulo <> 2
+and modulo_usuario.estado=1 
+and  modulo_detalle.mostrar = 1 
+and modulo_usuario.idusu=27
+and modulo_detalle.mostrar_nav = 'S'
+
+order by nombresub asc
+
+====================================================================================================
+
+Select nombresub,descripcion,pagina,idsubmod,target_blank,
+registrado_el 
+from modulo_detalle 
+inner join modulo_usuario on modulo_usuario.submodulo=modulo_detalle.idsubmod
+where 
+modulo_usuario.idmodulo=23
+and modulo_usuario.submodulo <> 2
+and modulo_usuario.estado=1 
+and  modulo_detalle.mostrar = 1 
+and modulo_usuario.idusu=27
+and modulo_detalle.mostrar_nav = 'S'
+
+order by nombresub asc
+
+====================================================================================================
+
+Select nombresub,descripcion,pagina,idsubmod,target_blank,
+registrado_el 
+from modulo_detalle 
+inner join modulo_usuario on modulo_usuario.submodulo=modulo_detalle.idsubmod
+where 
+modulo_usuario.idmodulo=21
+and modulo_usuario.submodulo <> 2
+and modulo_usuario.estado=1 
+and  modulo_detalle.mostrar = 1 
+and modulo_usuario.idusu=27
+and modulo_detalle.mostrar_nav = 'S'
+
+order by nombresub asc
+
+====================================================================================================
+
+Select nombresub,descripcion,pagina,idsubmod,target_blank,
+registrado_el 
+from modulo_detalle 
+inner join modulo_usuario on modulo_usuario.submodulo=modulo_detalle.idsubmod
+where 
+modulo_usuario.idmodulo=2
+and modulo_usuario.submodulo <> 2
+and modulo_usuario.estado=1 
+and  modulo_detalle.mostrar = 1 
+and modulo_usuario.idusu=27
+and modulo_detalle.mostrar_nav = 'S'
+
+order by nombresub asc
+
+====================================================================================================
+
+Select nombresub,descripcion,pagina,idsubmod,target_blank,
+registrado_el 
+from modulo_detalle 
+inner join modulo_usuario on modulo_usuario.submodulo=modulo_detalle.idsubmod
+where 
+modulo_usuario.idmodulo=28
+and modulo_usuario.submodulo <> 2
+and modulo_usuario.estado=1 
+and  modulo_detalle.mostrar = 1 
+and modulo_usuario.idusu=27
+and modulo_detalle.mostrar_nav = 'S'
+
+order by nombresub asc
+
+====================================================================================================
+
+Select nombresub,descripcion,pagina,idsubmod,target_blank,
+registrado_el 
+from modulo_detalle 
+inner join modulo_usuario on modulo_usuario.submodulo=modulo_detalle.idsubmod
+where 
+modulo_usuario.idmodulo=4
+and modulo_usuario.submodulo <> 2
+and modulo_usuario.estado=1 
+and  modulo_detalle.mostrar = 1 
+and modulo_usuario.idusu=27
+and modulo_detalle.mostrar_nav = 'S'
+
+order by nombresub asc
+
+====================================================================================================
+
+Select nombresub,descripcion,pagina,idsubmod,target_blank,
+registrado_el 
+from modulo_detalle 
+inner join modulo_usuario on modulo_usuario.submodulo=modulo_detalle.idsubmod
+where 
+modulo_usuario.idmodulo=29
+and modulo_usuario.submodulo <> 2
+and modulo_usuario.estado=1 
+and  modulo_detalle.mostrar = 1 
+and modulo_usuario.idusu=27
+and modulo_detalle.mostrar_nav = 'S'
+
+order by nombresub asc
+
+====================================================================================================
+
+Select nombresub,descripcion,pagina,idsubmod,target_blank,
+registrado_el 
+from modulo_detalle 
+inner join modulo_usuario on modulo_usuario.submodulo=modulo_detalle.idsubmod
+where 
+modulo_usuario.idmodulo=39
+and modulo_usuario.submodulo <> 2
+and modulo_usuario.estado=1 
+and  modulo_detalle.mostrar = 1 
+and modulo_usuario.idusu=27
+and modulo_detalle.mostrar_nav = 'S'
+
+order by nombresub asc
+
+====================================================================================================
+
+Select nombresub,descripcion,pagina,idsubmod,target_blank,
+registrado_el 
+from modulo_detalle 
+inner join modulo_usuario on modulo_usuario.submodulo=modulo_detalle.idsubmod
+where 
+modulo_usuario.idmodulo=25
+and modulo_usuario.submodulo <> 2
+and modulo_usuario.estado=1 
+and  modulo_detalle.mostrar = 1 
+and modulo_usuario.idusu=27
+and modulo_detalle.mostrar_nav = 'S'
+
+order by nombresub asc
+
+====================================================================================================
+
+Select nombresub,descripcion,pagina,idsubmod,target_blank,
+registrado_el 
+from modulo_detalle 
+inner join modulo_usuario on modulo_usuario.submodulo=modulo_detalle.idsubmod
+where 
+modulo_usuario.idmodulo=33
+and modulo_usuario.submodulo <> 2
+and modulo_usuario.estado=1 
+and  modulo_detalle.mostrar = 1 
+and modulo_usuario.idusu=27
+and modulo_detalle.mostrar_nav = 'S'
+
+order by nombresub asc
+
+====================================================================================================
+
+Select nombresub,descripcion,pagina,idsubmod,target_blank,
+registrado_el 
+from modulo_detalle 
+inner join modulo_usuario on modulo_usuario.submodulo=modulo_detalle.idsubmod
+where 
+modulo_usuario.idmodulo=1
+and modulo_usuario.submodulo <> 2
+and modulo_usuario.estado=1 
+and  modulo_detalle.mostrar = 1 
+and modulo_usuario.idusu=27
+and modulo_detalle.mostrar_nav = 'S'
+
+order by nombresub asc
+
+====================================================================================================
+
+Select nombresub,descripcion,pagina,idsubmod,target_blank,
+registrado_el 
+from modulo_detalle 
+inner join modulo_usuario on modulo_usuario.submodulo=modulo_detalle.idsubmod
+where 
+modulo_usuario.idmodulo=42
+and modulo_usuario.submodulo <> 2
+and modulo_usuario.estado=1 
+and  modulo_detalle.mostrar = 1 
+and modulo_usuario.idusu=27
+and modulo_detalle.mostrar_nav = 'S'
+
+order by nombresub asc
+
+====================================================================================================
+
+Select nombresub,descripcion,pagina,idsubmod,target_blank,
+registrado_el 
+from modulo_detalle 
+inner join modulo_usuario on modulo_usuario.submodulo=modulo_detalle.idsubmod
+where 
+modulo_usuario.idmodulo=11
+and modulo_usuario.submodulo <> 2
+and modulo_usuario.estado=1 
+and  modulo_detalle.mostrar = 1 
+and modulo_usuario.idusu=27
+and modulo_detalle.mostrar_nav = 'S'
+
+order by nombresub asc
+
+====================================================================================================
+
+Select nombresub,descripcion,pagina,idsubmod,target_blank,
+registrado_el 
+from modulo_detalle 
+inner join modulo_usuario on modulo_usuario.submodulo=modulo_detalle.idsubmod
+where 
+modulo_usuario.idmodulo=31
+and modulo_usuario.submodulo <> 2
+and modulo_usuario.estado=1 
+and  modulo_detalle.mostrar = 1 
+and modulo_usuario.idusu=27
+and modulo_detalle.mostrar_nav = 'S'
+
+order by nombresub asc
+
+====================================================================================================
+
+Select nombresub,descripcion,pagina,idsubmod,target_blank,
+registrado_el 
+from modulo_detalle 
+inner join modulo_usuario on modulo_usuario.submodulo=modulo_detalle.idsubmod
+where 
+modulo_usuario.idmodulo=36
+and modulo_usuario.submodulo <> 2
+and modulo_usuario.estado=1 
+and  modulo_detalle.mostrar = 1 
+and modulo_usuario.idusu=27
+and modulo_detalle.mostrar_nav = 'S'
+
+order by nombresub asc
+
+====================================================================================================
+
+Select nombresub,descripcion,pagina,idsubmod,target_blank,
+registrado_el 
+from modulo_detalle 
+inner join modulo_usuario on modulo_usuario.submodulo=modulo_detalle.idsubmod
+where 
+modulo_usuario.idmodulo=6
+and modulo_usuario.submodulo <> 2
+and modulo_usuario.estado=1 
+and  modulo_detalle.mostrar = 1 
+and modulo_usuario.idusu=27
+and modulo_detalle.mostrar_nav = 'S'
+
+order by nombresub asc
+
+====================================================================================================
+
+Select nombresub,descripcion,pagina,idsubmod,target_blank,
+registrado_el 
+from modulo_detalle 
+inner join modulo_usuario on modulo_usuario.submodulo=modulo_detalle.idsubmod
+where 
+modulo_usuario.idmodulo=30
+and modulo_usuario.submodulo <> 2
+and modulo_usuario.estado=1 
+and  modulo_detalle.mostrar = 1 
+and modulo_usuario.idusu=27
+and modulo_detalle.mostrar_nav = 'S'
+
+order by nombresub asc
+
+====================================================================================================
+
+Select nombresub,descripcion,pagina,idsubmod,target_blank,
+registrado_el 
+from modulo_detalle 
+inner join modulo_usuario on modulo_usuario.submodulo=modulo_detalle.idsubmod
+where 
+modulo_usuario.idmodulo=17
+and modulo_usuario.submodulo <> 2
+and modulo_usuario.estado=1 
+and  modulo_detalle.mostrar = 1 
+and modulo_usuario.idusu=27
+and modulo_detalle.mostrar_nav = 'S'
+
+order by nombresub asc
+
+====================================================================================================
+
+Select nombresub,descripcion,pagina,idsubmod,target_blank,
+registrado_el 
+from modulo_detalle 
+inner join modulo_usuario on modulo_usuario.submodulo=modulo_detalle.idsubmod
+where 
+modulo_usuario.idmodulo=18
+and modulo_usuario.submodulo <> 2
+and modulo_usuario.estado=1 
+and  modulo_detalle.mostrar = 1 
+and modulo_usuario.idusu=27
+and modulo_detalle.mostrar_nav = 'S'
+
+order by nombresub asc
+
+====================================================================================================
+
+Select nombresub,descripcion,pagina,idsubmod,target_blank,
+registrado_el 
+from modulo_detalle 
+inner join modulo_usuario on modulo_usuario.submodulo=modulo_detalle.idsubmod
+where 
+modulo_usuario.idmodulo=12
+and modulo_usuario.submodulo <> 2
+and modulo_usuario.estado=1 
+and  modulo_detalle.mostrar = 1 
+and modulo_usuario.idusu=27
+and modulo_detalle.mostrar_nav = 'S'
+
+order by nombresub asc
+
+====================================================================================================
+
+Select nombresub,descripcion,pagina,idsubmod,target_blank,
+registrado_el 
+from modulo_detalle 
+inner join modulo_usuario on modulo_usuario.submodulo=modulo_detalle.idsubmod
+where 
+modulo_usuario.idmodulo=16
+and modulo_usuario.submodulo <> 2
+and modulo_usuario.estado=1 
+and  modulo_detalle.mostrar = 1 
+and modulo_usuario.idusu=27
+and modulo_detalle.mostrar_nav = 'S'
+
+order by nombresub asc
+
+====================================================================================================
+
+Select nombresub,descripcion,pagina,idsubmod,target_blank,
+registrado_el 
+from modulo_detalle 
+inner join modulo_usuario on modulo_usuario.submodulo=modulo_detalle.idsubmod
+where 
+modulo_usuario.idmodulo=23
+and modulo_usuario.submodulo <> 2
+and modulo_usuario.estado=1 
+and  modulo_detalle.mostrar = 1 
+and modulo_usuario.idusu=27
+and modulo_detalle.mostrar_nav = 'S'
+
+order by nombresub asc
+
+====================================================================================================

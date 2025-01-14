@@ -1,0 +1,618 @@
+
+PREFERENCIAS COMPRAS          #  x
+CREATE TABLE IF NOT EXISTS `preferencias_compras` (
+  `idprefe` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `usar_lote` varchar(1) NOT NULL DEFAULT 'N',
+  `usar_vto` varchar(1) NOT NULL DEFAULT 'N',
+  `estado` int(1) NOT NULL,
+  `obliga_tipocomprobante` char(1) NOT NULL DEFAULT 'S',
+  `obliga_cdc` char(1) NOT NULL DEFAULT 'N',
+  `tipocomprobante_def` int(2) DEFAULT NULL,
+  `usar_depositos_asignados` char(1) NOT NULL DEFAULT 'N',
+  `usar_descuentos_compras` char(1) NOT NULL DEFAULT 'N',
+  `importacion` char(1) DEFAULT 'N',
+  `obliga_oc` char(1) DEFAULT 'N',
+  `multimoneda_local` char(1) NOT NULL DEFAULT 'N',
+  `cot_fecha_fact` char(1) NOT NULL DEFAULT 'N',
+  `permite_precio_venta_manual` char(1) NOT NULL DEFAULT 'N',
+  PRIMARY KEY (`idprefe`),
+  UNIQUE KEY `idprefe` (`idprefe`)
+) ENGINE=InnoDB ;
+
+
+
+INSERT INTO `preferencias_compras` (`idprefe`, `usar_lote`, `usar_vto`, `estado`, `obliga_tipocomprobante`, `obliga_cdc`, `tipocomprobante_def`, `usar_depositos_asignados`, `usar_descuentos_compras`, `importacion`, `obliga_oc`, `multimoneda_local`, `cot_fecha_fact`, `permite_precio_venta_manual`) VALUES
+(1, 'S', 'S', 1, 'S', 'N', NULL, 'S', 'S', 'S', 'N', 'S', 'S', 'N');
+
+
+PREFERENCIAS COTIZACIONES    #  x
+
+  CREATE TABLE IF NOT EXISTS `preferencias_cotizacion` (
+  `idpref` int(11) NOT NULL,
+  `cotiza_dia_anterior` char(1) NOT NULL DEFAULT 'N',
+  `editar_fecha` char(1) NOT NULL DEFAULT 'N',
+  `usa_cot_compra` char(1) NOT NULL DEFAULT 'N',
+  PRIMARY KEY (`idpref`)
+) ENGINE=InnoDB;
+
+
+
+INSERT INTO `preferencias_cotizacion` (`idpref`, `cotiza_dia_anterior`, `editar_fecha`, `usa_cot_compra`) VALUES
+(1, 'N', 'S', 'S');
+    
+PREFERENCIAS PROVEEDORES   #   x
+
+
+CREATE TABLE IF NOT EXISTS `preferencias_proveedores` (
+  `idpreferencia` int(11) NOT NULL AUTO_INCREMENT,
+  `idempresa` int(11) NOT NULL,
+  `agente_retencion` char(1) NOT NULL DEFAULT 'N',
+  `tipo_servicio` char(2) NOT NULL DEFAULT 'N',
+  `cta_cte` char(1) NOT NULL DEFAULT 'N',
+  `importacion` char(1) NOT NULL DEFAULT 'N' COMMENT 'Habilitar proveedores locales, importación,moneda y pais',
+  `acuerdos_comerciales_archivo` char(1) CHARACTER SET latin1 COLLATE latin1_spanish_ci NOT NULL DEFAULT 'N',
+  `sin_factura` char(1) CHARACTER SET latin1 COLLATE latin1_spanish_ci NOT NULL DEFAULT 'S',
+  `tipo_compra` char(1) NOT NULL DEFAULT 'N' COMMENT 'Credito Contado',
+  `dias_entrega` char(1) NOT NULL DEFAULT 'N',
+  `obliga_ruc` char(1) NOT NULL DEFAULT 'S',
+  `ruc_duplicado` char(1) NOT NULL DEFAULT 'N',
+  `razon_social_duplicado` char(1) NOT NULL DEFAULT 'N',
+  PRIMARY KEY (`idpreferencia`)
+) ENGINE=InnoDB ;
+
+
+INSERT INTO `preferencias_proveedores` (`idpreferencia`, `idempresa`, `agente_retencion`, `tipo_servicio`, `cta_cte`, `importacion`, `acuerdos_comerciales_archivo`, `sin_factura`, `tipo_compra`, `dias_entrega`, `obliga_ruc`, `ruc_duplicado`, `razon_social_duplicado`) VALUES
+(1, 1, 'S', 'S', 'S', 'S', 'S', 'N', 'S', 'S', 'N', 'S', 'S');
+
+
+
+TIPO ORIGEN
+    
+    
+    CREATE TABLE IF NOT EXISTS `tipo_origen` (
+        `idtipo_origen` int(10) NOT NULL,
+        `tipo` varchar(200) NOT NULL,
+        PRIMARY KEY (`idtipo_origen`)
+    ) ENGINE=MyISAM;
+
+
+
+INSERT INTO `tipo_origen` (`idtipo_origen`, `tipo`) VALUES
+(1, 'Local'),
+(2, 'Importacion');
+
+
+TIPO SERVICIO PROVEEDOR
+    
+        CREATE TABLE IF NOT EXISTS `tipo_servicio` (
+        `idtipo_servicio` int(11) NOT NULL,
+        `tipo` varchar(200) NOT NULL,
+        `registrado_por` int(11) DEFAULT NULL,
+        `registrado_el` datetime DEFAULT NULL,
+        `anulado_por` int(11) DEFAULT NULL,
+        `anulado_el` datetime DEFAULT NULL,
+        `actualizado_por` int(11) DEFAULT NULL,
+        `actualizado_el` datetime DEFAULT NULL,
+        `estado` decimal(1,0) DEFAULT 1,
+        `idempresa` int(3) NOT NULL,
+        PRIMARY KEY (`idtipo_servicio`)
+        ) ENGINE=MyISAM;
+
+
+        INSERT INTO `tipo_servicio` (`idtipo_servicio`, `tipo`, `registrado_por`, `registrado_el`, `anulado_por`, `anulado_el`, `actualizado_por`, `actualizado_el`, `estado`, `idempresa`) VALUES
+        (1, 'PROVEEDOR DE MERCADERIAS', NULL, NULL, NULL, NULL, 25, '2023-08-02 11:33:26', '1', 0),
+        (2, 'PROVEEDOR DE SERVICIO PERSONAL', NULL, NULL, NULL, NULL, 23, '2023-07-17 12:52:43', '1', 0),
+        (3, 'SOPORTE TECNOLOGICO', 23, '2023-07-17 12:52:53', 23, '2023-07-17 12:53:02', NULL, NULL, '6', 1),
+        (4, 'DESPACHANTE', 23, '2023-08-01 13:50:51', NULL, NULL, NULL, NULL, '1', 1),
+        (5, 'POLIZA', 23, '2023-10-30 09:42:02', NULL, NULL, NULL, NULL, '1', 1),
+        (6, 'MERCADERIAS', 23, '2023-12-21 14:53:19', NULL, NULL, NULL, NULL, '1', 1),
+        (7, 'OTROS', 23, '2023-12-21 14:53:56', NULL, NULL, NULL, NULL, '1', 1);
+
+
+  
+
+PREFERENCIAS INSUMOS LISTA
+   
+   
+   CREATE TABLE IF NOT EXISTS `preferencias_insumos_listas` (
+    `idpreferencia` int(11) NOT NULL,
+    `medidas_referenciales` char(1) NOT NULL DEFAULT 'N',
+    `medidas_edi` char(1) NOT NULL DEFAULT 'N',
+    `configuraciones_alternativas` char(1) NOT NULL DEFAULT 'N' COMMENT 'habilita Regimen Turismo, Sanitario, codigo alternativo, habilita descuento, Lote y respeta precio sugerido',
+    `codigo_fob` char(1) NOT NULL DEFAULT 'N',
+    `medidas_fisicas` char(1) NOT NULL DEFAULT 'N',
+    `costo_promedio` char(1) NOT NULL DEFAULT 'N' COMMENT 'Setea el Costo promedio para el ultimo costo, es decir el costo CIF promediado ',
+    `usa_iva_variable` char(1) DEFAULT 'N',
+    PRIMARY KEY (`idpreferencia`)
+    ) ENGINE=InnoDB;
+
+    
+    INSERT INTO `preferencias_insumos_listas` (`idpreferencia`, `medidas_referenciales`, `medidas_edi`, `configuraciones_alternativas`, `codigo_fob`, `medidas_fisicas`, `costo_promedio`, `usa_iva_variable`) VALUES
+    (1, 'S', 'S', 'S', 'S', 'S', 'N', 'S');
+
+
+PREFERENCIAS CATEGORIAS 
+	
+    
+    CREATE TABLE IF NOT EXISTS `preferencias_categorias` (
+    `idpref` int(11) NOT NULL,
+    `margen_seguridad` char(1) NOT NULL DEFAULT 'N',
+    `sub_categoria_secundaria` char(1) DEFAULT 'N',
+    PRIMARY KEY (`idpref`)
+    ) ENGINE=MyISAM;
+
+  
+
+    INSERT INTO `preferencias_categorias` (`idpref`, `margen_seguridad`, `sub_categoria_secundaria`) VALUES
+    (1, 'S', 'S');
+
+SUB CATEGORIA SECUNDARIA
+
+   CREATE TABLE IF NOT EXISTS `sub_categorias_secundaria` (
+  `idsubcate_sec` int(10) NOT NULL AUTO_INCREMENT,
+  `idsubcate` int(10) NOT NULL,
+  `descripcion` varchar(50) NOT NULL,
+  `idempresa` int(10) NOT NULL,
+  `estado` int(1) NOT NULL DEFAULT 1,
+  `anulado_por` int(11) DEFAULT NULL,
+  `anulado_el` datetime DEFAULT NULL,
+  `registrado_por` int(11) DEFAULT NULL,
+  `registrado_el` datetime DEFAULT NULL,
+  `describebanner` varchar(80) DEFAULT NULL,
+  `orden` int(1) NOT NULL DEFAULT 0,
+  `muestrafiltro` char(1) NOT NULL DEFAULT 'S',
+  `borrable` char(1) NOT NULL DEFAULT 'S',
+  `recarga_porc` decimal(24,4) NOT NULL DEFAULT 0.0000,
+  `margen_seguridad` decimal(6,3) DEFAULT NULL,
+  PRIMARY KEY (`idsubcate_sec`)
+) ENGINE=InnoDB ;
+
+
+
+
+PROVEEDORES FOB FALTA RENOMBRAR MAS ADELANTE PERO ES PARA CODIGO ORIGEN DEL PROVEEDOR
+CREATE TABLE IF NOT EXISTS `proveedores_fob` (
+  `idfob` int(11) NOT NULL,
+  `idproveedor` int(11) NOT NULL,
+  `codigo_articulo` varchar(100) NOT NULL,
+  `precio` decimal(11,0) NOT NULL,
+  `fecha` datetime NOT NULL,
+  `registrado_el` datetime DEFAULT NULL,
+  `registrado_por` int(11) DEFAULT NULL,
+  `estado` int(1) NOT NULL DEFAULT 1,
+  `anulado_por` int(11) DEFAULT NULL,
+  `anulado_el` datetime DEFAULT NULL,
+  PRIMARY KEY (`idfob`)
+) ENGINE=MyISAM;
+
+
+PREFERENCIAS COMPRAS ORDENES 
+  CREATE TABLE IF NOT EXISTS `preferencias_compras_orden` (
+  `idpreferencia` int(11) NOT NULL,
+  `facturas_multiples` char(1) NOT NULL DEFAULT 'N',
+  `descuento` char(1) NOT NULL DEFAULT 'N',
+  `facturas_finalizadas` char(1) NOT NULL DEFAULT 'N',
+  `mostrar_codigo_origen` char(1) NOT NULL DEFAULT 'N',
+  `insumos_proveedor` char(1) NOT NULL DEFAULT 'N',
+  `ocultar_tk_vincular` char(1) NOT NULL DEFAULT 'N',
+  PRIMARY KEY (`idpreferencia`)
+) ENGINE=InnoDB;
+
+INSERT INTO `preferencias_compras_orden` (`idpreferencia`, `facturas_multiples`, `descuento`, `facturas_finalizadas`, `mostrar_codigo_origen`, `insumos_proveedor`, `ocultar_tk_vincular`) VALUES
+(1, 'S', 'N', 'S', 'S', 'S', 'S');
+
+Afectan pero si es importacion ya que despacho tiene relacion con aduana paises,embarque
+
+PREFERENCIAS COTIZACION
+    
+    CREATE TABLE IF NOT EXISTS `preferencias_cotizacion` (
+        `idpref` int(11) NOT NULL,
+        `cotiza_dia_anterior` char(1) NOT NULL DEFAULT 'N',
+        `editar_fecha` char(1) NOT NULL DEFAULT 'N',
+        `usa_cot_compra` char(1) NOT NULL DEFAULT 'N',
+        PRIMARY KEY (`idpref`)
+    ) ENGINE=InnoDB;
+
+
+
+    INSERT INTO `preferencias_cotizacion` (`idpref`, `cotiza_dia_anterior`, `editar_fecha`, `usa_cot_compra`) VALUES
+    (1, 'N', 'S', 'S');
+
+
+   
+
+MIGRACIOPNES DE CIUDADES DISTRITO DEPARTAMENTO PROPIO PERO MIGRACIONES APARTE EN OTROS ARCHIVOS
+CREATE TABLE IF NOT EXISTS `paises_propio` (
+		`idpais` int(10) NOT NULL,
+		`idpais_set` int(10) NULL,
+		`nombre` varchar(80) NOT NULL,
+		`estado` int(1) NOT NULL DEFAULT 1,
+		`idempresa` int(10) NOT NULL,
+		`defecto` int(1) NOT NULL DEFAULT 0 COMMENT 'Establece un pasi por defecto',
+		`abreviatura` char(3) DEFAULT NULL,
+		`registrado_por` int(11) DEFAULT NULL,
+		`registrado_el` datetime DEFAULT NULL,
+		`anulado_por` int(11) DEFAULT NULL,
+		`anulado_el` datetime DEFAULT NULL,
+		`idmoneda` int(11) DEFAULT NULL,
+		PRIMARY KEY (`idpais`),
+		KEY `abreviatura` (`abreviatura`),
+		KEY `nombre` (`nombre`),
+		KEY `estado` (`estado`),
+		KEY `idempresa` (`idempresa`),
+		KEY `defecto` (`defecto`)
+		) ENGINE=InnoDB;
+
+		
+	-Migrando tablas de departamento para no cambiar tablas usadas por la SET
+		CREATE TABLE IF NOT EXISTS `departamentos_propio` (
+		`iddepartamento` int(11) NOT NULL,
+		`iddepartamento_set` int(11) NULL,
+		`descripcion` varchar(100) NOT NULL,
+		`estado` int(1) NOT NULL DEFAULT 1,
+		`idpais` int(11) NOT NULL,
+		`registrado_por` int(11) DEFAULT NULL,
+		`registrado_el` datetime DEFAULT NULL,
+		`anulado_por` int(11) DEFAULT NULL,
+		`anulado_el` datetime DEFAULT NULL,
+		PRIMARY KEY (`iddepartamento`),
+		KEY `estado` (`estado`)
+		) ENGINE=InnoDB;
+
+		
+	
+	-Migrando tabla de distrito para no cambiar distrito de la SET
+		CREATE TABLE IF NOT EXISTS `distrito_propio` (
+		`iddistrito` int(10) NOT NULL,
+		`iddistrito_set` int(10) NULL,
+		`distrito` varchar(60) NOT NULL,
+		`iddepartamento` int(11) NOT NULL,
+		`estado` int(1) NOT NULL DEFAULT 1,
+		`registrado_por` int(11) DEFAULT NULL,
+		`registrado_el` datetime DEFAULT NULL,
+		`anulado_por` int(11) DEFAULT NULL,
+		`anulado_el` datetime DEFAULT NULL,
+		PRIMARY KEY (`iddistrito`),
+		KEY `estado` (`estado`),
+		KEY `iddepartamento` (`iddepartamento`) USING BTREE
+		) ENGINE=InnoDB;
+
+        CREATE TABLE IF NOT EXISTS `ciudades_propio` (
+		`idciudad` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+		`idciudad_set` int(10) NULL,
+		`nombre` varchar(200) NOT NULL,
+		`iddistrito` int(11) DEFAULT 1,
+		`idpais` int(11) DEFAULT NULL,
+		`estado` char(1) DEFAULT NULL,
+		`registrado_por` int(11) DEFAULT NULL,
+		`registrado_el` datetime DEFAULT NULL,
+		`anulado_por` int(11) DEFAULT NULL,
+		`anulado_el` datetime DEFAULT NULL,
+		UNIQUE KEY `idciudad` (`idciudad`),
+		KEY `estado` (`estado`),
+		KEY `iddistrito` (`iddistrito`)
+		) ENGINE=InnoDB ;
+ADUANA
+   
+   
+        CREATE TABLE IF NOT EXISTS `aduana` (
+        `idaduana` int(20) UNSIGNED NOT NULL,
+        `descripcion` varchar(200) NOT NULL,
+        `idpais` int(20) NOT NULL,
+        `idempresa` int(3) NOT NULL,
+        `idpto` int(20) NOT NULL,
+        `idciudad` int(20) NOT NULL,
+        `registrado_por` int(11) DEFAULT NULL,
+        `registrado_el` datetime DEFAULT current_timestamp(),
+        `borrado_por` int(11) DEFAULT NULL,
+        `borrado_el` datetime DEFAULT NULL,
+        `estado` decimal(1,0) DEFAULT 1,
+        PRIMARY KEY (`idaduana`)
+        ) ENGINE=MyISAM;
+
+PUERTOS
+    CREATE TABLE IF NOT EXISTS `puertos` (
+  `idpuerto` int(20) NOT NULL,
+  `descripcion` varchar(200) NOT NULL,
+  `idpais` int(20) NOT NULL,
+  `idpto` int(20) NOT NULL,
+  `idciudad` int(20) NOT NULL,
+  `estado` decimal(1,0) DEFAULT 1,
+  `registrado_por` int(11) DEFAULT NULL,
+  `registrado_el` datetime DEFAULT NULL,
+  `borrado_por` int(11) DEFAULT NULL,
+  `borrado_el` datetime DEFAULT NULL,
+  PRIMARY KEY (`idpuerto`)
+) ENGINE=MyISAM;
+
+
+
+VIAS EMBARQUE 
+   CREATE TABLE IF NOT EXISTS `vias_embarque` (
+    `idvias_embarque` int(11) NOT NULL,
+    `descripcion` varchar(200) NOT NULL,
+    `registrado_por` int(11) DEFAULT NULL,
+    `registrado_el` datetime DEFAULT NULL,
+    `estado` int(11) NOT NULL DEFAULT 1,
+    `anulado_por` int(11) DEFAULT NULL,
+    `anulado_el` datetime DEFAULT NULL,
+    PRIMARY KEY (`idvias_embarque`)
+    ) ENGINE=InnoDB;
+
+EMBARQUE 
+    CREATE TABLE IF NOT EXISTS `embarque` (
+  `idembarque` int(11) NOT NULL,
+  `idcompra` int(11) DEFAULT NULL,
+  `idpuerto` int(11) NOT NULL,
+  `idtransporte` int(11) NOT NULL,
+  `idvias_embarque` int(11) NOT NULL,
+  `descripcion` varchar(200) DEFAULT NULL,
+  `fecha_embarque` datetime NOT NULL,
+  `fecha_llegada` datetime NOT NULL,
+  `registrado_por` int(11) DEFAULT NULL,
+  `registrado_el` datetime DEFAULT NULL,
+  `anulado_por` int(11) DEFAULT NULL,
+  `anulado_el` datetime DEFAULT NULL,
+  `estado` int(1) DEFAULT 1,
+  `estado_embarque` int(1) DEFAULT 1 COMMENT '1: Activo 2: Inactivo',
+  `ocnum` int(11) NOT NULL,
+  PRIMARY KEY (`idembarque`)
+) ENGINE=MyISAM;
+		
+
+TRANSPORTE 
+    CREATE TABLE IF NOT EXISTS `transporte` (
+  `idtransporte` int(11) NOT NULL,
+  `idvias_embarque` int(11) DEFAULT NULL,
+  `descripcion` varchar(200) NOT NULL,
+  `registrado_por` int(11) DEFAULT NULL,
+  `estado` int(1) NOT NULL DEFAULT 1,
+  `registrado_el` datetime DEFAULT NULL,
+  `anulado_por` int(11) DEFAULT NULL,
+  `anulado_el` datetime DEFAULT NULL,
+  PRIMARY KEY (`idtransporte`)
+) ENGINE=MyISAM;
+
+DESPACHO 
+    CREATE TABLE IF NOT EXISTS `despacho` (
+    `iddespacho` int(11) NOT NULL,
+    `tipo_moneda` int(11) NOT NULL,
+    `iddespachante` int(11) NOT NULL COMMENT 'son proveedores con un servicio despachante',
+    `idaduana` int(11) NOT NULL,
+    `cotizacion` decimal(12,6) NOT NULL,
+    `registrado_por` int(11) DEFAULT NULL,
+    `registrado_el` datetime DEFAULT NULL,
+    `estado` decimal(1,0) DEFAULT 1,
+    `anulado_el` datetime DEFAULT NULL,
+    `anulado_por` int(10) NOT NULL DEFAULT 0,
+    `comentario` varchar(150) DEFAULT NULL,
+    `fecha_despacho` datetime NOT NULL,
+    `idcompra` int(11) NOT NULL,
+    PRIMARY KEY (`iddespacho`)
+    ) ENGINE=MyISAM;
+
+
+
+MODULO IMPORTACION 
+
+VEHICULOS PORPIETARIOS 
+    CREATE TABLE IF NOT EXISTS `vehiculo_propietario` (
+    `idpropietario` int(11) NOT NULL,
+    `nombre` varchar(200) NOT NULL,
+    `documento` varchar(20) DEFAULT NULL,
+    `celular` varchar(15) DEFAULT NULL,
+    `emial` varchar(70) DEFAULT NULL,
+    `direccion` varchar(200) DEFAULT NULL,
+    `estado` int(1) NOT NULL DEFAULT 1,
+    `registrado_por` int(11) DEFAULT NULL,
+    `registrado_el` datetime DEFAULT NULL,
+    `anulado_por` int(11) DEFAULT NULL,
+    `anulado_el` datetime DEFAULT NULL,
+    PRIMARY KEY (`idpropietario`)
+    ) ENGINE=MyISAM;
+
+VEHICULO 
+
+CREATE TABLE IF NOT EXISTS `vehiculo` (
+  `idvehiculo` int(12) NOT NULL,
+  `codigo` varchar(50) DEFAULT NULL,
+  `nro_motor` varchar(20) DEFAULT NULL,
+  `capacidad_kg` decimal(25,5) NOT NULL,
+  `capacidad_volumen_m3` decimal(25,5) NOT NULL,
+  `anho_fabricacion` varchar(12) DEFAULT NULL,
+  `chapa` varchar(9) DEFAULT NULL,
+  `chasis` varchar(200) DEFAULT NULL,
+  `modelo` varchar(20) DEFAULT NULL,
+  `idvehiculo_propietario` int(12) NOT NULL,
+  `registrado_por` int(12) DEFAULT NULL,
+  `registrado_el` datetime DEFAULT NULL,
+  `estado` int(1) NOT NULL DEFAULT 1,
+  `anulado_por` int(12) DEFAULT NULL,
+  `anulado_el` datetime DEFAULT NULL,
+  `idmarca` int(11) NOT NULL,
+  `color` varchar(90) DEFAULT NULL,
+  PRIMARY KEY (`idvehiculo`)
+) ENGINE=MyISAM;
+
+
+POLIZA
+   CREATE TABLE IF NOT EXISTS `poliza` (
+  `idpoliza` int(11) NOT NULL,
+  `archivo` varchar(250) DEFAULT NULL,
+  `fecha_inicio` datetime NOT NULL,
+  `fecha_fin` datetime NOT NULL,
+  `registrado_el` datetime NOT NULL,
+  `registrado_por` int(11) NOT NULL,
+  `estado` int(1) NOT NULL DEFAULT 1,
+  `anulado_por` int(11) DEFAULT NULL,
+  `anulado_el` datetime DEFAULT NULL,
+  `idproveedor` int(11) NOT NULL,
+  PRIMARY KEY (`idpoliza`)
+) ENGINE=MyISAM;
+
+
+EXCEPCIONES PRODUCTOS 
+   
+   
+   CREATE TABLE IF NOT EXISTS `excepciones_producto` (
+  `idexcepcion` int(11) NOT NULL,
+  `idproducto` int(11) NOT NULL,
+  `idinsumo` int(11) NOT NULL,
+  `venta` int(1) NOT NULL DEFAULT 1 COMMENT '1:activo 2:inactivo',
+  `venta_sin_stock` int(1) NOT NULL DEFAULT 2 COMMENT '1:activo 2:inactivo',
+  `estado` int(1) NOT NULL DEFAULT 1 COMMENT '1:activo 2:inactivo',
+  `registrado_el` datetime NOT NULL,
+  `registrado_por` int(11) NOT NULL,
+  `anulado_por` int(11) DEFAULT NULL,
+  `anulado_el` datetime DEFAULT NULL,
+  PRIMARY KEY (`idexcepcion`)
+) ENGINE=MyISAM;
+
+
+GEST DEPOSITO GRAL ALMACTO (almacenamiento)
+    
+    
+    CREATE TABLE IF NOT EXISTS `gest_deposito_almcto_grl` (
+  `idalmacto` int(11) NOT NULL,
+  `iddeposito` int(11) NOT NULL,
+  `nombre` varchar(30) NOT NULL,
+  `registrado_por` int(11) NOT NULL,
+  `registrado_el` datetime NOT NULL,
+  `estado` int(1) NOT NULL,
+  `anulado_por` int(11) DEFAULT NULL,
+  `anulado_el` datetime DEFAULT NULL,
+  PRIMARY KEY (`idalmacto`)
+) ENGINE=MyISAM;
+
+GEST DEPOSITO ALMACTO  
+
+    CREATE TABLE IF NOT EXISTS `gest_deposito_almcto` (
+  `idalm` int(11) NOT NULL,
+  `idalmacto` int(11) NOT NULL,
+  `cara` char(1) DEFAULT NULL,
+  `tipo_almacenado` int(2) NOT NULL COMMENT '1: Estante 2: Apilado',
+  `registrado_por` int(11) NOT NULL,
+  `registrado_el` datetime NOT NULL,
+  `estado` int(1) DEFAULT NULL,
+  `anulado_por` int(1) DEFAULT NULL,
+  `anulado_el` datetime DEFAULT NULL,
+  `nombre` varchar(25) NOT NULL,
+  `filas` int(2) NOT NULL DEFAULT 0 COMMENT 'filas maximas del estante',
+  `columnas` int(2) NOT NULL DEFAULT 0 COMMENT 'columnas maximas del estante',
+  PRIMARY KEY (`idalm`)
+) ENGINE=MyISAM;
+
+
+GEST DEPOSITOS STOCK ALMACTO
+
+
+    CREATE TABLE IF NOT EXISTS `gest_depositos_stock_almacto` (
+    `idregserie_almacto` int(11) NOT NULL,
+    `idalm` int(11) NOT NULL,
+    `idregseriedptostk` int(11) NOT NULL,
+    `fila` int(11) DEFAULT NULL,
+    `columna` int(11) DEFAULT NULL,
+    `cantidad` decimal(36,4) NOT NULL,
+    `idmedida` int(11) NOT NULL,
+    `registrado_por` int(11) NOT NULL,
+    `registrado_el` datetime NOT NULL,
+    `estado` int(1) NOT NULL,
+    `anulado_por` int(11) DEFAULT NULL,
+    `anulado_el` datetime DEFAULT NULL,
+    `idpasillo` int(11) DEFAULT NULL,
+    `posicion` int(11) DEFAULT NULL,
+    `disponible` decimal(36,4) NOT NULL DEFAULT 0.0000,
+    PRIMARY KEY (`idregserie_almacto`)
+    ) ENGINE=MyISAM;
+
+GEST ALMACENAMIENTO PASILLO
+    
+    
+    CREATE TABLE IF NOT EXISTS `gest_almcto_pasillo` (
+  `idpasillo` int(11) NOT NULL,
+  `estado` int(1) NOT NULL DEFAULT 1,
+  `nombre` varchar(100) NOT NULL,
+  `idalmacto` int(11) NOT NULL,
+  `registrado_por` int(11) NOT NULL,
+  `registrado_el` datetime NOT NULL,
+  `anulado_por` int(11) DEFAULT NULL,
+  `anulado_el` datetime DEFAULT NULL,
+  PRIMARY KEY (`idpasillo`)
+) ENGINE=MyISAM;
+
+
+
+VENTAS DETALLE LOTE
+    
+    CREATE TABLE IF NOT EXISTS `ventas_detalles_lote` (
+  `idventadet_lote` int(11) NOT NULL,
+  `ideventadet` int(11) NOT NULL,
+  `cantidad` decimal(20,3) NOT NULL,
+  `lote` varchar(60) NOT NULL,
+  `vencimiento` datetime NOT NULL,
+  `registrado_por` int(11) NOT NULL,
+  `registrado_el` datetime NOT NULL,
+  PRIMARY KEY (`idventadet_lote`)
+) ENGINE=MyISAM;
+
+DEVOLUCION
+
+    CREATE TABLE IF NOT EXISTS `devolucion` (
+  `iddevolucion` int(11) NOT NULL,
+  `idventa` int(11) NOT NULL,
+  `registrado_por` int(11) NOT NULL,
+  `registrado_el` datetime NOT NULL,
+  `idempresa` int(11) NOT NULL DEFAULT 1,
+  `estado` int(1) NOT NULL DEFAULT 1,
+  PRIMARY KEY (`iddevolucion`)
+) ENGINE=MyISAM;
+
+
+DEVOLUCION DETALLE
+    CREATE TABLE IF NOT EXISTS `devolucion_det` (
+  `iddevolucion_det` int(11) NOT NULL,
+  `cantidad` decimal(20,3) NOT NULL,
+  `idproducto` int(11) NOT NULL,
+  `comentario` varchar(60) DEFAULT NULL,
+  `iddeposito` int(11) NOT NULL,
+  `lote` varchar(60) DEFAULT NULL,
+  `vencimiento` datetime DEFAULT NULL,
+  `idmedida` int(4) DEFAULT NULL,
+  `iddevolucion` int(11) NOT NULL,
+  PRIMARY KEY (`iddevolucion_det`)
+) ENGINE=MyISAM;
+
+
+
+PREFERENCIAS DEVOLUCION 
+   
+   
+   CREATE TABLE IF NOT EXISTS `preferencias_devolucion` (
+  `idpref` int(11) NOT NULL,
+  `devolucion_importacion` int(1) NOT NULL DEFAULT 0,
+  PRIMARY KEY (`idpref`)
+) ENGINE=MyISAM;
+
+
+RETIROS ORDENES 
+
+    CREATE TABLE IF NOT EXISTS `retiros_ordenes` (
+  `idorden_retiro` int(11) NOT NULL,
+  `iddevolucion` int(11) NOT NULL,
+  `estado` int(1) NOT NULL,
+  `iddeposito` int(11) NOT NULL,
+  `modificado_el` datetime DEFAULT NULL,
+  `nota_de_credito` int(1) NOT NULL DEFAULT 0 COMMENT '1: Creado 0:sin nota de credito',
+  `idnotacred` int(11) DEFAULT 0,
+  PRIMARY KEY (`idorden_retiro`)
+) ENGINE=MyISAM;
+
+
+PREFERENCIAS DEPOSITO
+
+    CREATE TABLE IF NOT EXISTS `preferencias_depositos` (
+    `idpref` int(11) NOT NULL,
+    `usa_almacenamiento` char(1) NOT NULL DEFAULT 'N',
+    `autosel_compras` char(1) NOT NULL DEFAULT 'N',
+    PRIMARY KEY (`idpref`)
+    ) ENGINE=MyISAM;

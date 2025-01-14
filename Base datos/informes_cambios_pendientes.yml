@@ -1,0 +1,205 @@
+Finalizado
+embarque se agrega en modulo de compras y permite finalizar la 
+compra pero para mover el stock tiene que primero finalizar el embarque y permite editar la fecha de llegada 
+pero no la fecha de la factura 
+
+ORDNES DE COMPA\
+compras_ordenes_add fecha de entrega estimada
+mostrar banderita
+si cotiza poner *
+en compras_ordenes_det agregar la moneda centrado mas grande 11 o 13 
+imprimir odern de compra 
+MEJORA
+ compras_ordenes_det cambiar lista de insumos
+compras_ordenes_det desabilitar los que no selecciono siempre que este cargado y que la unidad de medida este en parentesis
+ dar orden para cerrar la orden si es que se quiere cerrar a la fuerza la orden URGENTE 
+
+
+
+
+
+
+
+////////////////////////////////////////////////////////////////
+
+
+
+El orden es 
+- Agregar servicios para proveedores https://desarrollo.sistema.com.py/proveedores/tipo_servicio.php
+- crear proveedor https://desarrollo.sistema.com.py/proveedores/gest_proveedores.php
+- crear grupo de stock https://desarrollo.sistema.com.py/insumos/grupo_insumos.php para relacionar el stock(Consultar con el sr Jose para mas detalles o con Soporte)
+- crear insumo  https://desarrollo.sistema.com.py/insumos/insumos_lista.php
+- crear orden de compra https://desarrollo.sistema.com.py/compras_ordenes/compras_ordenes.php
+- nos saltara el avizo de la cotizacion si es importacion seguimos el mensaje de la alerta o vamos a https://desarrollo.sistema.com.py/cotizaciones/cotizaciones.php
+en el cual podemos agregar la cotizacion a mano o de lo contrario  seleccionamos ver cotizacion set el cual si la web de la set no cambio nos mostrara la cotizacion del 
+dia anterior, si al apretar ver cotizacion podemos vizualizar la cotizacion podemos dar con seguridad al boton Agregar cotizacion DOLAR SET el cual nos agregara de forma automatica dicha cotizacion mostrada
+- una vez creada la orden de compra padre que contenera a todas las proformas aparecera  en https://desarrollo.sistema.com.py/compras_ordenes/compras_ordenes.php en el apartado 
+Ordenes de Compra Finalizadas la orden cargada en el paso anterior y en la cual apretamos en el boton de la lupita para 
+ver los detalles y agregar las Sub Ordenes(Proforma)
+- una vez agregada la proforma buscaremos nuestra orden padre en  https://desarrollo.sistema.com.py/compras_ordenes/compras_ordenes.php en el apartado de   Ordenes de Compra Finalizadas
+y apretamos en la lupita nuevamente nos dara la opcion de vizualizar la proforma con el boton de lupita y si asi lo deseamos con el boton de embarque el rojo alado de la lupa en cada proforma
+podemos agregar el embarque correspondiente a cada proforma
+- Luego nos dirigimos a https://desarrollo.sistema.com.py/compras/gest_reg_compras_resto_new.php y seleccionamos AGREGAR
+en donde nos llevara a cargar la Factura para esto tenemos varias opciones 
+  [*] Podemos sleccionar el Proveedor y luego seguir los pasos que nos muestra la pantalla 
+  [*] Podemos seleccionar una orden por embarque asociado a una sub orden(proforma) y seguir los pasos
+  [*] Podemos selecionar una orden por la misma proforma y seguir los pasos
+  en cada las dos ultimas opciones tendremos el boton de la lupa para poder vizualizar los articulos asociados a cada Orden
+al mostrarnos el carrito para cargar la factura y si seleccionamos una ORDEN podremos darle al boton de autogenerar ubicado en el angulo superior izquierdo de la zona blanca de la pantalla por debajo del Boton para editar la cabecera
+el cual (El boton de autogenerar) nos precargara el carrito con los articulos asociados
+- Al finalizar la factura podremos ir a https://desarrollo.sistema.com.py/compras/gest_reg_compras_resto_new.php en el apartado 
+Compras pendientes de Verificacion y seleccionar la factura pendiente a ingreso de stock por medio de la lupita o si asi lo deseamos precargamos el Despacho antes de apretar la lupita, 
+El despacho tambien podra ser cargado desde el detalle(la ventana que accedemos al paretar el boton de la lupa) en dicha ventana ademas podremos acceder a el boton de agregar gastos ubicado en la parte superior de la zona Blanca de la pantalla 
+que como su nombre lo menciona es el boton para agregar gastos relacionados a esa compra
+-Una vez que dimos ingreso al stock podremos acceder a dos reportes https://desarrollo.sistema.com.py/reportes_ordenes/reportes_ordenes.php 
+y el reporte https://desarrollo.sistema.com.py/reporte_costos_producto/reporte_costos_producto.php
+
+para ventas querys descubiertos
+
+select COALESCE((
+                 select gest_depositos_stock_gral.disponible
+                from insumos_lista
+                inner join gest_depositos_stock_gral on insumos_lista.idinsumo = gest_depositos_stock_gral.idproducto
+                where
+                insumos_lista.idproducto = tmp_ventares.idproducto
+                and gest_depositos_stock_gral.iddeposito in (SELECT iddeposito 
+FROM gest_depositos 
+where tiposala = 2 
+and idempresa = 1 
+and idsucursal = 1 
+and estado = 1 )
+                and insumos_lista.idproducto is not null
+                ),0) as cantidad_stock from tmp_ventares where 
+                registrado = 'N'
+and tmp_ventares.usuario = 23
+and tmp_ventares.borrado = 'N'
+and tmp_ventares.finalizado = 'N'
+and tmp_ventares.idsucursal = 1
+and tmp_ventares.idempresa = 1
+and tmp_ventares.idtipoproducto not in (2,3,4)
+
+//////////////////////////////////////
+select COALESCE((
+                 select gest_depositos_stock_gral.disponible
+                from insumos_lista
+                inner join gest_depositos_stock_gral on insumos_lista.idinsumo = gest_depositos_stock_gral.idproducto
+                where
+                insumos_lista.idproducto = tmp_ventares.idproducto
+                and gest_depositos_stock_gral.iddeposito =1
+                and insumos_lista.idproducto is not null
+                ),0) as cantidad_stock from tmp_ventares
+
+
+
+///////////////////////
+cantidad en tmp_ventas 
+
+
+select idproducto, SUM(cantidad) as cantidad_tmp from tmp_ventares where tmp_ventares.registrado = 'N' and tmp_ventares.usuario = 23 and tmp_ventares.borrado = 'N' and tmp_ventares.finalizado = 'N' and tmp_ventares.idsucursal = 1 and tmp_ventares.idempresa = 1 and tmp_ventares.idtipoproducto not in (2,3,4) GROUP BY idproducto
+//////////////////////
+
+
+
+select gest_depositos_stock_gral.disponible,gest_depositos_stock_gral.idproducto
+from insumos_lista
+inner join gest_depositos_stock_gral on insumos_lista.idinsumo = gest_depositos_stock_gral.idproducto
+where
+	insumos_lista.idproducto in (
+        select DISTINCT(idproducto) from tmp_ventares 
+        where 
+        tmp_ventares.registrado = 'N'
+        and tmp_ventares.usuario = 23
+        and tmp_ventares.borrado = 'N'
+        and tmp_ventares.finalizado = 'N'
+        and tmp_ventares.idsucursal = 1
+        and tmp_ventares.idempresa = 1
+        and tmp_ventares.idtipoproducto not in (2,3,4)
+    )
+    and gest_depositos_stock_gral.iddeposito =1
+    and insumos_lista.idproducto is not null
+
+    ////////////////////////////////////////////////
+    select insumos_lista.idproducto, gest_depositos_stock_gral.disponible
+from insumos_lista
+left join gest_depositos_stock_gral on insumos_lista.idinsumo = gest_depositos_stock_gral.idproducto and gest_depositos_stock_gral.iddeposito =1
+where
+	insumos_lista.idproducto in (
+        select DISTINCT(idproducto) from tmp_ventares 
+        where 
+        tmp_ventares.registrado = 'N'
+        and tmp_ventares.usuario = 23
+        and tmp_ventares.borrado = 'N'
+        and tmp_ventares.finalizado = 'N'
+        and tmp_ventares.idsucursal = 1
+        and tmp_ventares.idempresa = 1
+        and tmp_ventares.idtipoproducto not in (2,3,4)
+    )
+    and insumos_lista.idproducto is not null
+
+
+
+    Modulos Nuevos 
+    Vehiculos
+    vehiculos propietario
+    poliza 
+    Excepsiones insumo
+
+    ventas se cambio dos scripts 
+     gest_ventas_resto_caja.php y ventas_caja.js 
+
+
+     en ventas por caja que se auno 
+     pero que tome por lote, solo si el cliente es un 
+     super o alguien especial entonces tomar lotes de productos con cierta fecha minima a vencer 
+
+     mover stock agregar descontar agregar  costo promedio y si usa lote y vencimiento poner uno ficticio 
+     o ver la forma que al descontar tambien desuente de los agregados con la funcion de agregar stock
+     actualmente esta fallando al descontar esos valores no asi los cargados por el modulo de compras 
+     
+     preguntar si realizar el modulo de ventas parte grafica 
+
+     crear seguridad para que al crear la cantidad medida 3 si no cargo medida 2 se guarde en 1  aprobado por 
+     mike realizar en la brevedad posible
+     
+
+
+     verificar conteo_productos_depositos ver el carrito esta verificando conteo y no conteo_detalles
+
+
+     en venta las mercaderias una vez se aprueban las facturas pasan al stock de venta es decir maneja doble 
+     stock todavia no descuenta para el stock general pero si para la venta 
+    luego cuando se junta cierta cantidad de facturas de venta que llenen un camion o un metodo de envio se selecciona
+    esas facturas y se descuenta del stock general para cargar de ejemplo los articulos a  un camion comun y se envia
+
+
+
+
+
+
+
+se tienen 100 unidades de producto x, en dos estantes en la posicion 1 de cada estante y tienen de a 50 
+luego se factura y aprueba 50 por lo que para facturar hay 50 del producto pero en el deposito 
+sigue los 100 porque todavia no llena un camion luego se factura 20 quedan 30 para vender pero en el deposito siguen
+100 por lo que  luego de un momento y facurar otros pedidos llenan el camion y ahi deposito dice carguen los camiones y descuentan
+del stock general  ademas a tener en cuenta 
+
+    al aprobar facturacion el stock que es caja sale del estante pero las unidades salen de un deposito que guarda en unidades y no 
+    importa donde esta 
+     
+
+
+- ingresa mercaderia luego de que ingresaron en el deposito verifican  si existe algun producto para imprimir el codigo de barras 
+- el modulo imprimir codigo de barras de mercaderias mostrara los que esten sin un lugar asignado, dando la posibilidad de 
+buscar los productos por nombre si por algun motivo no es visible a simple vista 
+- se procede a asignar un lugar a los productos, se entra en el deposito que se desea revisar y mostrara los productos sin 
+un lugar asignado, en el cual el usuario leera el codigo de barras para precargar el lote al que asignara un luagar ya sea libre
+ sin mercaderia o alguno ocupado para completar bajo su responsabilidad
+- al realizar un conteo no se pueden  mover ninguna mercaderia solo contabilizar y mostrara la diferencia de cada lugar 
+de existir alguna  y muestra la lista de productos 
+- al hacer el invetario de un deposito de la misma forma que el conteo solo que se utilizara el lector de codigo de barras para
+precargar el lote  que se contabiliza y el lugar ose cargara a mano y creara una lista que pisara el stock de ese estante o pasillo
+dejando en cero si no esta especificado en dicha lista
+
+
+-- en conteo insumos ver lo que hay en el deposito la parte de productos ver 
+-- ordenar en conteo al contar los conteos para ver mejor 

@@ -1,0 +1,6 @@
+INSERT INTO `paises_propio` (`idpais`,`idpais_set`, `nombre`, `estado`, `idempresa`, `defecto`, `abreviatura`, `registrado_por`, `registrado_el`, `anulado_por`, `anulado_el`, `idmoneda`) VALUES
+		(1,1, 'PARAGUAY', 1, 1, 1, 'PY', NULL, NULL, NULL, NULL, 1),
+		(2,2, 'ARGENTINA', 1, 1, 0, 'AR', NULL, NULL, NULL, NULL, 2),
+		(3,3, 'BRASIL', 1, 1, 0, 'BR', NULL, NULL, NULL, NULL, NULL),
+		(4,4, 'PERU', 1, 1, 0, 'PR', NULL, NULL, NULL, NULL, 2),
+		(5,5, 'CANADá', 1, 1, 1, 'CA', 23, '2023-06-26 14:24:24', 23, '2023-06-26 15:19:07', NULL);

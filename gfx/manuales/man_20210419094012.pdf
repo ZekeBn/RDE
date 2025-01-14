@@ -1,0 +1,122 @@
+%PDF-1.3
+1 0 obj
+<< /Type /Catalog
+/Outlines 2 0 R
+/Pages 3 0 R >>
+endobj
+2 0 obj
+<< /Type /Outlines /Count 0 >>
+endobj
+3 0 obj
+<< /Type /Pages
+/Kids [6 0 R
+]
+/Count 1
+/Resources <<
+/ProcSet 4 0 R
+/Font << 
+/F1 8 0 R
+/F2 9 0 R
+>>
+>>
+/MediaBox [0.000 0.000 612.000 792.000]
+ >>
+endobj
+4 0 obj
+[/PDF /Text ]
+endobj
+5 0 obj
+<<
+/Creator (DOMPDF)
+/CreationDate (D:20210413090944-04'00')
+/ModDate (D:20210413090944-04'00')
+>>
+endobj
+6 0 obj
+<< /Type /Page
+/Parent 3 0 R
+/Contents 7 0 R
+>>
+endobj
+7 0 obj
+<<
+/Length 1601 >>
+stream
+
+0.000 0.000 0.000 rg
+BT 50.522 737.504 Td /F2 12.0 Tf  [(Razon Social)] TJ ET
+BT 150.826 737.504 Td /F2 12.0 Tf  [(Ruc)] TJ ET
+BT 196.658 737.504 Td /F2 12.0 Tf  [(Nombres)] TJ ET
+BT 257.376 737.504 Td /F2 12.0 Tf  [(Apellidos)] TJ ET
+BT 330.177 744.632 Td /F2 12.0 Tf  [(Linea de )] TJ ET
+BT 334.185 730.376 Td /F2 12.0 Tf  [(Credito)] TJ ET
+BT 416.800 744.632 Td /F2 12.0 Tf  [(Saldo )] TJ ET
+BT 406.300 730.376 Td /F2 12.0 Tf  [(Adeudado)] TJ ET
+BT 492.645 744.632 Td /F2 12.0 Tf  [(Linea )] TJ ET
+BT 481.473 730.376 Td /F2 12.0 Tf  [(Disponible)] TJ ET
+BT 551.724 737.504 Td /F2 12.0 Tf  [(Cod)] TJ ET
+BT 44.462 713.120 Td /F1 12.0 Tf  [(OMAR DANIEL )] TJ ET
+BT 81.446 698.864 Td /F1 12.0 Tf  [(ALBERT )] TJ ET
+BT 78.458 684.608 Td /F1 12.0 Tf  [(QUEIROZ)] TJ ET
+BT 135.160 698.864 Td /F1 12.0 Tf  [(2192136-9)] TJ ET
+BT 333.700 698.864 Td /F1 12.0 Tf  [(100.000.000)] TJ ET
+1.000 1.000 0.800 rg
+395.950 680.704 73.380 44.268 re f
+0.000 0.000 0.000 rg
+BT 429.580 698.864 Td /F1 12.0 Tf  [(645.000)] TJ ET
+BT 492.050 698.864 Td /F1 12.0 Tf  [(99.355.000)] TJ ET
+BT 559.392 698.864 Td /F1 12.0 Tf  [(2)] TJ ET
+0.800 0.800 0.800 rg
+35.516 663.448 96.348 15.756 re f
+0.000 0.000 0.000 rg
+BT 36.266 667.352 Td /F2 12.0 Tf  [(Totales)] TJ ET
+0.800 0.800 0.800 rg
+133.364 663.448 55.587 15.756 re f
+190.451 663.448 59.069 15.756 re f
+251.021 663.448 60.723 15.756 re f
+313.244 663.448 81.206 15.756 re f
+395.950 663.448 73.380 15.756 re f
+0.000 0.000 0.000 rg
+BT 429.580 667.352 Td /F2 12.0 Tf  [(645.000)] TJ ET
+0.800 0.800 0.800 rg
+470.830 663.448 75.969 15.756 re f
+548.300 663.448 28.185 15.756 re f
+endstream
+endobj
+8 0 obj
+<< /Type /Font
+/Subtype /Type1
+/Name /F1
+/BaseFont /Times-Roman
+/Encoding /WinAnsiEncoding
+>>
+endobj
+9 0 obj
+<< /Type /Font
+/Subtype /Type1
+/Name /F2
+/BaseFont /Times-Bold
+/Encoding /WinAnsiEncoding
+>>
+endobj
+xref
+0 10
+0000000000 65535 f 
+0000000008 00000 n 
+0000000073 00000 n 
+0000000119 00000 n 
+0000000283 00000 n 
+0000000312 00000 n 
+0000000426 00000 n 
+0000000489 00000 n 
+0000002142 00000 n 
+0000002251 00000 n 
+trailer
+<<
+/Size 10
+/Root 1 0 R
+/Info 5 0 R
+>>
+startxref
+2359
+%%EOF

@@ -1,0 +1,176 @@
+
+ALTER TABLE tmpcompradeta ADD COLUMN iddeposito_tmp INT; // si nulo
+//alter para almacentar iddeposito del detalle de la compra
+
+
+
+ALTER TABLE `preferencias_compras`  ADD `usar_depositos_asignados` CHAR(1) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL DEFAULT 'N' ;
+//preferencia para habilitar los depositos de cada producto guardado en cada detalle 
+
+
+ALTER TABLE `tmpcompras` ADD `descripcion` VARCHAR(300) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL ;
+//almacenta una pequeña descripcion en tmpcompras
+
+
+ALTER TABLE `compras` ADD `descripcion` VARCHAR(300) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL ;
+//almacenta una pequeña descripcion en tmpcompras
+
+
+ALTER TABLE `tmpcompras` ADD `descuento` DECIMAL(20,3) NOT NULL DEFAULT '0.000' COMMENT 'descuento sobre el monto total' ;
+//Agrega un descuento sobre el monto total ( si agrega al carrito el insumo descuento )
+
+
+ALTER TABLE `preferencias_compras` ADD `usar_descuentos_compras` CHAR(1) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL DEFAULT 'N' ;
+// preferencias para que en el modulo de compras habilite visualmente agregar al carrito insumo descuento
+
+
+ALTER TABLE `tmpcompras` ADD `anulado_el` DATETIME NULL DEFAULbT NULL ;
+//para saber en que fecha se anula una compra temporal
+
+ALTER TABLE `tmpcompras` ADD `anulado_por` INT(10) NOT NULL DEFAULT '0' ;
+// alter para saver quien anulo la compra temporal
+
+/////////////////////////////////////////////////////////
+ALTER TABLE `proveedores` ADD `idpais` INT(10) NOT NULL DEFAULT '0' ;
+//almacena el pais en proveedores relacionada con pais 
+
+ALTER TABLE `proveedores` ADD `agente_retencion` CHAR(1) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL DEFAULT 'N' COMMENT 'es agente de retencion o no' ;
+//almacena si el proveedor es o no agente de retencion
+
+
+
+ALTER TABLE `proveedores` ADD `idmoneda` INT(11) NOT NULL DEFAULT '0';
+//almacena el id moneda relacionado a la tabla moneda
+
+
+
+
+TABLAS NUEVAS
+preferencias_proveedores
+
+CREATE TABLE `preferencias_proveedores` (
+  `idpreferencia` int(11) NOT NULL AUTO_INCREMENT,
+  `idempresa` int(11) NOT NULL,
+  `moneda` char(1) NOT NULL DEFAULT 'N' COMMENT 'Habilita Pais y Moneda para su uso',
+  `agente_retencion` char(1) NOT NULL DEFAULT 'N',
+  PRIMARY KEY (`idpreferencia`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+
+//moneda habilita en proveedores los campos moneda y pais podria unificarse con importacion 
+//que es un alter citado mas adelante que habilita tipo origen
+//agente de retencion habilita dicho campo en proveedores 
+INSERT INTO `ekaru`.`preferencias_proveedores` (`idpreferencia`, `idempresa`, `moneda`, `agente_retencion`, `mercaderias`) VALUES ('1', '1', 'S', 'S', 'S');
+
+/////creando tablas preferencias para proveedores
+
+
+
+
+
+
+ALTER TABLE `paises` ADD `idmoneda` INT(11) NULL ;
+/// para poner a una moneda por defecto al pais  utilizado con proveedores 
+
+
+// aduana tabla nueva 
+CREATE TABLE `ekaru`.`aduana` ( `idaduana` INT(20) UNSIGNED NOT NULL , `descripcion` VARCHAR(200) NOT NULL , `idpais` INT(20) NOT NULL , `idpto` INT(20) NOT NULL , `idciudad` INT(20) NOT NULL , PRIMARY KEY (`idaduana`(11))) ENGINE = MyISAM;
+
+// puerto tabla nueva 
+CREATE TABLE `ekaru`.`puertos` ( `idpuerto` INT(20) NOT NULL , `descricripcion` INT(20) NOT NULL , `idpais` INT(20) NOT NULL , `idpto` INT(20) NOT NULL , `idciudad` INT(20) NOT NULL ) ENGINE = MyISAM;
+
+
+
+
+
+CREATE TABLE `tipo_origen` ( `idtipo_origen` INT(10) NOT NULL , `tipo` VARCHAR(200) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL ) ENGINE = MyISAM;
+//rabla para definir si es local o importacion es una tabla por si quieran poner algo mas especifico
+a futuro es decir nacional del pais local o de importacion sujeto a cambios 
+
+ALTER TABLE `tipo_origen` ADD PRIMARY KEY(`idtipo_origen`);
+//agregando primary key a tipo origen
+
+INSERT INTO `tipo_origen` (`idtipo_origen`, `tipo`) VALUES ('1', 'Local'), ('2', 'Importacion')
+//valores por defecto
+
+ALTER TABLE `proveedores` ADD `idtipo_origen` INT(11) NOT NULL;
+//proveedores  tipo_origen relacion para saber si es local o no
+
+
+
+
+
+
+ALTER TABLE `proveedores` ADD `idtipo_servicio` INT(11) NULL;
+##agregando tipo servicio relacion a tabla 
+
+CREATE TABLE `tipo_servicio` ( `idtipo_servicio` INT(11) NOT NULL , `tipo` VARCHAR(200) NOT NULL ) ENGINE = MyISAM;
+ADD PRIMARY KEY(`idtipo_servicio`);
+//tabla para agregar tipos de servicios prestado referencial
+//ej: proveedor de productos,Proveedores de servicios de tecnología  etc
+
+INSERT INTO `tipo_servicio` (`idtipo_servicio`, `tipo`) VALUES ('1', 'Suministros de productos'), ('2', 'Servicios de tecnología de la información')
+//  servicios basicos de ejemplo
+
+
+
+
+ALTER TABLE `preferencias_proveedores` ADD `tipo_servicio` CHAR(2) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL DEFAULT 'N';
+//preferencias para agregar tipo de servicios
+
+
+UPDATE `preferencias_proveedores` SET `tipo_servicio` = 'S' WHERE `preferencias_proveedores`.`idpreferencia` = 1;
+//seteando la preferencia para poder probar 
+
+ALTER TABLE `proveedores` ADD `cuenta_cte_mercaderia` VARCHAR(200)  NULL, ADD `cuenta_cte_deuda` VARCHAR(200)  NULL;
+// agregando cuentas corrientes para proveedores (contaduria)
+
+
+ALTER TABLE `preferencias_proveedores` ADD `cta_cte` CHAR(1) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL DEFAULT 'N';
+//agregando preferencias para cuentas corrientes de proveedores 
+
+UPDATE `preferencias_proveedores` SET `cta_cte` = 'S' WHERE `preferencias_proveedores`.`idpreferencia` = 1;
+//seteando preferencias para pruebas en  RDE
+
+ALTER TABLE `preferencias_proveedores` ADD `importacion` CHAR(1) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL DEFAULT 'N' COMMENT 'Habilitar proveedores locales y de importación';
+//preferencias que habilita en proveedores el campo origen proveedores 
+
+
+UPDATE `preferencias_proveedores` SET `importacion` = 'S' WHERE `preferencias_proveedores`.`idpreferencia` = 1;
+//update para probar en RDE
+
+ALTER TABLE `aduana` ADD `registrado_por` INT(11) NULL DEFAULT NULL, ADD `registrado_el` DATETIME NULL DEFAULT NULL;
+ALTER TABLE `aduana` ADD `borrado_por` INT(11) NULL DEFAULT NULL;
+ALTER TABLE `aduana` ADD `estado` DECIMAL(1,0) NULL DEFAULT '1';
+//agregando a modelo aduana campos de estructura vieja 
+// TODO: pero  deben ser cambiados los campos boorrado por a  anulado por 
+
+ALTER TABLE `departamentos` ADD `idpais` INT(11) NOT NULL ;
+//agregando  idpais a  departamento
+
+UPDATE departamentos SET idpais = 1
+# update general porque no existen cargados otros paises 
+
+ALTER TABLE `aduana` ADD `idempresa` INT(3) NOT NULL;
+ALTER TABLE `aduana` CHANGE `registrado_el` `registrado_el` DATETIME NULL DEFAULT CURRENT_TIMESTAMP;
+ALTER TABLE `aduana` ADD `borrado_el` DATETIME NULL;
+//cambios para aduana para estructura baisca, TODO: los borrados cambiar a anulado 
+
+ALTER TABLE `paises` ADD `borrado_por` INT(11) NULL DEFAULT NULL;
+ALTER TABLE `paises` ADD `borrado_el` DATETIME NULL DEFAULT NULL;
+// TODO: borrado cambiar a anulado
+
+ALTER TABLE `departamentos` ADD `registrado_por` INT(11) NULL, ADD `registrado_el` DATETIME NULL, ADD `borrado_por` INT(11) NULL, ADD `borrado_el` DATETIME NULL;
+//campos para estructura basica en departamento
+// TODO: borrado cambiar a anulado
+
+ALTER TABLE `distrito` ADD `registrado_por` INT(11) NULL , ADD `registrado_el` DATETIME NULL, ADD `borrado_por` INT(11) NULL , ADD `borrado_el` DATETIME NULL;
+//campos para estructura basica en distrito
+// TODO: borrado cambiar a anulado
+
+ALTER TABLE `ciudades` ADD `registrado_por` INT(11) NULL , ADD `registrado_el` DATETIME NULL, ADD `borrado_por` INT(11) NULL , ADD `borrado_el` DATETIME NULL;
+ALTER TABLE `ciudades` CHANGE `idpais` `idpais` INT(11) NULL;
+//campos para estructura basica en ciudades
+// TODO: borrado cambiar a anulado
+ALTER TABLE `proveedores` ADD `registrado_por` INT(11) NULL , ADD `registrado_el` DATETIME NULL, ADD `borrado_por` INT(11) NULL , ADD `borrado_el` DATETIME NULL, ADD `actualizado_por` INT(11) NULL , ADD `actualizado_el` DATETIME NULL;
+//campos para estructura basica en proveedores
+// TODO: borrado cambiar a anulado

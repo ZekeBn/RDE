@@ -1,0 +1,7 @@
+nc_mini_motivos.php
+funciones_pulseras.php
+funciones_electronica.php
+Validate.php
+GeneradorXMLFacturaElectronica.php
+nota_credito_cabeza.php
+nc_mini_agrega_motivos.php

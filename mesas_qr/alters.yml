@@ -1,0 +1,21 @@
+ALTER TABLE `mesas_preferencias` ADD `usa_pin` CHAR(1) NOT NULL DEFAULT 'S' AFTER `mostrar_categorias`;
+ALTER TABLE `mesas_atc` ADD `pin` VARCHAR(20) NULL  COMMENT 'se usara para el pin generado para la web del lado del cliente, es decir el pin que el cliente debe ingresar'; 
+ALTER TABLE `mesas_preferencias` ADD `cliente_gen_pin` CHAR(1) NOT NULL DEFAULT 'S' AFTER `usa_pin`; 
+
+
+
+
+CREATE TABLE IF NOT EXISTS `mesas_pedidos` (
+  `idpedido` int(11) NOT NULL,
+  `idatc` int(20) NOT NULL,
+  `fecha` datetime NOT NULL,
+  `estado` int(1) NOT NULL DEFAULT 1,
+  `tipo_pedido` int(1) NOT NULL DEFAULT 1,
+  `fechahora_cancelado` datetime DEFAULT NULL,
+  `idmozo` int(11) DEFAULT NULL,
+  `fechahora_atendido` datetime DEFAULT NULL,
+  PRIMARY KEY (`idpedido`),
+  KEY `idmozo` (`idmozo`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+ALTER TABLE `usuarios_mozos` ADD `token` CHAR(32) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL AFTER `registrado_el`; 

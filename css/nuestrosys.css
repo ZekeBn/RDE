@@ -1,0 +1,8 @@
+.ui-pnotify.stack-bar-top {
+	right: 0;
+	top: 0;
+}
+.table-bordered tfoot{
+	font-weight:bold;
+	background-color:#CCC;
+}

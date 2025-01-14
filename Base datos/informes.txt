@@ -1,0 +1,1831 @@
+INFORME 29/06/2023 
+- Se agrego el historico de archivos de Acuerdos Comerciales a los detalles del proveedor
+- Se agrego fecha desde hasta para  archivo asociado al Acuerdo Comercial
+- Se agregaron al formulario de proveedores el campo persona juridica
+- Se editaron los campos de de los detalles para agregar persona
+INFORME 30/06/2023
+- Arreglando funciones de verificacion de parametros en proveedores
+- Arreglando estructura, cambiando ABM y tablas de Paises para no perjudicar a Facturas electronicas(Paises SET)
+- Arreglando estructura, cambiando ABM y tablas de Departamentos para no perjudicar a Facturas electronicas(Departamentos SET)
+- Arreglando estructura, cambiando ABM y tablas de Distritos para no perjudicar a Facturas electronicas(Distritos SET)
+- Arreglando estructura, cambiando ABM y tablas de Ciudades para no perjudicar a Facturas electronicas(Ciudades SET)
+- Creando ABM Tipo Servivios y agregando a pantalla de gestion de Proveedores
+- Bloqueando la eliminacion de Paises,Departamentos,Distrito,Ciudades pertenecientes a Paraguay para que
+no se generen problemas con Facturas Electronicas
+- Generando Identificador estructurado para la SET en relacion a cada Departamento,Distrito,Ciudad precargada en la db pertenceiente a Paraguay 
+- Agregando bulto y pallets para calculos de unidades en insumos lista
+- Creando tabla compras_orden_importacion para ABM de pedido de Orden
+
+PENDIENTE
+- Generar copia de Paises,Departamentos,Distrito,Ciudades a la nueva estructura Separada de tablas destinadas al Web Service proporcionado por la Set
+- Mensaje de alerta al tratar de Editar algun Departamento,Distrito,Ciudad perteneciente a Paraguay 
+INFORME 03/07/2023
+- Editando estructura de monedas extranjeras 
+- Agregando limite a tabla ciudades
+- Migrando valores de tabla ciudades  a ciudades_propio 
+- migrando a carpetas  cotizacion monedas extranjeras y orden_compra
+- Cambiando relacion de tabla monedas en paises y proveedores
+- Cambiando relaciones de tabla paises en proveedores
+- Permitiendo habilitar o no la Cotizacion
+- Alertas si no se a seleccionado un pais y moneda por defecto
+PENDIENTE MEJORA
+- Generar copia de Paises,Departamentos,Distrito,Ciudades a la nueva estructura Separada de tablas destinadas al Web Service proporcionado por la Set
+- Mensaje de alerta al tratar de Editar algun Departamento,Distrito,Ciudad perteneciente a Paraguay 
+INFORME 04/07/2023
+- Almacenando en orden de compra cotizacion referencial para el costo_ref
+- Creando scipt de consulta para cotizacion del dia y generando alerta de no tenerlo asignado
+- Corrigiendo query en aduana.php por migraciones de tablas de moneda
+- Agregando campos necesarios al formulario de creacion y edicion referente a la orden de compra
+- Agregando botones para cajas y pallets en detalles de orden de compra
+- Corrigiendo query en proveedores.php por migraciones de tablas de moneda
+- Preparando modales en orden de compra detalle para cargar unidades por cajas y cajas por pallets de ser necesario
+Pendiente
+- Terminar query para modales de cajas  y pallets en orden de compra
+INFORME 05/07/2023
+- Agregando medidas referenciales Medidas 2 y Medidas 3 a insumos al crear y al editar
+- Agregando medidas referenciales Medidas 2 y Medidas 3 a compras_orden al gestionar el detalle
+- Agregando autocompletar carrito de compras cuando existe una orden
+INFORME 06/07/2023
+- Permitiendo facturas multiples asociadas a una orden de compra hasta que se complete el pedido de la orden
+es decir si se pidio 50 toneladas de Celulosa, la orden saldra en el apartado de ordenes hasta completar el pedido
+- Agregando seguridades para no borrar ordenes asociadas a compras ya realizadas
+- Agregando seguridades para no borrar items de ordenes asociadas a compras ya realizadas
+- Mejorando autocompletar carrito de compras cuando existe una orden con productos pendientes es decir,
+existen facturas asociadas pero el la orden de compra no fue completada
+- Aclarando dudas del relevamiento hasta Embarques, pendiente Gastos y Despacho
+- Mejorando Alertas al tratar de finalizar una compra, no dejando finalizar la compra si 
+los productos solicitados en la orden son sobrepasados
+INFORME 07/07/2023
+-Agregando cant_caja_edi,largo,ancho,alto,peso,cod_fob,rs,rspa,hab_desc,modifica_precio,maneja_lote,regimen_turismo,maneja_cod_alt,idcod_alt
+al formulario de insumos (add)
+-Mejorando dinamica para carga de formulario insumos
+Pendiente 
+- Agregar campos nuevos y alertas a  detalles insumos y formulario de edit insumo 
+INFORME 10/07/2023
+-   Agregando caja Edi a formulario de compras ordenes y a modulo de compras, para facilitar insertar unidades de ese tipo
+-   Preparando categoria tabla para sub-categoria secundaria
+-   Arreglando y verificando funcionamiento de Ordenes de Compra con varias facturas asociadas 
+-   Agregando medidas2 y medidas3(cajas y pallets a modulo de compras)
+-   Arreglando bugs en el autocompletado del carrito automatico si es que la compra posee orden de compra
+Pendiente 
+-Costo de referencia en ordenes de compra 
+-Agregar Embarcacion a Modulos de compra y verificar su funcionamiento 
+INFORME 11/07/2023
+- Agregando costo de referencia a las ordenes utilizando la cotizacion de referencia 
+cargada al realizar la orden de compra 
+- Probando ABM aduana,puertos,Proveedores,tipo_servicios
+- Agregando ABM vias_embarque
+- Agregando ABM transporte
+- Agregando tabla Embarque y ABM
+Pendiente
+-Cotizacion en compras
+-Embarque compras 
+INFORME 12/07/2023
+-Agregando cotizacion y verificaciones al formulario de compras
+-Permitiendo editar la fecha de cotizacion al agregar una cotizacion nueva
+-Agregando alertas si es que la cotizacion que se desea agregar ya existe 
+Pendiente 
+-Cotizacion Orden de compra verificacion
+-Embarque 
+INFORME 13/07/2023
+- Cambiando cotización en compras ordenes para tomar una cotización de referencia pero obteniendo el valor del sistema y bloqueando la orden si no hay cotización disponible
+- Probando y mejorando alertas del sistema en carga de formularios
+- Mejorando estructura del código
+Pendiente 
+- Embarcación
+INFORME 14/07/2023
+-Arreglando bug en cotizaciones, referente al modulo de compra
+-Agregando cotizaciones a editar cabecera desde el detalle de la compra 
+-Arreglando bugs menores en aduana y verificando funcionamiento
+-Verificando funcionamiento de tipo_servicios,puertos,insumos,monedas_extranjeras,cotizaciones,proveedores
+Pendiente 
+- Embarque 
+- Cotizacion en Edit cabecera de compras
+- Verificar articulos en transito al variar la cantidad de algun producto de una orden ya existente
+INFORME 17/07/2023
+ - Agregando verificación de cantidad de productos al editar una orden, revisando si ya hay
+  productos comprados y evitar permitir que la cantidad editada sea menor que la cantidad comprada previamente.
+- Agregando ABM sub categoria secundaria
+- Editando formulario para editar la cabecera de una compra
+- Actualizando plataforma https://desarrollo.sistema.com.py y eliminando bugs en insumos
+Pendiente 
+- Agregando Embarque a formulario de Compras
+INFORME 18/07/2023
+- Actualizando css del ABM Categoria
+- Actualizando css del ABM de Sub Categoria
+- Actualizando css de del ABM Sub Cotizacion
+- Agregando Embarque luego de registrar la Orden de Compra 
+- Debatiendo operativa de Embarque y Ordenes de Compra
+INFORME 19/07/2023
+-Actualizanco ABM Embarque 
+-Agregando embarque a formulario de compra 
+-Generando historico en compras si se recibe menos productos
+Pendiente
+Revisar Circuito de Compras con Embarque y multimoneda 
+INFORME 20/07/2023
+- Modificando detalles de embarque para visalizar los productos solicitados en el detalle de la orden y de la comrpa 
+- Ajustando bugs en medidas para visulizar medidas referenciales
+- Verificando alertas para embarques en el modulo de compras 
+- Mejoras visuales y alertas en compras ordenes referentes a los embarques
+Pendiente 
+- Revisar Circuito de Compras con Embarque y multimoneda 
+INFORME 21/07/2023
+- Corrigiendo bug de vencimiento fecha en compras al elegir el proveedor
+- Corrigiendo bug al estirar la moneda en compras ordenes al elegir el proveedor
+- Mejorando visual en detalles de orden de compra
+- Corrigiendo bug al guardar una moneda sin  foto 
+- Mejoras visuales en embarque
+- Corrigiendo bug en proveedor al editar y no guardar ninguna foto
+Pendiente
+- Margen de seguridad
+- Descuento en orden de compra por unidad
+INFORME 24/07/2023
+- Agregando margen de seguridad y editando ABM de Categoria,Sub-Categoria y Sub-Categoria secundaria
+- Agregando Descuento por producto para las ordenes de compra 
+- Agregando sub categoria secundaria a insumos
+- Aumentando Decimales para descuentos 
+Pendiente
+- Editar Orden de Compra para su mejor funcionalidad de acuerdo al relevamiento y a lo conversado 
+- Crear Despacho para Cada compra (Factura) y anexarlo con un id de referencia para dicha compra
+INFORME 25/07/2023
+-Preparando Orden para facturas Múltiples y cambiado uso de orden para lo solicitado
+- Realizando cambios visuales menores  a aplicación de pedidos
+Pendiente 
+- Factura Importación
+- Verificar Orden de compra
+- Gastos
+- Despacho
+INFORME 26/07/2023
+-Finalizando circuito para Embarque 
+- Creando detalle de Embarque 
+- Creando detalle de órdenes y sub ordenes
+-Creando ABM Despachante
+Pendiente
+- ABM Despachante
+- GASTOS
+- Reportes
+INFORME 27/07/2023
+- Agregando logica y detalles a Despacho, enlazando un Despacho con el idcompra
+- Ajustes menores y pruebas en pedidos para google-maps
+- Agregando verificaciones a despacho
+- Conversando ajuste de compras_ordenes( Permitir crear sub orden )
+Pendiente 
+- GASTOS
+- REPORTES
+- Validaciones para importaciones
+28/07/2023
+-Agregando creacion de sub ordenes y asociando a detalles de orden 
+-Cambiando ordenes mostradas al agregar una compra, se mostraran compras que no tengan sub ordenes asociadas y esten listas 
+pero si la orden contiene sub ordenes se mostraran las sub ordenes del proveedor
+-Tomando cotizacion del dia anterior si es que se crea una sub orden con la moneda de la orden padre por defecto
+de igual manera antes de finalizar la orden es posible cambiar la moneda
+-Cambios visuales en Detalles de Compras Ordenes para su mayor facilidad de uso
+Pendiente 
+- GASTOS (agregar referencia de la compra a la orden  previamente conversado)
+- REPORTES (pdf)
+- Validaciones para importaciones(segun relevamiento)
+- Bug al autocompletar una sub orden,  en realidad es tener en cuenta tanto las sub ordenes y las compras finalmente tomar un valor de mercaderia faltante en la orden padre con respecto a dichos valores evaluados
+
+Informe 29/07/2023
+-Agregando creación de gastos asociando a la compra 
+- Arreglando problemas al mostrar las órdenes de compra
+- Agregando detalle de gastos a la compra
+- Arreglando problemas en validaciones de creación de la cabecera 
+- Agregando casos especiales en validación para compras de importación 
+Pendiente 
+- REPORTES (pdf)
+- Validaciones para importaciones(según relevamiento)
+- Bug al autocompletar una sub orden,  en realidad es tener en cuenta tanto las sub órdenes y las compras finalmente tomar un valor de mercadería faltante en la orden padre con respecto a dichos valores evaluados
+Informe 01/08/2023
+- Bug al autocompletar una sub orden,  en realidad es tener en cuenta tanto las sub órdenes y las compras finalmente tomar un valor de mercadería faltante en la orden padre con respecto a dichos valores evaluados
+- Cambios visuale al mostrar las órdenes de compra
+- Validaciones para importaciones(según relevamiento)
+- Agregando scripts nuevos al servidor
+- Arreglando link en Aplicacion pedidos RDE
+Pendiente 
+- REPORTES (pdf)
+02/08/2023
+movimientos
+moviendo categorias
+pendiente
+php faltantes en insumos
+CONTENEDOR ABM
+pendientes mejora
+agregar volver a sub categoria y descripcion a margen
+
+REPORTE
+numero de orden o proveedor 
+todos los embarques por los estados 
+03/08/2023
+- Cambias de esteticos y funcionales al carrito en aplicacion RDE
+- Agregando flechas para agregar o quitar elementos en el carrito
+- Agregando detalle de Pedido Finalizado para visualizar los productos del carrito de un cliente visitado
+- Agregando Filtro en orden de compra para filtrar por tipo de servicio
+- Quitando fecha de entrega como capo obligatorio en orden de compra 
+- Agregando pantallas de carga a aplicacion RDE de pedidos para su facil entendimiento
+- Arreglando bug al actualizar los precios luego de aplicar el descuento en aplicacion RDE de pedidos
+Pendientes
+- Cambios varios solicitados en la reunion para el modulo de compras 
+
+Informe 04/08/2023
+- Agregando  filtro por tipo de servicio a los proveedores en ordenes de compra
+- Agregando en Editar proveedor: según el origen colocar local 
+o distinto a py (auto seleccionar )
+- Sacando campo obligatorio de oc fecha estimada 
+entrega (que no sea obligatoria)
+- Agregando en proveedores días de entrega 
+- Cambiando funcionalidad en Ordenes de copmpra referente a las medidas de la unidad, caja y pallets 
+- Agregando Gastos a la tabla correspondiente de los detalles de la compra 
+Pendiente 
+-Agregar Costo de los gastos al producto final
+-Cambiar Valor con monedas multiples es decir guardar todo en GUARANIES
+
+
+Informe 07/08/2023 
+- Agregando modal para buscar Embarques al registrar una compra 
+con la facilidad de porder visualizar los productos pedidos en dicha orden
+- Agregando modal para buscar Ordenes de Compra al registrar una compra 
+con la facilidad de porder visualizar los productos pedidos en dicha orden
+- Cambiando a la moneda Nacional del sistema al ingresar en la base de datos y brindando datos de 
+referencia en la ventana de compra en ambas monedas pantallas cambiandas para requerimiento
+tmpcompras_add,tmpcompras_edit, compras_detalles
+- Almacenando Costo de gastos y agregando el costo porcentual a cada producto segun la formula explicada en la reunion
+- Actualizadno web con cambios mencionados
+Pendiente 
+- Presentacion del circuito actual
+- Cambios varios para mejora 
+
+Informe 08/08/2023 
+- Agregando radio button para elegir la unidad del precio es decir caja pallet unidad 
+- Arreglando cotizacion al autogenerar los productos desde una orden y tomando la cotizacion del dia anterior
+- Arreglando bug al editar una cabecera de compra
+- Quitando timbrado obligatorio si es importacion
+- Agregando detalle de compra al crear una sub orden en compras_ordenes detalle
+- Agregando proveedor a grilla de embarque
+Pendiente
+- Costo Promedio 
+- Mostrar Circuito Actual
+Informe 09/08/2023 
+- Arreglando bug en modulo compras por multimonedas
+- Agregando funciones a compras para calcular el costo promedio y el costo cif
+- Arreglando bug al cambiar de una compra de Importacion a una Local
+Pendiente
+- Reporte Costos similar a la imagen 
+- Mostrar Circuito Actual  
+Informe 10/08/2023
+- Arreglando bug script roto en Proveedores Edit
+- Creando web scraping  Set Cotización Dólar
+- Tomando Cotización del Despacho para realizar el Informe
+- Creando reporte para visualizar Costo Cif, Costo Promedio, Costo Fob
+- Arreglando reporte Ordenes de Compra
+- Agregando Alters par costos a el servidor
+
+- Actualizando servidor
+Pendiente
+- Mostrar Circuito Actual
+Informe 11/08/2023
+- Borrando elementos del carrito al cambiar de Orden de compra
+- Creando boton webscrapping para la set cotizacion
+- Recibiendo hoja de servicio
+Informe 14/08/2023
+- Arreglando codigo interno de modulo de compra 
+- Discutiendo Sobre el siguiente modulo(stock)
+- Verificando Circuito actual del Stock y ventas 
+- Entregando hoja de servicio
+Informe 16/08/2023
+- Repasando circuito en la web
+- Creando ABM de Propietarios Vehiculo
+- Creando ABM de Vehiculo
+- Editando html de Marcas
+- Editando html Depositos
+- Arreglando bug en Funciones 
+Pendiente 
+- Analizar relevamiento con Mike
+Informe 17/08/2023
+- Repasando circuito en la web 
+- Arreglando bug en tmpcompras_edit
+-Agregando medidas (Cajas,Pallets , Unidad) a editar compras 
+-Agregando medidas (Cajas,Pallets , Unidad) a editar compras_ordenes_detalles 
+Pendiente 
+- Analizar relevamiento con Mike
+- Verificar funcionamiento de Agregando medidas (Cajas,Pallets , Unidad) a editar compras 
+Informe 18/08/2023
+- Arreglando bug al agregar un embarque desde la compra 
+- Verificando medida de compra para cada factura (Unidad, Caja, Pallets)
+- Verificando y arreglando validaciones para compras locales debido a cambios estructurales internos
+- Agregando medida de compra al carrito de la factura de compra para su facil visualizacion
+- Arreglando bug en orden de compra
+- Creando Codigo Origen (para cargar los codigos de origen de los proveedores el precio y la fecha de vigencia)
+- Creando Excel para carga masiva de Codigo de Origen
+Pendiente 
+- Analizar relevamiento con Mike
+Informe 21/08/2023
+- Verificando relevamiento con Mike
+- Arreglando bug fecha vencimiento compras
+- Actualizando Web Rde Vehiculos, vehiculos_propietario
+- Realizando cambios para codigo Fob segun relevamiento 
+Pendiente
+Cambios varios en Articulos 
+Informe 22/08/2023
+-Agregando país de origen al artículo
+-Agregando días útiles al artículo 
+-Agregando días stock al artículo 
+-Cambiando formularios de artículo (Agregar, Editar)
+-Actualizando Web código origen Abm
+-Agregando código de barras a insumo
+-Permitiendo que al convertir a producto si es que el insumo posee un código de barras que este se autocomplete
+-Actualizando y arreglado bug en código de origen Abm y carga masiva 
+-Creando ABM Póliza(ADD,EDIT,DET)
+Pendiente
+- Bloqueo por producto 
+- Movimiento Entrada y salida de producto por cambio de código
+- Agregar color a Vehículo
+- Agregar leyenda de Tipos de servicios(Proveedores necesarios para el sistema Despachante,Póliza,etc...)
+-Cambiar formularios de artículo (Det)
+Informe 23/08/2023
+-Agregando preferencias para bloquear articulos ABM
+-Iniciando Bloqueo por articulo
+-Preparando estructura para venta por caja 
+Pendiente
+- Bloqueo por producto 
+- Movimiento Entrada y salida de producto por cambio de código
+- Agregar color a Vehículo
+- Agregar leyenda de Tipos de servicios(Proveedores necesarios para el sistema Despachante,Póliza,etc...)
+-Cambiar formularios de artículo (Det)
+Informe 24/08/2023
+- Agregando categoria secundaria a conversion de insumo a producto
+- Estirando datos por defecto del insumo para la conversion de insumo a producto
+- Bloqueo de articulo a venta en ventas por caja 
+- Agregando preferencia Maneja lote en formulario de insumos afecta formulario en compras  
+Pendiente
+- Bloqueo por producto en otras modalidades
+- Aviso de stock faltante
+- Movimiento Entrada y salida de producto por cambio de código
+- Agregar color a Vehículo
+- Agregar leyenda de Tipos de servicios(Proveedores necesarios para el sistema Despachante,Póliza,etc...)
+-Cambiar formularios de artículo (Det)
+Informe 25/08/2023
+- Continuando Bloqueo de producto
+- Comenzando con avisos de stock antes de realizar la venta 
+- Cambiando estructura interna para Aplicación Pedidos RDE, ocultando botón de descuento y deshabilitando 
+(http://181.94.221.41:1704/wsrde/busquedaDescuentos) obteniendo parámetros para determinar si el cliente posee o no descuentos y mostrándolos de forma automática
+Pendiente
+- Bloqueo por producto en otras modalidades
+- Aviso de stock faltante
+- Movimiento Entrada y salida de producto por cambio de código
+- Agregar color a Vehículo
+- Agregar leyenda de Tipos de servicios(Proveedores necesarios para el sistema Despachante,Póliza,etc...)
+-Cambiar formularios de artículo (Det)
+Informe 28/08/2023
+- Actualizando venta sin stock por articulo en ventas por caja  y ABM de excepciones_productos
+- Analizando estructura para fefo
+- Corrigiendo problemas al guardar lote y vencimiento en tmpcompras, compras_detalles y gest_depositos_stock
+- Movimiento Entrada y salida de producto por cambio de código sera usado ajustar_stock_add.php
+ Pendiente
+- Bloqueo por producto en otras modalidades
+- Aviso de stock faltante en otras modalidades
+- Agregar color a Vehículo
+- Agregar leyenda de Tipos de servicios(Proveedores necesarios para el sistema Despachante,Póliza,etc...)
+- Cambiar formularios de artículo (Det)
+Informe 29/08/2023
+- Agregando lote y vencimiento a tmp_ventares
+- Agregando lote y vencimiento a vista de venta por caja preparando para fefo
+- Editando eventos jquery y javascript para estructura fefo
+ Pendiente
+- Pendiente actualizar gest_depositos_stock  y verificar lote - vencimiento al crear con cada compra
+- Bloqueo por producto en otras modalidades
+- Aviso de stock faltante en otras modalidades
+- Agregar color a Vehículo
+- Agregar leyenda de Tipos de servicios(Proveedores necesarios para el sistema Despachante,Póliza,etc...)
+- Cambiar formularios de artículo (Det)
+
+Informe 29/08/2023
+- revaluando modulo de venta conversado  
+- preparando y migrando funciones para movimientos de stock en modulo de venta
+
+ Pendiente
+- Pendiente actualizar gest_depositos_stock  y verificar lote - vencimiento al crear con cada compra(a verificar en el nuevo modulo)
+- Bloqueo por producto en otras modalidades
+- Aviso de stock faltante en otras modalidades
+- Agregar color a Vehículo
+- Agregar leyenda de Tipos de servicios(Proveedores necesarios para el sistema Despachante,Póliza,etc...)
+- Cambiar formularios de artículo (Det)
+Informe 31/08/2023
+- revaluando modulo de venta verificando circuito actual en inventiva  
+- preparando y migrando funciones para carrito de ventas
+- Agregando idmedida a tmp_ventares
+- Agregando idcot a tmp_ventares_cab
+
+ Pendiente
+- Pendiente actualizar gest_depositos_stock al realizar una venta
+- Bloqueo por producto en modulo nuevo a desarrollar 
+- Aviso de stock faltante en modulo nuevo a desarrollar
+- Agregar color a Vehículo
+- Agregar leyenda de Tipos de servicios(Proveedores necesarios para el sistema Despachante,Póliza,etc...)
+- Cambiar formularios de artículo (Det)
+
+Informe 1/09/2023
+- Realizando pruebas para agregar carrito de tmp_ventas 
+- Verificando  e inspeccionando script de funciones_stock.php para usar como base para funciones_stock_fefo y que se utilicen en conjunto con lo ya existente
+es decir que los productos que no controlen fefo no generen conflicto con los que si
+- Agregar leyenda de Tipos de servicios(Proveedores necesarios para el sistema Despachante,Póliza,etc...)
+- Agregar color a Vehículo
+- cambiando ultimo costo por defecto a costo promedio
+Pendiente
+- Pendiente actualizar gest_depositos_stock al realizar una venta con fefo
+- Bloqueo por producto en modulo nuevo a desarrollar 
+- Aviso de stock faltante en modulo nuevo a desarrollar
+Informe 4/09/2023
+- Arreglando problema en costos promedio al agregar varios productos de lotes distintos y probando cambios 
+- Agregando verificacion para que no agregue el mismo producto con el mismo costo,lote y vencimiento en el mismo carrito en el modulo de compras
+para tener mayor facilidad en el calculo del costo promedio y para articulos que usen fefo por cambios estructurales internos 
+- Actualizando servidor
+Pendiente
+- Pendiente actualizar gest_depositos_stock al realizar una venta con fefo
+- Bloqueo por producto en modulo nuevo a desarrollar 
+- Aviso de stock faltante en modulo nuevo a desarrollar
+Informe 5/09/2023
+- Arreglando problema en costo cif al agregar mas de una vez el producto con costo 0 o algun otro costo
+- Verificando y arreglando costo promedio para articulos de costo 0 
+- Actualizando el costo promedio a todas las sucursales, productos e insumos 
+- Arreglando funcion para mostrar productos con una fecha de vencimiento 
+superior a una fecha dada, mostrando elementos  que usan lote/vencimiento 
+y productos los cuales no manejan lote 
+- Arreglando bug idseripkcosrepetido  en gest _depositos_stock a causa de implementacion de lote y vencimiento
+- Adaptando funcion para descontar stock a productos que usen fefo
+- Adaptando funcion para aumentar stock a productos que usen fefo
+Pendiente
+- Pendiente actualizar gest_depositos_stock al realizar una venta con fefo
+- Bloqueo por producto en modulo nuevo a desarrollar 
+- Aviso de stock faltante en modulo nuevo a desarrollar
+Informe 6/09/2023
+- Mejorando lista de productos para su mejor uso en modulo de compras 
+- corrigiendo bug costo promedio para productos sin lote y vencimiento
+- Evaluando relevamiento y tiempos para desarrollo 
+Pendiente
+- Pendiente actualizar gest_depositos_stock al realizar una venta con fefo
+- Bloqueo por producto en modulo nuevo a desarrollar 
+- Aviso de stock faltante en modulo nuevo a desarrollar
+Informe 7/09/2023
+- Mejorando lista de productos para su mejor uso en modulo de compras 
+- realizando prueba fefo compra venta
+- verificando el conteo pdv y traslado de stock en demo.servidor
+- agregando alerta y a  productos cargados por ordenes de compra los cuales no tienen lote y Vencimiento
+pero manejan lote
+-  Agregando  bloqueo por producto a funcion de venta para modulo nuevo a desarrollar 
+-  Actualizando gest_depositos_stock al realizar una venta con fefo por medio de una funcion que sera 
+-  Quitando venta sin stock por articulo de Excepciones Producto 
+usada en el nuevo modulo de venta
+Pendiente 
+- Aviso de stock faltante en modulo nuevo a desarrollar
+- Pendiente editar conteo Pdv y existencia para agregar estantes 
+Informe 8/09/2023
+- Migrando conteo Pdv y Stock a Modulos
+- Visitando Depositos fisicos para aclarar ideas del funcionamiento actual de cada deposito 
+- Migrando traslados de depositos a Modulos 
+- Creando estructura para el detalles del almacenamiento en cada  deposito (Almacenamiento general, almacenamiento )
+es decir un deposito tiene un almacenamiento ejemplo D1, y D1 puede tener Estantes o Productos Apilados, o ambos
+- Agregando ABM Almacenamiento ligado al deposito
+- Agregando ABM Almacenamiento detalle ligado al almacenamiento, es decir los estantes o las cargas apiladas
+Pendiente 
+- Aviso de stock faltante en modulo nuevo a desarrollar
+- Pendiente editar conteo Pdv y existencia para agregar estantes 
+Informe 11/09/2023
+- Cambiando estructura Depositos, creando relaciones entre gest_depositos gest_deposito_almcto_grl y gest_deposito_almcto preparando para el 
+ordenamiento de lotes 
+- Relacionando Detalle de Stock con conteos pdv y detalles de almacenamientos, creando relacion entre 
+gest_depositos_stock y gest_depositos_stock_almacto para seguimiento de lotes y productos en distintos almacenamientos
+- Transformando formulario de conteo_stock_pdv para cambios solicitados
+Pendiente 
+- Transformando formulario de conteo_stock_pdv para cambios solicitados
+- Aviso de stock faltante en modulo nuevo a desarrollar
+- Pendiente editar conteo Pdv y existencia para agregar estantes 
+
+Informe 12/09/2023
+- Discutiendo pantalla de formulario para salon de ventas y carga de inventario 
+- Cambiando estructura interna de almacenamiento para que cada almacenamiento tambien pueda crear la variable pasillo 
+- Cambiando estructurade seguimiento de lotes en detalle de depositos para que un almacenamiento de tipo 
+apilado se relacione con un pasillo de un deposito
+- Agregando ABM Pasillos del Almacenamiento a el detalle del almacenamiento
+Pendiente 
+- Transformando formulario de conteo_stock_pdv para cambios solicitados
+- Aviso de stock faltante en modulo nuevo a desarrollar
+- Pendiente editar conteo Pdv y existencia para agregar estantes 
+Informe 13/09/2023
+- Discutiendo pantalla de formulario para conteo de depositos 
+- Discutiendo estructura de base de datos para depositos y lotes aprobada 
+- Creando formularios y flujos para conteos de depositos
+Pendiente 
+- Creando formularios y flujos para conteos de depositos
+- Pendiente editar conteo Pdv y existencia para agregar estantes 
+Informe 14/09/2023
+- Discutiendo operativa de etiquetado para etiquetas en inventarios de lote vencimiento 
+- Discutiendo stock doble para preparar mecaderia a vender en operativa de venta para flujo actual
+- Editando formularios(Agregar, Editar) de estantes y pasillos para agregar cantidad maxima de filas y columnas en 
+estantes y posiciones maximas para pasillo
+- Editando formularios(Agregar, Editar) de estantes y pasillos Agregando seguridad de nombres repetidos alertas de nulos 
+y campos obligatorios
+- Agregando lote y vencimiento a formulario de conteo de deposito 
+- Arreglando css a aplicacion de pedidos RDE
+Pendiente 
+- Creando formularios y flujos para conteos de depositos
+- Pendiente editar conteo Pdv y existencia para agregar estantes 
+Informe 15/09/2023
+- Discutiendo operativa de ingreso de productos y conteos  
+- Editando formulario de conteo para cambios solicitados
+- Realizando formulario y flujo  para conteos por productos
+- Agregando seguridad de parámetros a formulario de conteo por producto, 
+es decir si obliga lote o no, el lugar donde se guardará  y preparando 
+conteo para consolidarlo a un conteo único una vez agrupado las sub conteos de cada tipo de almacenamiento
+Pendiente
+- Creando formularios y flujos para conteos de depósitos
+- Pendiente editar conteo Pdv y existencia para agregar estantes 
+Informe 18/09/2023
+- Agregando alertas de llenado de formulario para conteo de depósito
+- Agregando funciones para agregar productos al formulario para conteo de depósito
+- Agregando botón para eliminar producto antes de guardar el conteo parcial
+- Creando modal para editar producto ya contado
+Pendiente
+- Cambiar estado del conteo parcial a guardado
+- Consolidar los conteos parciales guardados del depósito elegido y mostrar diferencias si es que
+existe alguna
+- Dar la opción de sobrescribir stock o no al consolidar el stock 
+Informe 19/09/2023
+- Agregando alertas de llenado de formulario para editar elementos del conteo
+- Creando funcionalidades dinámicas del formulario para editar elementos del conteo
+- preparando parámetros para actualizar el conteo_detalle
+Pendiente
+- Verificar que la edición del producto contado fue guardado correctamente
+- Cambiar estado del conteo parcial a guardado
+- Consolidar los conteos parciales guardados del depósito elegido y mostrar diferencias si es que
+existe alguna
+- Dar la opción de sobrescribir stock o no al consolidar el stock 
+Informe 20/09/2023
+- Agregando funcionalidades de editar conteo al boton del elemento elegido
+- Agregando funcionalidad de codigo de lote  para rellenar el lote, vencimiento y ubicar el focus al
+input de la cantidad contar 
+- Creando Boton para consolidar conteo e iniciando formularios para consolidar conteos
+
+Pendiente
+- Verificar que la edición del producto contado fue guardado correctamente
+- Cambiar estado del conteo parcial a guardado
+- Consolidar los conteos parciales guardados del depósito elegido y mostrar diferencias si es que
+existe alguna
+- Dar la opción de sobrescribir stock o no al consolidar el stock 
+
+
+Informe 21/09/2023
+- Discutiendo Conteo consolidado
+- Agregando funcionalidad a botón consolidar conteo
+- Agregando funcionalidad a reabrir sub conteo
+- Agregando Ventana de reporte de conteo consolidado
+- Agregando funcionalidad a botón del reporte de conteo consolidado para poder reabrir
+un sub conteo siempre y cuando todavía no se afecte el stock
+Pendiente
+- Verificar que productos están guardados en el depósito según base de datos
+y de no coincidir mostrarlos en el reporte con un color llamativo
+- Consolidar los conteos parciales guardados del depósito elegido y mostrar diferencias si es que
+existe alguna
+- Dar la opción de sobrescribir stock o no al consolidar el stock 
+Informe 22/09/2023
+- Arreglando estilos y articulos faltantes para reporte de conteo consolidado
+- Agregando funcionalidad de detalle para ver de forma rapido un sub conteo
+- Verificando y agregando diferencias de cada almacenamiento y verificando si es un 
+estante o un pasillo para determinar si puede o no existir mas de un articulo en el lugar
+ 
+Pendiente
+- Verificar que productos están guardados en el depósito según base de datos
+y de no coincidir mostrarlos en el reporte con un color llamativo
+- Consolidar los conteos parciales guardados del depósito elegido y mostrar diferencias si es que
+existe alguna
+- Dar la opción de sobrescribir stock o no al consolidar el stock
+
+Informe 25/09/2023
+- Borrando reporte consolidado si es que se reabren todos los sub conteos de forma manual
+- Agregando boton para anular sub conteos siempre y cuando no este consolidado
+- Agregando visualizacion de diferencia con el stock actual a la tabla mostrada
+- Agregando tabla para visualizar lugares actuales del sistema del insumo elegido a modo de guia 
+- Agregando boton para cerar productos si es que fuese necesario
+- Mejorando estilos para su mejor entendimiento
+ 
+Pendiente
+- Verificar que productos están guardados en el depósito según base de datos
+y de no coincidir mostrarlos en el reporte con un color llamativo
+- Consolidar los conteos parciales guardados del depósito elegido y mostrar diferencias si es que
+existe alguna
+- Dar la opción de sobrescribir stock o no al consolidar el stock
+- Crear modulo para asignar almacenamiento a Productos nuevos que fueron trasladados a un deposito nuevo
+y que no tiene ningun almacenamiento(pasillo, estante, fila, columna) asignado 
+Informe 26/09/2023
+- Agregando Módulo para asignar en que almacenamiento del depósito se encuentra cada
+producto que acaba de entrar al depósito y que no tiene ningún almacenamiento(pasillo, estante, fila, columna) asignado
+- Permitiendo asignar mismo lugar a varios productos y relacionándolos a su respectiva orden de compra
+Pendiente
+- Permitiendo asignar mismo lugar a varios productos en el conteo y al asignar por primera vez un producto que acaba de ingresar
+Pendiente
+- Consolidar los conteos parciales guardados del depósito elegido y mostrar diferencias si es que
+existe alguna
+- Dar la opción de sobrescribir stock o no al consolidar el stock
+
+Informe 27/09/2023
+- Al agregar un producto recien enviado al 
+deposito permitiendo colocar 2 productos en el mismo lugar fisico(arreglando bug)
+- Arreglando problema con diferencias en conteo al agregar dos lotes iguales en el mismo lugar
+- Recorriendo circuito para asignar almacenamiento a producto nuevo y corrigiendo errores
+- Iniciando preparacion para movimiento de stock por conteo por producto 
+Pendiente
+- Consolidar los conteos parciales guardados del depósito elegido y mostrar diferencias si es que
+existe alguna
+Informe 28/09/2023
+- Creando y probabdo Funcion para descontar stock que maneja almacenamiento es decir 
+editando la posicion del estante el deposito que pertenece el detalle del deposito el stock general 
+y asociando a la factura de compra de la cual salio
+(tablas costos_productos, gest_depositos_stock,gest_depositos_stock_gral,gest_depositos_stock_almacto)
+Pendiente
+- Consolidar los conteos parciales descontando o aumentando en el deposito correspondiente 
+Informe 02/10/2023
+- Migrando a funciones disminucion_stock_fefo
+- Migrando a funciones aumento_stock_fefo
+- Arreglando bug por lote al contar un deposito
+- Guardando reporte consolidado permitiendo afectar o no stock
+Pendiente
+- Reparar Cerar Elementos restantes en conteo consolidado
+- Verificar Funcionamineto de Conteo Consolidado 
+- Iniciar modulo de Devoluciones
+Informe 03/10/2023
+- Modificando Función y mejorando visual en sub conteos para su 
+mejor entendimiento y visualización en cuanto a operativa de carga
+- consolidando Conteo
+- Reparando Cerar Elementos restantes en conteo consolidado
+- Generando Detalle de reporte consolidado
+- Verificar Funcionamiento de Conteo Consolidado 
+Pendiente
+- Verificar  el circuito completo de conteo por producto
+- Iniciar módulo de Devoluciones
+
+Informe 04/10/2023
+- Discutiendo módulos de conteo
+- Agregando detalle de lotes a la hora de comprar productos nuevos para tener un 
+esquema de los lotes existentes y no repetir sin una razón los lotes, una razón válida 
+para repetir un lote y vencimiento es que el costo varíe o sea nulo 
+por ejemplo bonificación
+- Arreglando bug al descontar el stock
+- Agregando detalle de elementos almacenados en cada almacenamiento en el botón de detalle ubicado en el almacenamiento
+- Agregando detalle de elementos almacenados en cada almacenamiento al designar un lugar a Productos
+que no tienen lugar  designado 
+Pendiente
+- Migración de módulos a la web y pruebas
+- Iniciar módulo de Devoluciones
+Informes
+- El 05/10/2023, estaré en la oficina de Innovasys debido a requerimientos de migración y a solicitud de mi supervisor
+Informe 05/10/2023
+- Discutiendo modulo de Devoluciones
+- Preparando Esquema Entidad Relacion para Devoluciones
+- Recibiendo capacitacion para notas de credito
+- Preparando scripts necesarios para pruebas de Devoluciones 
+- Creando script en python para automatizar pedidos de scripts necesarios  
+- Iniciando módulo de Devoluciones
+Pendiente
+- Modulo de Devoluciones
+- Pruebas en la web 
+Informe 06/10/2023
+- Discutiendo estructura para Devoluciones
+- Creando tablas para devoluciones y ordenes de retiro
+- iniciando index para modulo de devoluciones
+- Obteniendo scripts necesarios para pruebas de ventas y devolucion 
+Pendiente 
+- Modulo de Devoluciones
+- Pruebas en la web 
+
+Informe 09/10/2023
+- Editando index de modulo de devoluciones, agregando filtros, y un modal de detalles en la venta buscada para 
+facilitar el uso del modulo 
+- Creando formulario de devolucion para una venta elegida
+- Mostrando Elementos cargados en esa venta para su mayor facilidad a la hora de cargar articulos los 
+cuales seran devueltos 
+Pendiente 
+- Modulo de Devoluciones
+- Pruebas en la web 
+Informe 10/10/2023
+- Mejorando el query en la consulta del formulario de devoluciones 
+para seleccionar los productos presentes en la factura y que aún no han sido objeto de devolución.
+- Implementando medidas de seguridad para evitar que se devuelva más producto del que se 
+registra en la factura original.
+- Incorporando funciones específicas que permitan añadir elementos a la tabla de devoluciones de manera efectiva y eficiente.
+- Iniciando la implementación de un modal para editar los artículos devueltos los cuales aún no  finalizaron la etapa 
+de guardar y procesar la devolución por completo.
+Pendiente 
+- Modulo de Devoluciones(Editar,Borrar, Procesar Devolucion[crear nota de credito al procesar] )
+- Orden de Retiro de Mercaderías 
+- Pruebas en la web 
+
+Informe 11/10/2023
+-  Finalizando implementacion del modal para editar los artículos devueltos los cuales aún no  finalizaron la etapa 
+de guardar y procesar la devolución por completo.
+- Agregando la opcion de  borrar el producto devuelto siempre y cuando no se finalice el proceso de devolucion
+- Agregando Seguridad a la edicion de la devolucion para no devolver mas articulos de los cuales fueron comprados en la 
+factura de venta
+Pendiente 
+- Bug encontrado en devoluciones 
+- Modulo de Devoluciones(Editar,Borrar, Procesar Devolucion[crear nota de credito al procesar] )
+- Orden de Retiro de Mercaderías 
+- Pruebas en la web 
+
+Informe 12/10/2023
+- Corrigiendo bug en el modulo de devolucion para no devolver mas mercaderia de la declarada en la factura de venta
+- Agregando articulos devueltos si los tuviera a el detalle de la factura en el modulo de devolucion
+- Finalizando devolucion y creando orden de retiro
+- Iniciando Modulo de Orden de Retiro para procesar el ingreso y para editar el estado de la orden{pendiente, Transito, Finalizado}
+Pendiente 
+- Modulo de Devoluciones( Devolucion[crear nota de credito al procesar] )
+- Orden de Retiro de Mercaderías 
+- Pruebas en la web 
+
+Informe 13/10/2023
+- Creando detalle para finalizar el proceso de retiro de devolucion
+- Mejorando grilla principal para retriro de devolucion agregando modales para visualizar articulos de forma rapida y 
+formas de cambiar el estado de una orden de retiro de forma interactiva y sin refrescar la pagina 
+- Iniciando Fucnion para mover stock al devolver una Orden de Retiro
+Pendiente 
+- Orden de Retiro de Mercaderías mover stock  
+- Devolucion[crear nota de credito al procesar]
+- Pruebas en la web 
+
+
+Informe 16/10/2023
+- Agregando fecha de última modificación a orden de retiro
+- Finalizando Función para mover stock al devolver una Orden de Retiro
+- Encontrando bug en Modulo Devolución
+Pendiente
+- Devolución[crear nota de crédito al procesar]
+- Mejoras visuales a devolución  y orden de retiro
+- Pruebas en la web 
+
+
+Informe 17/10/2023
+- Arreglado bug en Módulo Devolución
+- Agregando filtros al módulo de devolución y orden de retiro
+- Agregando visualización si es que la orden de retiro ya posee una nota de crédito o no
+- Iniciando módulo para notas de crédito originadas por órdenes de retiro(devolución), reutilizando componente existente
+pero Comenzando cambios requeridos para operativa
+Pendiente
+- Devolución[crear nota de crédito al procesar]
+- Pruebas en la web 
+
+Informe 18/10/2023
+- Mejorando interfaz de nota de crédito actual, mejorando la elección de facturas en la nota de crédito
+- agregando detalles de cada devolución a la hora de elegir facturas por devolución
+- Precargando costo en base a la devolución elegida  monto global
+Pendiente
+- Devolución[crear nota de crédito al procesar]
+- Pruebas en la web 
+Informe 19/10/2023
+- Mejorando interfaz de nota de crédito actual, agregando detalle de orden de devolucion al seleccionar una factura 
+- Precargando costo en base a la devolución elegida  monto por articulo, mostrando los articulos 
+desglosados y no solo el monto global de la devolucion
+- Arreglando bug de nota de credito
+- Solucionando bug de tipo de dato en devolucion_det.php para generar la orden para devolver un producto
+- Iniciando filtros para el reporte de Ranking de devoluciones
+Pendiente
+- Pruebas en la web, modulo para asignar un almacenamiento a los articulos comprados,
+ modulo conteo consolidado, modulo devolucion
+ 
+Informe 20/10/2023
+
+- Creando reporte de Ranking de Devoluciones en el cual se puede seleccionar el ranking de:
+  [*] Productos: idproductos, cantidad, Artículo en el cual mostrará la cantidad de unidades devueltas del articulo
+  [*] Clientes: idcliente, cantidad de Artículos Devueltos, Cliente en los cuales muestra la cantidad de artículos que devolvió ya el cliente
+  sin discriminar el tipo de artículo es decir el cliente puede devolver varios tipos de artículos
+  [*] Vendedores: idvendedor, cantidad de Articulo Devueltos, Vendedores en los cuales muestra la cantidad de artículos devueltos que todos
+  los clientes asociados a este vendedor devolvieron
+- Al seleccionar en la ventana de ranking de devoluciones la opción de vendedores hay un detalle para cada vendedor que nos redirecciona 
+al detalle en el cual nos muestra los datos del vendedor y agrupados los de cada cliente del vendedor en donde podemos visualizar 
+todos los artículos devueltos por cada cliente con los depósitos seleccionados.
+
+Pendiente
+- Arreglar depósito del reporte ya que este puede cambiar al momento de ingresar al depósito dependiendo del operador
+- Pruebas en la web, módulo para asignar un almacenamiento a los artículos comprados,
+ modulo conteo consolidado, módulo devolución
+
+Informe 23/10/2023
+- Mejorando parte gráfica en Reporte de Ranking
+- Agregando reporte por depósito en el ranking de devolución
+- Mejorando formulario de devolución para visualizar los datos
+- Arreglando depósito del reporte de ranking ya que este puede cambiar al momento de ingresar el producto al depósito
+ dependiendo del operador
+- Corrigiendo bug en conteo consolidado, verificando flujo del proceso y redireccionamiento
+- Agregando filtro para artículos contados en un depósito seleccionado
+Pendiente
+- Pruebas en la web, módulo para asignar un almacenamiento a los artículos comprados,
+ módulo conteo consolidado, módulo devolución
+
+ Informe 24/10/2023
+- Arreglando bug al editar una compra del carrito en el modulo de compra 
+- Revisando circuito en localhost de módulo para asignar un almacenamiento a los artículos comprados,
+ módulo conteo consolidado, módulo devolución
+ - Arreglando bug al concretar una devolucion
+ - Creando detalle de Almacenamiento para su facil visualizacion  de productos almacenados
+ - Eliminando campo Posicion de tabla y ABM Pasillo
+ - Arreglando bug en Pasillo delete
+Pendiente
+- Pruebas en la web, módulo para asignar un almacenamiento a los artículos comprados,
+ módulo conteo consolidado, módulo devolución
+ 
+ Informe 25/10/2023
+- Arreglando bug varios en asignar_productos, compras, deposito y retiros_ordenes
+- Pruebas en la web, módulo para asignar un almacenamiento a los artículos comprados,
+ módulo conteo consolidado, módulo devolución
+ - Mejorando interfaz para mejor manejo del usuario
+Pendiente
+- Demostracion de Modulos y Flujo
+Informe 26/10/2023
+- Mejora de estilos en el módulo de asignación de mercancías a los almacenes,
+Se ha implementado una función de previsualización gráfica de los estantes, brindando una alternativa más dinámica
+y visual a la opción de visualización en forma de tabla
+- Agregando links relacionando Almacenamientos de cada depósito en la tabla de los detalles
+- Ocultando datos vacíos en módulo de devolución
+- Mejorando el formulario de edición de devoluciones, formulario de edición de artículos a retirar
+y agregando la función de guardado automático al presionar la tecla 'Enter'
+- Mejorando estilos en compras detalle
+
+Pendiente
+- Demostración de Módulos y Flujo
+
+Informe 27/10/2023
+- Cambiando módulos y submódulos a scripts, excepciones, retiros ordenes, devoluciones, vehículos propietario, vehículos y
+código origen
+- Mejorando css del módulo de compras
+- Mejorando css del módulo de compras ordenes
+- Mejorando css del modulo de compras póliza
+- Probando flujos y corrigiendo bugs
+Pendiente
+- Demostración de Módulos y Flujo
+
+Informe 30/10/2023
+- Agregando link para redireccionar conteo en gest admin depósitos
+- Actualizando parámetros en nota de crédito devolución
+- Redireccionando modulo nota de crédito al módulo actual
+- Agregando y convirtiendo a módulo script faltantes
+- Probando flujo
+- Cambiando estética y mejorando problemas de carga de datos
+- Creando Grilla para Barrios(módulo de venta)
+- Creando formulario para agregar un Barrios(módulo de venta)
+- Creando detalles para un Barrio(módulo de venta)
+
+Pendiente
+- Demostración de Módulos y Flujo(Pendiente feedback para flujo actual)
+
+
+Informe 31/10/2023
+- Iniciando Circuito Actual y discutiendo cambios
+- Creando ABM Barrio completo
+- Cambiando descripción de medidas en insumos 
+- Agregando modal para agregar Proveedores a formulario de insumos
+- Arreglando problema de categorías y sub categorías en insumos
+- Continuando creación de insumo y definiendo el producto si el concepto de creación del insumo es mercadería  
+- En el formulario de Convertir insumos a producto transformando link de Marcas a modal para que el usuario no sea 
+redirigido a otra ventana la cual corta el flujo del formulario
+- Quitando actualización automática del precio de venta al comprar un insumo, pero si actualizando el costo
+- Creando link en Orden de compras detalles para agregar un insumo si es que no esta definido, este link abre una ventana 
+nueva para que una vez creado el insumo/producto el usuario recargue el carrito de la orden de compra para poder visualizar 
+el producto nuevo
+- Agregando columna  cotización de compra a tabla actual de Cotizaciones 
+- Actualizando todos los cambios citados en la web 
+Pendiente
+- Continuar demostración de Módulos y Flujo(Pendiente feedback para flujo actual)
+- Arreglar cotización y pdf de órdenes de compra 
+
+Informe 01/11/2023
+- Agregando cotización de compra a modulo de Cotización
+- Agregando cantidad de días a la creación del encabezado de la orden de compra si es que el proveedor
+es de tipo crédito y si posee días por defecto para el cobro
+- Cambiando script de generación de pdf para la impresión en A4 de la orden de compra
+- Cambiando script de generación de pdf para la impresión en A4 de la orden de compra al tener proformas asociadas y agregando
+botón dentro del detalle de la orden de compra
+Pendiente
+- Continuar demostración de Módulos y Flujo(Pendiente feedback para flujo actual)
+- Arreglar cotización y pdf de órdenes de compra 
+
+
+Informe 02/11/2023
+- Agregando parámetros para preferencias las cuales activar ciertas funcionalidades
+- Agregando botón de impresión pdf para cada proforma en A4 aparte de la orden global y la orden global con las proformas
+- Agregando modal para agregar monedas de forma fácil para el flujo en cotizaciones
+- Agregando cotización de compra en módulo de cotización
+Pendiente
+- Continuar demostración de Módulos y Flujo (Pendiente feedback para flujo actual)
+
+Informe 03/11/2023
+- Cambiando generador de código para mejor escalabilidad
+- Agregando eventos a formularios para facilitar carga de elementos al usuario(compras ordenes , depósito, conteo , compras,)
+- Reorganizando código para su mejor escalabilidad
+
+Pendiente
+- Continuar demostración de Módulos y Flujo (Pendiente feedback para flujo actual)
+
+
+Informe 06/11/2023
+- Cambiando funcionamiento de filtro, cambiando get por post para recargar de forma automática
+- Creando módulo para generar códigos de barra para los productos que se encuentran en el depósito seleccionado
+- Arreglando lector de código de barras en conteo de productos en depósito y
+asignar almacenamiento a producto seleccionado
+
+Pendiente
+- Continuar demostración de Módulos y Flujo (Pendiente feedback para flujo actual)
+
+Informe 07/11/2023
+- Cambiando Flujo en compras_ordenes al crear una proforma y al guardarlo retornar a la orden padre,
+al guardar una proforma y crear un embarque redirigir a la orden padre si se guarda o no el embarque, 
+al crear una proforma  y a l ver el detalle de la proforma dar la oportunidad de crear el embarque y si desea 
+cancelar o guardar redirigir a la pagina en la que estaba anteriormente
+- Cargando preferencia en cotizaciones
+- Arreglando informe de compras_ordenes con proformas para que solo cuente proformas cerradas
+- Evaluando implementacion de React
+
+Pendiente
+- Continuar demostración de Módulos y Flujo (Pendiente feedback para flujo actual)
+
+
+Informe 08/11/2023
+- Agregando modal para agregar cotización en orden de compra para agregar cotización sin recargar 
+- Agregando a el informe de compras cajas,pallets,unidades y codigo de origen, ademas formateando decimales en guaraníes
+
+Pendiente
+- Continuar demostración de Módulos y Flujo (Pendiente feedback para flujo actual)
+
+
+
+Informe 09/11/2023
+- Actualizando decimales en impresión de ordenes compras
+- En orden de compra mostrando solo productos del proveedor seleccionado
+- Arreglando evento onkeyUp de ordenes compras
+- En órdenes de compra en el input precio permitiendo , y . para separador de miles
+- En detalles de órdenes de compra  Cambiando el nombre suborden por proforma
+- Agregando días de crédito a impresión de orden de compra  de cada proforma
+- Agregando modal de agregar puerto en el formulario de embarque
+- Agregando verificación no solo en unidades inferiores es decir, al escribir un número en el input de una caja convertir en unidades, si no que si coincide con el número de
+cajas almacenadas en un pallets también agregar el número en el input superior  
+- Embarque detalles  cambiando el responsive de la tabla
+Pendiente
+- Continuar demostración de Módulos y Flujo (Pendiente feedback para flujo actual)
+- Cambios varios de la demostración pasada
+
+
+
+Informe 10/11/2023
+- En compras si se elige una moneda en la factura de importación, se debe cargar todos los costos en la moneda seleccionada es decir si la factura esta en dólar todos los precios deben ser cargados en dólar, pero en la db se guarda en guaraní y la cotización se almacena por separado
+- En compras en la grilla de productos se agregan las medidas referenciales y sus conversiones de tenerla es decir si compro dos pallets de un producto saldrán las cantidades referenciales en cajas y unidades
+- Siendo descriptivo en cuanto a monedas es decir al tener Columnas Precio y Precio Dolar(moneda seleccionada puede ser otra)
+sustituyendo por Precio Guaraní(Moneda Nacional seleccionada) y Precio Dolar(Moneda Seleccionada de la factura)
+- Si es importación no calculando el iva
+- Comenzando el Cambio estético del Header de Compras
+Pendiente
+- Continuar demostración de Módulos y Flujo (Pendiente feedback para flujo actual)
+- Cambios varios de la demostración pasada
+
+
+Informe 13/11/2023
+- Agregando div de comentarios en módulo de compra
+- Arreglado bug en medidas referenciales en el carrito de compras
+- Arreglando Form para editar artículo en el carrito de compras
+- Agregando visualización de la Set para agregar cotizaciones con un modal a formularios que lo necesiten
+- Mejorando estilos de radio buttons 
+- Agregando Modal de cotizaciones para agregar de manera rápida cotizaciones al formulario de compras   
+- Arreglado bug en facturas_proveedores con respecto a números de facturas de importación
+Pendiente
+- Continuar demostración de Módulos y Flujo (Pendiente feedback para flujo actual)
+
+Informe 14/11/2023
+- Agregando modales para cotizacion y cotizacion de la set con scrapping
+- Realizando recorrido de Flujo actual y discutiendo cambios
+- Arreglando problema de facturas de importación sin iva
+- Arreglando css de editar modal en compras ordenes
+- Ocultando cantidad cajas edi en formularios
+Pendiente
+- Continuar demostración de Módulos y Flujo (Pendiente feedback para flujo actual)
+- Cambios varios
+
+
+Informe 15/11/2023
+- Creando preferencias para multimoneda a compras locales
+- Agregando embarque al reporte de las proformas (Al pdf generado)
+- Ocultando Botones no necesarios en compras ordenes 
+Pendiente
+- Continuar demostración de Módulos y Flujo (Pendiente feedback para flujo actual)
+- Cambios varios
+
+
+Informe 16/11/2023
+- Arreglando decimales de cotizaciones en modulo cotización
+- Arreglando decimales de cotización en módulo de compras y ordenes 
+- Cambiando el nombre del icono para imprimir en orden Compras
+- Arreglando problema de decimales en detalles de orden de compra
+- Arreglando problema de decimales en detalles de compra
+- Agregando cajas pallets y unidades al pdf de la orden de compra
+- Reubicando la tabla del detalle del embarque una debajo de la otras
+- Compras recalculando el vencimiento de la factura de acuerdo con la fecha de la factura
+- Reajustando responsive en compras  
+
+
+Pendiente
+- Continuar demostración de Módulos y Flujo (Pendiente feedback para flujo actual)
+- Cambios varios
+
+
+Informe 17/11/2023
+- En formulario de compras permitiendo agregar monto tanto con , como con . para los decimales no hay separador de miles
+- Agregando Depósito por defecto a compras, en adm depósitos agregando Switch para activar de manera más amigable, con lo cual
+al seleccionar uno quedará por defecto para agregar en cada compra pero permitiendo cambiarlo si así lo desea
+- Agregando formato de decimales al formulario de editar artículo
+- Agregando si por defecto a los 4 elementos pedidos en el formulario de insumos, dando la posibilidad de
+cambiarlo( Habilita compra,Habilita inventario,Habilita Descuento,Modifica Precio )
+- Verificando fecha de vencimiento en el formulario de compras para que el valor no sea menor que la fecha de la
+factura declarada
+- Validador de número de factura para el formato de 001-001-0000123 para facturas locales
+Pendiente
+- Continuar demostración de Módulos y Flujo (Pendiente feedback para flujo actual)
+- Cambios varios
+
+Informe 20/11/2023
+- Agregando ABM de concepto (ubicado en insumos )
+- Agregando botón borrar  proforma en la cual no hay una compra relacionada
+- Agregando botón para finalizar orden de compra por más de que tenga productos pendientes
+- Agregando modal al botón para finalizar para preguntar nuevamente si desea finalizar la orden de compra
+con lo cual aseguramos de que no fue un click accidental
+- Depurando circuito de compra con el cambio de multimoneda en compras locales
+
+Pendiente
+- Continuar demostración de Módulos y Flujo (Pendiente feedback para flujo actual)
+- Cambios Despacho consultar
+
+Informe 21/11/2023
+- Arreglando problema de casting con  decimales en el módulo de compras
+- Cambiando nombre Despacho a Cotización Despacho
+- Arreglado Bug en proveedores facturas a causa de números de factura importación
+- Permitiendo órdenes de compras locales con multimonedas
+- Actualizando web
+- Actualizando indentación en pdf de compras ordenes
+- Agrupando articulos del depósito para el módulo de generar codigo de barra
+- Arreglando reporte de conteo consolidado en módulo de conteo por artículo de cada depósito
+- Agregando modal para poder editar compras ordenes al crear la orden de compra
+Pendiente
+- Continuar demostración de Módulos y Flujo (Pendiente feedback para flujo actual)
+- Cambios Despacho consultar
+
+Informe 22/11/2023
+- Iniciando migraciones y correccion de scripts 
+Pendiente
+- Continuar demostración de Módulos y Flujo (Pendiente feedback para flujo actual)
+- Cambios Despacho consultar
+
+Informe 23/11/2023
+- Mejorando modal de editar cabecera en compras_ordenes
+- Mejorando Módulo de Tipo Cambio de Despacho agregando filtro de proveedores e índex de pie de página para evitar saturación
+de elementos 
+- Agregando en editar cabecera de compra un botón para precargar el monto total de la factura, útil para el autocompletado del carrito
+- Arreglado bug en funciones compra por problema de redondeo de decimales
+- si la compra es de importación no llenando el iva o excentas en funciones compras
+Pendiente
+- Continuar demostración de Módulos y Flujo (Pendiente feedback para flujo actual)
+- Cambios Despacho consultar
+
+Informe 24/11/2023
+- Mejorando Mensaje para visualizar cotizaciones de la SET 
+- Creando modal para seleccionar cotizaciones previas si así lo desea al cargar una factura de compra(pendiente aplicar a editar cabecera a ambos, en un mismo modal y en el formulario individual)
+- Ordenando migraciones y preparando scripts para migraciones
+Pendiente
+- Continuar demostración de Módulos y Flujo (Pendiente feedback para flujo actual)
+- Cambios Despacho consultar
+
+Informe 27/11/2023
+- Creando modal para seleccionar cotizaciones previas si así lo desea al cargar una factura de compra(pendiente aplicar a editar cabecera a ambos, en un mismo modal y en el formulario individual)
+- Iniciando cambios destinados a gastos asociados del Despacho 
+- Creando concepto despacho en insumos lista para el iva variable, al seleccionar este concepto el insumo no tomará el valor de 
+iva compra y en el formulario anulara la carga y de estar cargado lo limpiara y mostrará una interfaz dando a entender al usuario que no 
+usará dicho valor
+- Cambiando verificación de insumos listas_add e insumos_listas_edit
+- Agregando a formulario de compras el campo iva si el artículo es DESPACHO 
+- Agregando verificaciones a modulo de compra
+Pendiente
+- Continuar demostración de Módulos y Flujo (Pendiente feedback para flujo actual)
+- Cambios Despacho probar funcionalidad
+
+Informe 28/11/2023
+- Modulo de compra implementando iva variable para el artículo despacho
+- agregando cambio de moneda a el iva si es que se encuentra en otra moneda que no sea la local
+- ocultando botones sin uso para compras_ordenes 
+- Discutiendo cambios
+Pendiente
+- Continuar demostración de Módulos y Flujo (Pendiente feedback para flujo actual)
+- Cambios Despacho probar funcionalidad
+
+Informe 29/11/2023
+- Discutiendo avances  
+- verificando código en conjunto con el equipo
+Pendiente
+- Continuar demostración de Módulos y Flujo (Pendiente feedback para flujo actual)
+- Cambios Despacho probar funcionalidad
+
+
+Informe 30/11/2023
+- ocultando despacho y agregando origen a grilla principal del módulo de compra 
+- Agregando medidas referenciales a grillas de compras ordenes, grilla de detalles en compras ordenes,
+ grilla en embarque y detalles de embarque 
+- Agregando o solicitando por defecto la fecha de la factura para las cotizaciones en compras 
+- En el módulo de compras arreglando javascript de fecha vencimiento para que sea un onblur y no un onchange
+- Redirigiendo al detalle de ingreso a stock de la compra cuando se finaliza la carga de un gasto relacionado
+- en el módulo de compra al editar la compra agregando todos los decimales en el input de precio
+- Arreglando edit de un depósito
+- Cambiando títulos de compras ordenes
+- Pdf proforma agregando 2 decimales a la cotización en guaraní y asignando un apartado para la descripción del embarque
+para tener en cuenta que la descripción puede ser de muchos caracteres 
+- Agregando titulo al agregar una proforma
+- Cambiando estetica botón de forzar cierre en compras ordenes
+- En compras ordenes al agregar una orden agregar un evento para actualizar la fecha de entrega estimada al cambiar la fecha de la orden
+y validando la fecha de entrega estimada para no recargar una fecha menor a la fecha de la orden
+Pendiente
+- Continuar demostración de Módulos y Flujo (Pendiente feedback para flujo actual)
+- Cambios Despacho probar funcionalidad
+
+
+Informe 1/12/2023
+- Creando talba para consultar un producto de manera rapida RDE APP MOBILE
+- mejorando seleccion de cotizaciones pasadas
+  [ * ] En orden de compra: tomando la cotizacion del dia, pero si no se encuentra ninguno tenemos la opcion de agregar de forma rapida
+  una cotizacion o si se realiza un click dentro del input de la cotizacion nos muestra un modal con todas los cotizaciones pasadas
+  registradas, con un buscador de fechas por si asi lo desea, esta misma funcionalidad se encuntra en el modal de editar cabecera
+  ubicada en el detalle de la orden de compra, es decir en la ventana donde se agregan los productos a la orden de compra 
+  [ * ] Modulo de compra agregando modal para permitir seleccionar cotizaciones pasadas si realizamos un click en el select de 
+  donde se encuentra el monto de la cotizacion
+- Actualizando web RDE APP MOBILE 
+- Actualizando web RDE 
+- Actualizando la fecha estimada al cambiar la fecha del pedido en compras ordenes
+Pendiente
+- Continuar demostración de Módulos y Flujo (Pendiente feedback para flujo actual)
+- Cambios Despacho probar funcionalidad
+
+
+
+Informe 4/12/2023
+- Arreglando decimales en grilla de embarques de productos de la orden y los que se encuentran en la factura de compra
+- Agregando fechas de cotizaciones pasadas en módulo de compras órdenes y compras
+- Agregando previsualización de la cotización del despachante en compras de importación, transformando costos de los productos si es que se
+carga una cotización de despacho
+- Agregando depósito por defecto a artículo de Ajuste
+- Actualizando web con cambios correspondientes
+Pendiente
+- Continuar demostración de Módulos y Flujo (Pendiente feedback para flujo actual)
+- Cambios Despacho probar funcionalidad
+
+
+
+
+Informe 5/12/2023
+- Arreglando grilla para ingreso de stock, adaptando a multimoneda
+- Agregando botón para eliminar gastos asociados si así lo desea (pendiente análisis de script registro compra para revertir )
+- En gastos asociados quitando el  botón de editar depósito
+- En gasto asociados ocultar orden y embarque al crear la factura
+- En tmp compras agregando botón y  modal para poder agregar cotizaciones
+- Arreglando problema de cotizaciones de despacho par multimoneda en una misma grilla
+- Discutiendo Flujo actual de despacho
+Pendiente
+- Continuar demostración de Módulos y Flujo (Pendiente feedback para flujo actual)
+- Switch para tomar o no cotizaciones de despacho asociadas en local y en importación
+- Roll back de cotizaciones del día de la factura  a cotizaciones del dia anterior
+
+
+Informe 6/12/2023
+- Continuando verificacion de codigo
+Pendiente
+- Continuar demostración de Módulos y Flujo (Pendiente feedback para flujo actual)
+- Switch para tomar o no cotizaciones de despacho asociadas en local y en importación
+- Roll back de cotizaciones del día de la factura  a cotizaciones del dia anterior
+
+Informe 7/12/2023
+- Creando switch para usar o no la cotizacion de despacho en las compras
+Pendiente
+- usar la verificacion del switch para el calculo del costo promedio
+- Continuar demostración de Módulos y Flujo (Pendiente feedback para flujo actual)
+- Switch para tomar o no cotizaciones de despacho asociadas en local y en importación
+- Roll back de cotizaciones del día de la factura  a cotizaciones del dia anterior
+
+Informe 8/12/2023
+- finalizando switch para usar o no la cotización de despacho en las compras
+Pendiente
+- usar la verificación del switch para el calculo del costo promedio
+- Continuar demostración de Módulos y Flujo (Pendiente feedback para flujo actual)
+- Roll back de cotizaciones del día de la factura  a cotizaciones del dia anterior
+
+Informe 9/12/2023
+- Arreglando (bug) switch para usar o no la cotización de despacho en las compras
+- Agregando modal de insumos para el módulo de compras
+- Actualizando web
+Pendiente
+- usar la verificación del switch para el cálculo del costo promedio
+- Continuar demostración de Módulos y Flujo (Pendiente feedback para flujo actual)
+- Roll back de cotizaciones del día de la factura  a cotizaciones del dia anterior
+
+
+Informe 13/12/2023
+- Continuando migraciones
+Pendiente
+- usar la verificación del switch para el cálculo del costo promedio
+- Continuar demostración de Módulos y Flujo (Pendiente feedback para flujo actual)
+- Roll back de cotizaciones del día de la factura  a cotizaciones del dia anterior
+
+Informe 14/12/2023
+- Continuando migraciones
+Pendiente
+- usar la verificación del switch para el cálculo del costo promedio
+- Continuar demostración de Módulos y Flujo (Pendiente feedback para flujo actual)
+- Roll back de cotizaciones del día de la factura  a cotizaciones del dia anterior
+
+Informe 15/12/2023
+- Continuando migraciones
+Pendiente
+- usar la verificación del switch para el cálculo del costo promedio
+- Continuar demostración de Módulos y Flujo (Pendiente feedback para flujo actual)
+- Roll back de cotizaciones del día de la factura  a cotizaciones del dia anterior
+
+Informe 18/12/2023
+- Creando Script para migrar categorias
+- Creando Script para migrar Familias
+- Creando Script para migrar Sub Familias
+- Creando Script para migrar Marcas
+- Creando Script para migrar Paises
+- Iniciando Script para migrar Articulos, pendientes datos de Proveedores para su avance
+- Continuando modal de insumos en Carrito de Compras
+Pendiente
+- usar la verificación del switch para el cálculo del costo promedio
+- Continuar demostración de Módulos y Flujo (Pendiente feedback para flujo actual)
+- Roll back de cotizaciones del día de la factura  a cotizaciones del dia anterior
+
+
+
+Informe 19/12/2023
+- Finalizando modal de insumos en módulo de compras
+- redireccionando compras ordenes al crear para facilitar flujo
+- Arreglando bug de iva para insumos el cual surgió por el iva variable del Despacho
+- Usando cot de despacho en compras importación al agregar una cotización de despacho
+- Corrigiendo bug de cotizaciones al dar la oportunidad de elegir cualquier otra cotización anterior 
+- Actualizando Web
+Pendiente
+- Continuar demostración de Módulos y Flujo (Pendiente feedback para flujo actual)
+
+Informe 20/12/2023
+- formateando excel de articulos 
+- continuando script de migraciones de excel, pendiente recepcion de excel de articulos y proveedores para finalizacion de scripts
+Pendiente
+- Continuar demostración de Módulos y Flujo (Pendiente feedback para flujo actual)
+
+Informe 21/12/2023
+- agregando script de migraciones de excel par proveedores
+- convirtiendo ruc en dato opcional para proveedores
+- creando preferencias para ruc duplicados
+- creando preferencias para razón social duplicadas
+- agregando reporte de errores al migrar datos del excel
+- actualizando documentación
+Pendiente
+- Continuar demostración de Módulos y Flujo (Pendiente feedback para flujo actual)
+- actualizar funciones de proveedores para las verificaciones de insert
+
+Informe 22/12/2023
+- finalizando script de migraciones de excel para proveedores y agregando alertas de errores en caso
+de la existencia de algún dato erróneo
+- actualizar funciones de proveedores para las verificaciones de insert
+- iniciando script para carga de artículos
+Pendiente
+- Continuar demostración de Módulos y Flujo (Pendiente feedback para flujo actual)
+
+
+
+Informe 26/12/2023
+- finalizando script de migraciones de excel para artículos y agregando alertas de errores en caso
+de la existencia de algún dato erróneo y verificando duplicados
+
+Pendiente
+- Continuar demostración de Módulos y Flujo (Pendiente feedback para flujo actual)
+-Reparar ultimo bug en carga masiva de proveedores al tener ruc o fantasia nulo y actualizar la web
+
+
+Informe 27/12/2023
+- finalizando script de migraciones de excel para artículos además  convirtiendo los insumos en productos
+- Reparar último bug en carga masiva de proveedores al tener ruc o fantasía nulo
+- Probando y actualizando web con cargas masivas, preparando scripts para limpiar datos de pruebas
+Pendiente
+- Continuar demostración de Módulos y Flujo (Pendiente feedback para flujo actual)
+
+
+Informe 28/12/2023
+- Probando scripts en la web
+- Mejorando filtros e indexacion en insunos, proveedores,marcas, paises,
+ categorias y  articulos borrados
+- Agregamdo ejemplos xlsx a modulos de carga masiva 
+Pendiente
+- Continuar demostración de Módulos y Flujo (Pendiente feedback para flujo actual)
+
+
+Informe 29/12/2023
+- Arreglando bugs a causa de datos en migración y probando flujo en la web
+- Arreglando problema de búsqueda en cotización
+- Migrando db en desarrollo.sistema y eliminando compras anteriores a la migración
+Pendiente
+- Continuar demostración de Módulos y Flujo (Pendiente feedback para flujo actual)
+
+Informe 02/01/2024
+- Generando tutorial para agregar una compra
+- Generando tutorial para agregar articulos al almacenamento
+- Generando tutorial para realizar el conteo del deposito
+- Generando tutorial para realizar una devolucion
+- Generando tutorial para crear una nota de credito
+- Corrigiendo funciones compras
+
+Pendiente
+- Continuar demostración de Módulos y Flujo (Pendiente feedback para flujo actual)
+
+
+Informe 03/01/2024
+- Cambiando Mensajes en conteos deposito
+- Cambiando Mensajes en ordenes de retiro
+- Cambiando Mensajes en devoluciones
+- Arreglando bugs en conteo 
+- Reordenando codigo para su reutilizacion 
+Pendiente
+- Continuar demostración de Módulos y Flujo (Pendiente feedback para flujo actual)
+
+Informe 05/01/2024
+- Arreglando labels con mensajes erroneos 
+- Agregando la opcion de dpeosito por  defecto para articulos a ser devueltos, para acceder a esa opcion 
+se necesita seleccionar en administracion de depositos  el switch del deposito por defecto  y luego cuando 
+necesitemos devolver un articulo este sera seleccionado por defecto pero dejando la opcion de cambiar el deposito 
+si asi lo deseamos 
+- Probando flujo actual de compras y depositos
+- presentando flujo actual pendiente reporte de costos e impresion fisica de un pdf con los gastos asociados de la compra para su ingreso a Stock
+Pendiente
+- Continuar demostración de Módulos y Flujo (Pendiente feedback para flujo actual)
+
+Informe 05/01/2024
+- Arreglando labels con mensajes erroneos 
+- Agregando la opcion de dpeosito por  defecto para articulos a ser devueltos, para acceder a esa opcion 
+se necesita seleccionar en administracion de depositos  el switch del deposito por defecto  y luego cuando 
+necesitemos devolver un articulo este sera seleccionado por defecto pero dejando la opcion de cambiar el deposito 
+si asi lo deseamos 
+- Probando flujo actual de compras y depositos
+- presentando flujo actual pendiente reporte de costos e impresion fisica de un pdf con los gastos asociados de la compra para su ingreso a Stock
+Pendiente
+- Continuar demostración de Módulos y Flujo (Pendiente feedback para flujo actual)
+
+Informe 08/01/2024
+- Iniciando Arreglos pendientes para finalizar la compra y crear el pdf de aprobacion
+- Inspeccionando y organizando codigo 
+Pendiente
+- Continuar demostración de Módulos y Flujo (Pendiente feedback para flujo actual una vez terminado los cambios solicitados)
+
+
+Informe 09/01/2024
+- Continuando Arreglos pendientes para finalizar la compra y crear el pdf de aprobacion
+- preparando  codigo de reporte por producto para migrar a previsualización antes de ingresar algun producto al deposito 
+Pendiente
+- Continuar demostración de Módulos y Flujo (Pend
+iente feedback para flujo actual una vez terminado los cambios solicitados)
+
+
+
+Informe 10/01/2024
+- finalizando reporte para ingreso de stock creando pdf y ajustando redondeo
+Pendiente
+- Continuar demostración de Módulos y Flujo (Pendiente feedback)
+
+Informe 11/01/2024
+- Presentando reporte para ingreso de stock
+- Presentando flujo de generacion de reporte
+- Ajustando decimales
+- iniciando ltimos ajuetes para prueba en la web
+Pendiente
+- pendiente revision una vez subios los cambios
+
+Informe 12/01/2024
+- Subiendo cambios en la web
+- corrigiendo errores de redondeo en compras ordenes y compras
+- corrigiendo errores de reporte de compras 
+- finalizando correcciones requeridas
+Pendiente
+- pendiente verificacion en la web para demostracion
+- pendiente revision una vez subios los cambios
+
+Informe 16/01/2024
+- Subiendo cambios en la web
+- Corrigiendo errores al generar el pdf y probando el flujo actual 
+- Eniando mensaje para pruebas y testeo 
+Pendiente
+- pendiente a cualquier eventualidad que ocurra en el testeo
+
+
+Informe 18/01/2024
+- verificando código para su reestructuración
+- continuando con migraciones de scripts
+Pendiente
+- pendiente a cualquier eventualidad que ocurra en el testeo
+
+
+Informe 19/01/2024
+- verificando código para su reestructuración
+- continuando con migraciones de scripts en paralelo 
+Pendiente
+- Pendiente revision del cliente de modulos compras, depositos,conteos,devoluciones
+- pendiente a cualquier eventualidad que ocurra en el testeo
+Informe 21/01/2024
+- verificando código para su reestructuración
+- continuando con migraciones de scripts en paralelo 
+Pendiente
+- Pendiente revision del cliente de modulos compras, depositos,conteos,devoluciones
+- pendiente a cualquier eventualidad que ocurra en el testeo
+
+
+Informe 22/01/2024
+- verificando código para su reestructuración
+- continuando con migraciones de scripts en paralelo
+Pendiente
+- Pendiente revisión del cliente de módulos compras, depósitos,conteos,devoluciones
+
+
+
+Informe 23/01/2024
+- reestructuración de funciones compras para migraciones 
+- parametrizando funciones y valores para scripts anteriores
+Pendiente
+- Pendiente revision del cliente de modulos compras, depositos,conteos,devoluciones
+- pendiente a cualquier eventualidad que ocurra en el testeo
+
+Informe 24/01/2024
+- reestructuración de funciones compras para migraciones 
+- parametrizando funciones y valores para scripts anteriores
+Pendiente
+- Pendiente revision del cliente de modulos compras, depositos,conteos,devoluciones
+- pendiente a cualquier eventualidad que ocurra en el testeo
+
+
+Informe 25/01/2024
+- reestructuración de funciones compras para migraciones 
+- parametrizando funciones y valores para scripts anteriores
+Pendiente
+- Pendiente revision del cliente de modulos compras, depositos,conteos,devoluciones
+- pendiente a cualquier eventualidad que ocurra en el testeo
+
+Informe 26/01/2024
+- reestructuración de funciones compras para migraciones, proceso de prueba y testeo 
+- Documentando Codigo
+Pendiente
+- Pendiente revision del cliente de modulos compras, depositos,conteos,devoluciones
+- pendiente a cualquier eventualidad que ocurra en el testeo
+
+Informe 05/02/2024
+- Arreglar el reporte de compras antes de ingreso a stock teniendo en cuenta el uso de cotizacion de factura y de despacho.
+- Verificacion de valores en el reporte y correccion en calculos del costo Cif
+- Se identifica que para el costo CIF se suman el costo FOB mas los gastos asociados sin iva
+Pendiente:
+- Finalizacion y prueba de cambio de costo CIF de acuerdo a requerimiento del cliente
+- Pruebas en frio y prueba con el cliente.
+
+Informe 06/02/2024
+- Se corrigio el calculo del costo CIF obteniendo el calculo correcto en guaranies.
+- Se agrego al informe compras_reporte el calculo de los totales de CostoFOB, TotalGastos y TotalCIF en guaranies.
+- Se agrega columna de cotizacion en el Detalle de Gastos para identificar la cotizacion utilizada.
+- Se acomodo la recarga del boton que genera el PDF en gest_adm_depositos_compras_det
+- Se agrego el campo IVA al modal que corresponde a modificacion en compras_detalle 
+Pendiente:
+- Finalizar la creacion del campo IVA en modal de edicion en compras_detalle
+- Puntos pendientes recopilada en reunion con cliente.
+- Pruebas en frio con variaciones tanto en compras como en gastos adicionales para asegurar calculos del proceso y reporte.
+
+Informe 07/02/2024
+- Se corrige la cantidad de decimales para el calculo de gastos adicionales en dolares
+- Se cambia la etiqueta Precio en la carga de insumos de gastos adicionales por Precio+IVA sugerido por el cliente
+- Se corrige la edicion de los gastos adicionales permitiendo modificar el IVA
+- Insumo despacho permite colocar iva variable
+- Culminacion de proceso de actualizacion de costos CIF en reporte de importacion
+- Se corrigio el funcionamiento de opcion Ajustes en la totalizacion de Insumos
+Pendiente:
+- culminar creacion de ABM para filrar la busqueda de documentos por cliente o articulo.
+- Pruebas con cliente de reporte de Importacion en PDF (calculos reales).
+- Modificar deposito predeterminado al deposito que trae la factura por compra.
+
+Informe 08/02/2024
+- Se amplia la cantidad de decimales para el calculo de gastos adicionales en dolares a pedido del cliente
+- Creacion de modal para ver reporte de importacion filtrado por Proveedor o Insumo
+- Pruebas de gastos adicionales con manejo de Cotizacion de Factura y Cotizacion de Despacho
+- Se arreglaron Bugs en reportes y pantallas de compras
+- Pruebas del proceso de actualizacion de costos CIF en reporte de importacion
+- Reunion y levantamiento de requerimientos del cliente
+- Se actualiza servidor con cambios realizados en localhost
+Pendiente:
+- Aplicacion de cambios solicitados por el cliente.
+
+Informe 09/02/2024
+- Se cambia id de movimiento por factura - cotizacion y fecha
+- Se recalculo el costo FOB del reporte de Orden de Compra en PDF a pedido del cliente
+- Se delimitaron visualmente en la patalla de gastos adicionales las facturas nacionales y extranjeras
+- Se oculta boton para generar automaticamente una proforma
+- Se cambia subtotal impuesto por total factura en carga de gastos adicionales
+- Recalculo de IVA en reporte de Orden de Compra en PDF al utilizar cotizacion de factura o de despacho
+- Modificar el calculo del gasto adicional en guaranies para que se prorratee por la cant unitaria contra la cotizacion de despacho
+- Reunion con el cliente para finalizar proceso / Solciita tiempo para hacer pruebas con varios productos mas
+Pendiente:
+- Recopilar resultados de pruebas realizadas por el cliente
+- Ajuste de costo promedio cuando se realiza compra por primera vez 
+
+Informe 12/02/2024
+- Reunion con el cliente para explicacion de puntos pendientes
+- Familiarizacion con codigo y tablas de la base de datos que interactuan con el proceso de compras
+- Modificacion de compras_ordenes_det para que se calcule la cantidad de pallets de un producto
+- Modificacion de compras_ordenes_grillaprod para arreglar falla
+Pendiente:
+- Recibir resultados de pruebas
+- Iniciar con proceso derivado de la reunion con el cliente
+
+Informe 13/02/2024
+- Orden de Compra
+-- Modificacion de Unidad para calcular pallet
+-- Modificacion de Cantidad para calcular pallet
+-- Modificacion de proceso Agregar Producto para cargar la unidad de compra (Und/Caja/Pallet)
+-- Cambio en grid para mostrar Costo Unit. con 3 decimales
+- Revision de pantalla de costo promedio para ser modificado
+Pendiente:
+- Modificacion de pantalla de costo promedio
+- Modificacion de pantalla de consulta de producto (indicada por el cliente)
+
+Informe 14/02/2024
+- Orden de Compra
+-- Edicion de ventanas de compras en donde aparece el lote (revision del calculo)
+-- Revision del proceso que calcula y agrega el costo promedio a la tabla costos_productos
+- Revision de pantalla de costo promedio para ser modificado
+Pendiente:
+- Continuacion en la modificacion de pantalla de costo promedio
+- Modificacion de pantalla de consulta de producto (indicada por el cliente)
+
+Informe 15/02/2024
+- Orden de Compra
+-- Verificacion de costos en resumen antes de imprimir reporte PDF de costos de importación
+-- Revision del proceso que calcula y agrega el costo promedio a la tabla costos_productos
+- Revision de pantalla de costo promedio para ser modificado
+Pendiente:
+- Continuacion en la modificacion de pantalla de costo promedio
+- Modificacion de pantalla de consulta de producto (indicada por el cliente)
+
+Informe 16/02/2024
+- Clientes
+-- Ubicacion y modificacion de cliente_add.php a campos usados por el cliente
+-- Creacion de clientes_del.php
+-- Creacion de cliente_edit.php
+-- Modificacion de cliente.php para agregar boton para asociar vendedor al cliente
+Pendiente:
+- Continuacion de la edicion de las pantallas y modificacion de campos de BD local
+- Pruebas de pantallas y levantamiento de requerimientos con el cliente dia lunes 19-02-2024
+
+Informe 19/02/2024
+- Clientes
+-- Modificación de clientes y clientes_add ajustando a necesidad del cliente.
+-- Pruebas de almacenamiento en BD local.
+-- Prueba de clientes_edita_credi_linea
+-- Modificación de cliente_edit y cliente_del para mostrar campos solicitados por el cliente
+- Reunion y levantamiento de procesos de Stock y manejo de produccion con el cliente
+- Muestra de procesos de elaboracion de vino y de reempaquetado de papel.
+
+Pendiente:
+- Continuacion de la edicion de las pantallas y modificacion de campos de BD local
+
+Informe 20/02/2024
+- Costo Promedio
+-- Revision y modificacion de funcion_compras (relacionar_gastos)
+-- Verificación de campos de BD (gest_depositos_stock_gral y costos_productos)
+-- Pull de pruebas y calculo con formula manual con 1 producto y 1 gasto
+-- Pull de pruebas y calculo con mas de un articulo y mas de un gasto
+-- Modificacion de gest_adm_costos para que me muestre los campos que trae
+
+Pendiente:
+- Continuacion de pruebas en gest_adm_costos ya que trae solo el ultimo valor de la tabla.
+- Pull de pruebas complementarias con contraste de calculos manuales.
+- Modificación de pantalla de costos promedios indicado por el cliente.
+
+Informe 21/02/2024
+- Costo Promedio
+-- Revision y correccion de formula de costo promedio (daba error en calculo con stock anterior)
+-- Verificación de campos de BD (gest_depositos_stock_gral y costos_productos)
+-- Pull de pruebas y calculo con formula manual con 2 productos y 2 gastos
+-- Pull de pruebas y calculo con varias compras anteriores para ver el comportamiento del costo promedio
+-- Modificacion de gest_adm_costos para que me muestre los campos que trae
+-- Creacion de gest_adm_costos2 para verificar problema de muestra en pantalla de todos los registros
+
+Pendiente:
+- Continuacion de pruebas en gest_adm_costos ya que trae solo el ultimo valor de la tabla.
+- Pull de pruebas complementarias con contraste de calculos manuales.
+- Modificación de pantalla de costos promedios indicado por el cliente.
+
+Informe 22/02/2024
+- Costo Promedio
+-- Correción y verificación de formula de costo promedio (daba error en calculo con stock anterior)
+-- Verificación en pruebas de campos de BD (gest_depositos_stock_gral y costos_productos)
+-- Pull de pruebas y calculo con formula manual con 2 productos y 2 gastos
+-- Pull de pruebas y calculo con varias compras anteriores para ver el comportamiento del costo promedio
+-- Modificacion de gest_adm_costos para ocultar desglose historico innecesario
+-- Modificación de reporte_costos_productos para mostrar historico de costos promedios
+-- Modificacion de gest_adm_depositos_compras_det_grillas para ajustes de detalles
+- Reunion con Gustavo para mostrar detalles del proyecto hasta el momento y discusion de fechas de entregas
+ 
+Pendiente:
+- Continuacion de pruebas referentes a compras e importacion, preparacion de entrega para dia lunes
+- Pull de pruebas complementarias con contraste de calculos manuales.
+- Verificación de pantalla de costos promedios indicado por el cliente (reporte_costos_productos).
+
+Informe 26/02/2024
+- Costo Promedio
+-- Se realizo un nuevo esquema de pruebas emulando valores reales.
+(Los calculos se hicieron de forma manual y por sistema)
+- Modificacion de cliente_add
+- Reunion con dpto de ventas para evaluar proceso
+- Se solicita reunion con RRHH para ver sistema nomina
+- En referencia al cierre de ordenes de compra, el cliente se encuentra enfermo
+  se coordina para su regreso poder demostrar los cambios realizados.
+ 
+Pendiente:
+- Muestra al cliente de los cambios realizados en Orden de Compra
+- Modificacion de clientes_add y clientes_edit para que se ajusten a los datos que necesita el cliente
+- Se realiza mapa de procesos entre pedido, venta y facturacion para su automatizacion
+
+Informe 27/02/2024
+- Clientes
+-- Creacion y adaptacion del ABM cliente_add
+-- Creacion y adaptacion del ABM cliente_add2
+-- Creacion y adaptacion del ABM cliente_comercial
+-- Creacion y adaptacion del ABM cliente_despacho
+- Vendedores
+-- Creacion y adaptacion del ABM vendedor_add
+ 
+Pendiente:
+- Culminacion de adaptacion de los ABM
+- Creacion de campos adicionales en la BD
+- Pruebas de almacenado en la BD
+
+
+Informe 28/02/2024
+- Clientes
+-- Adaptacion del ABM cliente_add
+-- Adaptacion del ABM cliente_add2
+-- Adaptacion del ABM cliente_comercial
+-- Adaptacion del ABM cliente_despacho
+-- Creacion de campos en la base de datos para manejo de clientes
+- Vendedores
+-- Adaptacion del ABM vendedor_add
+-- Creacion de campos en la base de datos para manejo de vendedores
+ 
+Pendiente:
+- Culminacion de adaptacion de los ABM
+- Pruebas de almacenado en la BD
+
+Informe 29/02/2024
+- Clientes
+-- Incorporación de los campos de cliente_add, cliente_add2, cliente_comercial y cliente_despacho a un modal amigable
+-- Modificación de la tabla lista_precios_venta (se añade campo moneda)
+-- Se añaden a la tabla de lista de precios las listas usadas por el cliente
+- Vendedores
+-- Adaptación del ABM vendedor_add
+-- Adaptación de tabla vendedores
+
+Pendiente:
+- Culminación de adaptación de los ABM
+- Pruebas de almacenado en la BD 
+
+Informe 05/003/2024
+- Clientes
+-- Incorporación de los campos de cliente_add, cliente_add2, cliente_comercial y cliente_despacho a un modal amigable
+-- Modificación de la tabla lista_precios_venta (se añade campo moneda)
+-- Modificacion de la tabla clientes, se añaden campos del cliente
+- Vendedores
+-- Adaptación del ABM vendedor_add
+-- Adaptación de tabla vendedores
+
+Pendiente:
+- Culminación de adaptación de los ABM
+- Pruebas de almacenado en la BD 
+- Preparación de reunion Jueves 07-03-2024 con el cliente
+
+Informe 06/03/2024
+- Clientes
+-- Modificacion de tabla cliente con campos adicionales
+-- Modificacion de tabla departamentos_propio
+-- Modificacion de tabla distrito_propio
+-- Prueba de ingreso de clientes en base de datos
+- Vendedores
+-- Modificacion de la tabla vendedor
+-- Pruebas de carga en tabla vendedor
+- Lista de precios
+-- Modificacion de la tabla lista_precios_venta
+
+Pendiente:
+- Culminación de adaptación de los ABM
+- Pruebas generales de Clientes, Vendedores y Lista de precios
+- Recopilacion de datos de las listas de precios con el cliente
+- Reunion de avances de Compras y Ordenes de Compra
+
+Informe 07/03/2024
+- Clientes
+-- Reajuste de pantalla de clientes a soliitud del cliente
+-- Creacion de la tabla cadena para agrupar a los clientes
+-- Se añade imagen al registro de cliente (fachada de local)
+- Vendedores
+-- Ajustes de la tabla de vendedores y del ABM
+- Proveedores
+-- Revision del ABM de proveedores
+- Lista de precios
+-- Modificacion de la tabla lista_precios_venta
+- Levantamiento del proceso de ventas y requerimientos del cliente
+Pendiente:
+- Culminación de adaptación de los ABM
+- Pruebas generales de Clientes, Vendedores y Proveedores
+- Recopilacion de datos de las listas de precios con el cliente
+- Reunion de avances de Compras y Ordenes de Compra (se pospone hasta verificar cambios subidos)
+verificar auto llenado proforma cuando la orden padre cargo por caja 
+vericar que cargue los dos en edita producto en carrito 
+
+Informe 13/03/2024
+- Clientes
+-- Pruebas y ajustes en cliente_add, cliente_edit, cliente_del
+-- Ajustes en base de datos de prueba
+- Vendedores
+-- Pruebas y ajustes en ABM de vendedores
+-- Ajuste de base de datos de pruebas
+- Pedidos
+-- Creación de ABM de Pedidos
+- Productos
+-- Revision y ajuste de ABM de productos para ajustarse a necesidad del cliente
+- Verificación de proceso de ordenes de compra luego de creacion de campo costo_cero
+Pendiente:
+- Culminación de adaptación de los ABM
+- Pruebas generales de Clientes, Vendedores y Proveedores
+- Recopilacion de datos solciitados al cliente (pendientes por recibir)
+- Reunion de avances de Compras y Ordenes de Compra se pauta para Lunes 18-03-2024
+- Continuacion de pruebas de proceso de orden de compra y costos promedios
+
+Informe 15/03/2024
+- Se revisaro el proceso de costos en produccion y local
+-- Se encuentra una discrepancia en lo levantado y se revisa los ABM
+-- Se reverifican los calculos de costo FOB, costo CIF para evitar anomalias
+-- Se verifican reportes y base de datos para identificar el correcto almacenado
+Pendiente:
+- Culminación de adaptación de los ABM
+- Pruebas generales de Clientes, Vendedores y Proveedores
+- Recopilacion de datos solciitados al cliente (pendientes por recibir)
+- Reunion de avances de Compras y Ordenes de Compra se pauta para Martes 19-06-2024
+- Continuacion de pruebas de proceso de orden de compra y costos promedios
+
+Informe 20/03/2024
+- Costos e Importacion
+-- Se reviso el proceso con el cliente quedando conforme con la prueba realizada con datos controlados
+-- El cliente solicita realizar prueba con datos reales para comprobar el resultado.
+- Vendedores
+-- Se recibe por parte del cliente las tablas referentes a vendedores
+-- Se modifica el ABM de vendedores y se ajusta a lo solicitado.
+- Clientes
+-- Se ajusta ABM de edicion de datos del cliente
+-- Se ajusta ABM de limite de credito
+-- Se ajusta ABM de eliminación de cliente
+- Se crean tablas complementarias para cliente y vendedor
+Pendiente:
+- Culminación de adaptación de los ABM
+- Modificacion de datos recibidos por el cliente y ajustados a la BD actual
+- Creación de ABM edicion de vendedor
+- Creación de ABM de pedidos y ajuste a requerimientos de cliente
+- Se aguarda para el dia 21-03-2024 las pruebas del cliente y el resultado.
+
+Informe 21/03/2024
+- Vendedores
+-- Se modifica el ABM de vendedor y se ajusta a lo solicitado.
+-- Se ajusta el ABM de clientes_vend para cambiar el vendedor a un cliente
+-- Se ajusta el ABM de vendedor_del y vendedor_edit
+-- Se carga información suministrada por el cliente en la BD
+- Clientes
+-- Se ajusta ABM de edicion de datos del cliente
+-- Se ajusta ABM de limite de credito
+-- Se ajusta ABM de eliminación de cliente
+- Se crean tablas complementarias para cliente y vendedor
+Pendiente:
+- Culminación de adaptación de los ABM
+- Modificacion de datos recibidos por el cliente y ajustados a la BD actual
+- Ajustes de ABM edicion de vendedor
+- Creación de ABM de pedidos y ajuste a requerimientos de cliente
+
+
+
+verificar auto llenado proforma cuando la orden padre cargo por caja 
+vericar que cargue los dos en edita producto en carrito 
+
+
+dolar no cambiar al tocar la cot de despacho de los gastos asociado verificar el cambio de dolar verificar en una compra 
+
+permitir cambiar el iva en compra y venta que no posean ivas iguales  
+flete iva ariable 
+gastos agregar cotizacion de cada uno 
+
+historial de precio en venta la lista el precio anterior precio nuevo  moneda usuario  fecha modificacion  fecha de vigencia 
+
+agregar reporte de fob cif antes de dar ingreso  al articulo

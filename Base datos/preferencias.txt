@@ -1,0 +1,10 @@
+Preferencias proveedores
+SIN FACTURA: desabilita el sin factura y obliga a marcar persona fisica
+proveedores.persona= 1=Física 2=Jurídica 0=sin preferencia
+acuerdos compercieles archivo: habilita la carga del pdf y ademas desde hasta que serian fechas de vencimiento
+para dicho archivo
+
+importacion: habilita moneda pais tipo origen en los formularios de proveedor y en compras_ordenes 
+Preferencias compras _ordenes 
+facturas multiples: activa cambios en vista compras ordenes y en los script de ocn para poder aceptar varias facturas asociadas a
+una orden 

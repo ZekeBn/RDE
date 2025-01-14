@@ -1,0 +1,159 @@
+************** TABLA: tipo_credito ********************
+CREATE TABLE `tipo_credito` (
+`idcredito`  int(11) NOT NULL ,
+`descripcion`  varchar(30) NULL ,
+`dias_credito`  int(3) NULL ,
+`tolerancia`  int(3) NULL ,
+`limite_credto`  int(12) NULL 
+)
+;
+
+ALTER TABLE `cliente`
+ADD COLUMN `codigo_cliente`  int(40) NULL AFTER `anulado_el`;
+ADD COLUMN `codigo_persona`  int(40) NULL AFTER `idcobrador`,
+ADD COLUMN `motivo`  varchar(50) NULL AFTER `codigo_persona`,
+ADD COLUMN `limite_credito`  int(12) NULL AFTER `motivo`,
+ADD COLUMN `idcredito`  int(11) NULL AFTER `limite_credito`,
+ADD COLUMN `dia_visita`  int(2) NULL AFTER `idcredito`,
+ADD COLUMN `idnaturalezapersona`  int(11) NULL AFTER `dia_visita`,
+ADD COLUMN `idtipomoneda`  int(11) NULL AFTER `idnaturalezapersona`,
+ADD COLUMN `idlistaprecio`  int(11) NULL AFTER `idtipomoneda`,
+ADD COLUMN `direccion2`  varchar(50) NULL AFTER `idlistaprecio`,
+ADD COLUMN `numero_casa2`  int(11) NULL AFTER `direccion2`,
+ADD COLUMN `departamento2`  int(11) NULL AFTER `numero_casa2`,
+ADD COLUMN `iddistrito2`  int(11) NULL AFTER `departamento2`,
+ADD COLUMN `idciudad2`  int(11) NULL AFTER `iddistrito2`,
+ADD COLUMN `idcadena`  int(11) NULL AFTER `idciudad2`,
+ADD COLUMN `permite_credito`  int(11) NULL AFTER `idcadena`;
+MODIFY COLUMN `celular`  varchar(45) NULL DEFAULT '' AFTER `telefono`;
+
+CREATE TABLE `sexo` (
+`idsexo`  int(11) NOT NULL ,
+`sexo`  varchar(20) NOT NULL 
+)
+;
+
+ALTER TABLE `clientes_lineas_log`
+ADD COLUMN `permite_credito`  int(2) NOT NULL;
+ADD COLUMN `idcredito`  int(11) NOT NULL;
+
+ALTER TABLE `vendedor`
+ADD COLUMN `registrado_por`  varchar(50) NOT NULL,
+ADD COLUMN `registrado_el`  datetime NOT NULL,
+ADD COLUMN `motivo`  varchar(40) NULL,
+ADD COLUMN `codigo_persona`  int(11) NULL,
+ADD COLUMN `idzona` int(11) NULL,
+ADD COLUMN `codigo_vendedor` int(11) NULL,
+ADD COLUMN `codigo_vendedor`  int(11) NULL,
+ADD COLUMN `codigo_zona`  int(11) NULL;
+
+
+
+CREATE TABLE `tipo_vendedor` (
+`idtipovendedor`  int(11) NOT NULL ,
+`descripcion`  varchar(40) NOT NULL 
+)
+;
+
+CREATE TABLE `zona_vendedor` (
+`idzona`  int(2) NOT NULL AUTO_INCREMENT ,
+`codigo_zona`  int(3) NOT NULL ,
+`descripcion`  varchar(60) NOT NULL ,
+`estado`  int(2) NULL ,
+`registrado_por`  int(3) NULL ,
+`registrado_el`  datetime NULL ,
+`modificado_por`  int(3) NULL ,
+`modificado_el`  datetime NULL ,
+PRIMARY KEY (`idzona`)
+)
+;
+
+CREATE TABLE `pedidos_cab` (
+`idempresa`  varchar(6) NOT NULL ,
+`sucursal`  varchar(3) NOT NULL ,
+`tipodoc`  varchar(3) NOT NULL ,
+`moneda`  decimal(24,4) NULL ,
+`documento`  varchar(8) NULL ,
+`codigo_cliente`  varchar(20) NULL ,
+`nombrecli`  varchar(100) NULL ,
+`ruc`  varchar(25) NULL ,
+`dv`  varchar(25) NULL ,
+`direccion`  varchar(200) NULL ,
+`telefonos`  varchar(50) NULL ,
+`tipoprecio`  double(2,0) NOT NULL ,
+`emision`  date NOT NULL ,
+`hora_emision`  varchar(5) NOT NULL ,
+`total_costo`  decimal(24,7) NOT NULL ,
+`total_bruto`  decimal(24,7) NOT NULL ,
+`total_neto`  decimal(24,7) NOT NULL ,
+`total_final`  decimal(24,7) NOT NULL ,
+`total_impuestos`  decimal(24,7) NOT NULL ,
+`total_descuento`  decimal(24,7) NOT NULL ,
+`impuesto1`  decimal(24,7) NOT NULL ,
+`impuesto2`  decimal(24,7) NOT NULL ,
+`impuesto3`  decimal(24,7) NOT NULL ,
+`baseimpo1`  decimal(24,7) NOT NULL ,
+`baseimpo2`  decimal(24,7) NOT NULL ,
+`baseimpo3`  decimal(24,7) NOT NULL ,
+`exento`  decimal(24,7) NOT NULL ,
+`notas`  longtext NULL ,
+`estado`  varchar(1) NULL ,
+`vendedor`  varchar(8) NULL ,
+`factor_cambio`  decimal(24,7) NULL ,
+`anulado_el`  datetime NULL ,
+`anulado_por`  varchar(30) NULL ,
+`motivo_anul`  longtext NULL ,
+`registrado_por`  varchar(30) NULL ,
+`registrado_el`  datedatetime NULL ,
+`deposito`  varchar(2) NULL ,
+`porbackorder`  decimal(4,0) NULL ,
+`importado`  decimal(2,0) NULL 
+)
+;
+
+CREATE TABLE `pedidos_mov` (
+`idempresa`  varchar(6) NOT NULL ,
+`sucursal`  varchar(3) NULL ,
+`tipodoc`  varchar(3) NOT NULL ,
+`documento`  varchar(8) NOT NULL ,
+`categoria`  varchar(6) NULL ,
+`subcategoria`  varchar(6) NULL ,
+`origen`  int(2) NOT NULL ,
+`codigo`  varchar(25) NOT NULL ,
+`subcodigo`  varchar(25) NULL ,
+`barcode`  varchar(25) NULL ,
+`descripcion`  varchar(150) NULL ,
+`unidad`  varchar(25) NULL ,
+`cantidad`  decimal(20,7) NOT NULL ,
+`costounit`  decimal(20,7) NOT NULL ,
+`preciounit`  decimal(20,7) NOT NULL ,
+`dcto_unit`  decimal(20,7) NOT NULL ,
+`dcto_prc`  decimal(20,7) NOT NULL ,
+`idprecio`  int(2) NULL ,
+`id_descuento`  varchar(6) NULL ,
+`precio_final`  decimal(20,7) NOT NULL ,
+`prc_recargo`  decimal(20,7) NULL ,
+`recargo_unt`  decimal(20,7) NULL ,
+`precio_original`  decimal(20,7) NULL ,
+`monto_neto`  decimal(20,7) NOT NULL ,
+`monto_total`  decimal(20,7) NOT NULL ,
+`deposito`  varchar(3) NULL ,
+`cliente`  varchar(20) NULL ,
+`emision`  date NULL ,
+`baseimpo1`  decimal(20,7) NULL ,
+`baseimpo2`  decimal(20,7) NULL ,
+`baseimpo3`  decimal(20,7) NULL ,
+`impuesto1`  decimal(20,7) NULL ,
+`impuesto2`  decimal(20,7) NULL ,
+`impuesto3`  decimal(20,7) NULL ,
+`prc_impuesto`  decimal(20,7) NULL ,
+`idvendedor`  varchar(8) NULL ,
+`registrado_por`  varchar(30) NULL ,
+`registrado_el`  datetime NULL ,
+`anulado_por`  varchar(30) NULL ,
+`anulado_el`  datetime NULL ,
+`notas`  longtext NULL ,
+`usa_existencia`  int(2) NULL ,
+`lote`  varchar(30) NULL 
+)
+;

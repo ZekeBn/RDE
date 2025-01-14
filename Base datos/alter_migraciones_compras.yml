@@ -1,0 +1,196 @@
+GEST DEPOSITOS 
+    ALTER TABLE `gest_depositos` ADD `autosel_compras` CHAR(1) NOT NULL DEFAULT 'N' AFTER `autosel`;
+
+FACTURAS_PROVEEDORES_COMPRAS
+    ALTER TABLE `facturas_proveedores_compras` CHANGE `lote` `lote` VARCHAR(60) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL; 
+
+COMPRA
+    ALTER TABLE `compras` ADD `descripcion` VARCHAR(300) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL ;
+	ALTER TABLE `compras` ADD `idcot` INT(11) NULL DEFAULT '0' , ADD `idtipo_origen` INT(11) NULL DEFAULT '0' ;
+	ALTER TABLE `compras` ADD  `descuento` DECIMAL(32,6) NOT NULL DEFAULT '0.000' COMMENT 'descuento sobre el monto total';
+	ALTER TABLE `compras` ADD `idcompra_ref` INT(11) NULL AFTER `descuento`;
+
+COMPRAS DETALLES
+	ALTER TABLE `compras_detalles` ADD `gastos` DECIMAL(32.4) NULL AFTER `idmedida`; 
+
+COSTO PRODUCTO
+    ALTER TABLE `costo_productos` ADD `costo_cif` DECIMAL(34.6) NOT NULL AFTER `ficticio`, ADD `costo_promedio` DECIMAL(34.6) NOT NULL AFTER `costo_cif`; 
+    ALTER TABLE `costo_productos` CHANGE `costo_cif` `costo_cif` DECIMAL(34,0) NULL, CHANGE `costo_promedio` `costo_promedio` DECIMAL(34,0) NULL;
+    ALTER TABLE `costo_productos` ADD `modificado_el` DATETIME NULL AFTER `costo_promedio`; 
+    ALTER TABLE `costo_productos` ADD `cantidad_stock` DECIMAL(34.4) NULL AFTER `modificado_el`; 
+
+GEST DEPOSITO STOCK GRL
+    ALTER TABLE `gest_depositos_stock_gral` ADD `costo_promedio` DECIMAL(34.4) NULL;
+
+
+
+
+TMPCOMPRAS Y PREFERENCIAS
+    ALTER TABLE `tmpcompras` ADD `descripcion` VARCHAR(300) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL ;
+    ALTER TABLE `tmpcompras` ADD `descuento` DECIMAL(20,3) NOT NULL DEFAULT '0.000' COMMENT 'descuento sobre el monto total' ;
+    ALTER TABLE `tmpcompras` ADD `anulado_el` DATETIME NULL DEFAULT NULL ;
+    ALTER TABLE `tmpcompras` ADD `anulado_por` INT(10) NOT NULL DEFAULT '0' ;
+	ALTER TABLE `tmpcompras` ADD `idcot` INT(11) NULL DEFAULT '0' , ADD `idtipo_origen` INT(11) NULL DEFAULT '0' ;
+	ALTER TABLE `tmpcompras` CHANGE `descuento` `descuento` DECIMAL(32,6) NOT NULL DEFAULT '0.000' COMMENT 'descuento sobre el monto total';
+	ALTER TABLE `tmpcompras` ADD `idcompra_ref` INT(11) NULL;
+
+    ALTER TABLE tmpcompradeta ADD COLUMN iddeposito_tmp INT; // si nulo
+    ALTER TABLE `tmpcompradeta` ADD `idmedida` INT(10) NULL COMMENT ' insumo idmedida';
+
+
+
+COTIZACIONES 
+    ALTER TABLE `cotizaciones` ADD `compra` DECIMAL(25,5) NULL AFTER `idmoneda`;  // este ya se corrio
+    ALTER TABLE `cotizaciones` CHANGE `cotizacion` `cotizacion` DECIMAL(24,4) NOT NULL DEFAULT '0';
+    ALTER TABLE `cotizaciones` ADD `registrado_el` DATETIME NULL; 
+    ALTER TABLE `cotizaciones` ADD `registrado_por` INT(11) NOT NULL; 
+
+
+PROVEEDORES EN RELACION CON EL MODULO DE COMPRAS 
+    
+    ALTER TABLE `proveedores` ADD `idpais` INT(10) NOT NULL DEFAULT '0' ;
+    ALTER TABLE `proveedores` ADD `agente_retencion` CHAR(1) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL DEFAULT 'N' COMMENT 'es agente de retencion o no' ;
+    ALTER TABLE `proveedores` ADD `idmoneda` INT(11) NOT NULL DEFAULT '0';
+    ALTER TABLE `proveedores` ADD `idtipo_origen` INT(11) NOT NULL;
+    ALTER TABLE `proveedores` ADD `cuenta_cte_mercaderia` VARCHAR(200)  NULL, ADD `cuenta_cte_deuda` VARCHAR(200)  NULL;
+    ALTER TABLE `proveedores` ADD `registrado_por` INT(11) NULL , ADD `registrado_el` DATETIME NULL, ADD `borrado_por` INT(11) NULL , ADD `borrado_el` DATETIME NULL, ADD `actualizado_por` INT(11) NULL , ADD `actualizado_el` DATETIME NULL;
+    ALTER TABLE `proveedores` ADD `ac_archivo` VARCHAR(250) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL ;
+    ALTER TABLE `proveedores` ADD `persona` INT(2) NOT NULL COMMENT '1=Física 2=Jurídica', ADD `ac_desde` DATETIME NULL COMMENT 'acuerdo comercial desde', ADD `ac_hasta` DATETIME NULL COMMENT 'acuerdo comercial hasta';
+	ALTER TABLE `proveedores` ADD `dias_entrega` INT(4) NOT NULL AFTER `ac_hasta`; 
+
+    
+
+
+
+
+INSUMOS LISTA
+    ALTER TABLE `insumos_lista` ADD `bulto` INT(11) NULL COMMENT 'cuantas unidades por caja' AFTER `idinsumoimp`, ADD `pallet` INT(11) NULL COMMENT 'cuantos bultos/cajas por pallets' AFTER `bulto`;
+    ALTER TABLE `insumos_lista` ADD `idmedida2` INT UNSIGNED NULL DEFAULT NULL , ADD INDEX (`idmedida2`) ;
+    ALTER TABLE `insumos_lista` ADD `idmedida3` INT UNSIGNED NULL DEFAULT NULL , ADD INDEX (`idmedida3`) ;
+    ALTER TABLE `insumos_lista` ADD `cant_medida2` DECIMAL(34,4) NULL DEFAULT NULL ;
+    ALTER TABLE `insumos_lista` ADD `cant_medida3` DECIMAL(34,4) NULL DEFAULT NULL ;
+
+    ALTER TABLE `insumos_lista` ADD `cant_caja_edi` DECIMAL(34,4) NULL, 
+    ADD `largo` DECIMAL(34,4) NULL AFTER `cant_caja_edi`, 
+    ADD `alto` DECIMAL(34,4) NULL AFTER `largo`, 
+    ADD `ancho` DECIMAL(34,4) NULL AFTER `alto`, 
+    ADD `peso` DECIMAL(34,4) NULL AFTER `ancho`, 
+    ADD `rs` VARCHAR(100) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL AFTER `peso`, 
+    ADD `rspa` VARCHAR(100) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL AFTER `rs`, 
+    ADD `modifica_precio` CHAR(1) NULL DEFAULT 'S' AFTER `rspa`, 
+    ADD `maneja_lote` CHAR(1) NULL DEFAULT 'N' AFTER `modifica_precio`, 
+    ADD `regimen_turismo` CHAR(1) NULL DEFAULT 'N' AFTER `maneja_lote`, 
+    ADD `maneja_cod_alt` CHAR(1) NULL DEFAULT 'N' AFTER `regimen_turismo`, 
+    ADD `idcod_alt` INT(11) NULL AFTER `maneja_cod_alt`;
+    ALTER TABLE `insumos_lista` ADD `cod_fob` INT(11) NULL;
+    ALTER TABLE `insumos_lista` ADD `hab_desc` CHAR(1) NULL DEFAULT 'N' AFTER `cod_fob`;
+	ALTER TABLE `insumos_lista` ADD `idsubcate_sec` INT(11) NULL DEFAULT '0' COMMENT 'sub categoría secundaria';
+    ALTER TABLE `insumos_lista` ADD `idpais` INT(11) NULL; 
+    ALTER TABLE `insumos_lista` ADD `dias_utiles` DECIMAL(10,4) NULL; 
+    ALTER TABLE `insumos_lista` ADD `dias_stock` DECIMAL(10,4) NULL;
+    ALTER TABLE `insumos_lista` ADD `bar_code` VARCHAR(20)  NULL; 
+
+
+
+
+
+CATEGORIAS
+	ALTER TABLE `categorias` ADD `margen_seguridad` DECIMAL(6,3) NULL AFTER `ordenfc`;
+
+
+
+SUB CATEGORIA 
+    ALTER TABLE `sub_categorias` ADD `margen_seguridad` DECIMAL(6,3) NULL AFTER `recarga_porc`;
+
+
+
+MEDIDAS OJO creo que ya existe estos insert me paso el sr Omar
+    INSERT INTO `medidas` (`id_medida`, `nombre`, `nombre_singular`, `estado`) VALUES ('22', 'PALLET', 'PALLET', '1');
+    UPDATE `medidas` SET `nombre` = 'CAJAS', `nombre_singular` = 'CAJA' WHERE `medidas`.`id_medida` = 21;
+	INSERT INTO `medidas` (`id_medida`, `nombre`, `nombre_singular`, `estado`) VALUES ('23', 'CAJAS EDI', 'CAJA EDI', '1');
+
+
+
+COMPRAS ORDENES
+    ALTER TABLE `compras_ordenes` ADD `idtipo_origen` INT(5) NOT NULL ;
+    ALTER TABLE `compras_ordenes` ADD `costo_ref` INT(11) NULL ;
+    ALTER TABLE `compras_ordenes` ADD `cot_ref` DECIMAL(11,2) NULL DEFAULT NULL;
+	ALTER TABLE `compras_ordenes` ADD `carga_completa` CHAR(1) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT 'N' AFTER `idtipo_origen`;
+	ALTER TABLE `compras_ordenes` CHANGE `costo_ref` `costo_ref` DECIMAL(34,4) NULL DEFAULT NULL;
+	ALTER TABLE `compras_ordenes` CHANGE `cot_ref` `idcot` INT(11) NULL DEFAULT NULL;
+	ALTER TABLE `compras_ordenes` ADD `descuento` DECIMAL(32,6) NULL AFTER `carga_completa`;
+    ALTER TABLE `compras_ordenes` ADD `ocnum_ref` INT(11) NULL AFTER `descuento`;
+	ALTER TABLE `compras_ordenes` ADD `estado_orden` INT(1) NOT NULL DEFAULT '2' COMMENT '1: Activo 2:Finalizado' AFTER `ocnum_ref`;
+
+
+
+COMPRAS ORDENES DETALLES 
+    ALTER TABLE `compras_ordenes_detalles` ADD `precio_compra_total` DECIMAL(34,4) NULL , ADD `idmedida` INT(10) NULL COMMENT ' insumo idmedida' ;
+	ALTER TABLE `compras_ordenes_detalles` ADD `cant_transito` DECIMAL(10,2) NULL DEFAULT '0.00' AFTER `idmedida`;
+	ALTER TABLE `compras_detalles` ADD `idmedida` INT(10) NULL COMMENT ' insumo idmedida';
+    ALTER TABLE `compras_ordenes_detalles` ADD `descuento` DECIMAL(36,6) NULL ;
+	ALTER TABLE `compras_ordenes_detalles` CHANGE `precio_compra` `precio_compra` DECIMAL(15,6) NOT NULL DEFAULT '0.00';
+
+
+
+
+PAISES
+    ALTER TABLE `paises` ADD `idmoneda` INT(11) NULL;
+    ALTER TABLE `paises` ADD `borrado_por` INT(11) NULL DEFAULT NULL;
+    ALTER TABLE `paises` ADD `borrado_el` DATETIME NULL DEFAULT NULL;
+
+CIUDADES
+    ALTER TABLE `ciudades` ADD `registrado_por` INT(11) NULL , ADD `registrado_el` DATETIME NULL, ADD `borrado_por` INT(11) NULL , ADD `borrado_el` DATETIME NULL;
+    ALTER TABLE `ciudades` CHANGE `idpais` `idpais` INT(11) NULL;
+
+DEPARTAMENTO
+    ALTER TABLE `departamentos` ADD `idpais` INT(11) NOT NULL ;
+    ALTER TABLE `departamentos` ADD `registrado_por` INT(11) NULL, ADD `registrado_el` DATETIME NULL, ADD `borrado_por` INT(11) NULL, ADD `borrado_el` DATETIME NULL;
+
+DISTRITO
+   ALTER TABLE `distrito` ADD `registrado_por` INT(11) NULL , ADD `registrado_el` DATETIME NULL, ADD `borrado_por` INT(11) NULL , ADD `borrado_el` DATETIME NULL;
+ 
+   
+
+TIPO Moneda
+    ALTER TABLE `tipo_moneda` ADD `nacional` CHAR(1) NOT NULL DEFAULT 'N';
+	ALTER TABLE `tipo_moneda` ADD `anulado_el` DATETIME NULL AFTER `anulado_por`, ADD `anulado_por` INT(11) NULL AFTER `anulado_el`;
+    
+
+
+
+TMP VENTA
+    ALTER TABLE `tmp_ventares` ADD `lote` VARCHAR(80) NULL DEFAULT NULL AFTER `idmotivoborra`, ADD `vencimiento` DATETIME NULL DEFAULT NULL AFTER `lote`;
+    ALTER TABLE `tmp_ventares` ADD `idmedida` INT(11) NULL DEFAULT NULL AFTER `vencimiento`; 
+
+TMP VENTA CAB
+    ALTER TABLE `tmp_ventares_cab` ADD `idcot` INT(11) NOT NULL DEFAULT '0' AFTER `idterminal`; 
+
+
+CONTEO 
+	ALTER TABLE `conteo` ADD `conteo_deposito` INT(1) NULL DEFAULT '6' COMMENT '1:Conteo Deposito 6:Conteo Normal';
+    ALTER TABLE `conteo` CHANGE `conteo_deposito` `tipo_conteo` INT(1) NULL DEFAULT '6' COMMENT '1:Conteo Deposito 2:conteo por articulo 6:Conteo Normal'; 
+    ALTER TABLE `conteo` ADD `idinsumo` INT(11) NULL AFTER `tipo_conteo`;
+    ALTER TABLE `conteo` ADD `conteo_consolidado` INT(1) NULL DEFAULT '0' COMMENT '1:si 6:no' AFTER `idinsumo`;
+    ALTER TABLE `conteo` ADD `idconteo_ref` INT(11) NULL DEFAULT '0' AFTER `conteo_consolidado`;
+
+CONTEO DETALLE 
+    ALTER TABLE 
+    `conteo_detalles` 
+    ADD `idalm` INT(11) NULL, 
+    ADD `fila` INT(11) NULL, 
+    ADD `columna` INT(11) NULL;
+    ALTER TABLE `conteo_detalles` CHANGE `vto` `vencimiento` DATE NULL DEFAULT NULL;
+    ALTER TABLE `conteo_detalles` ADD `idpasillo` INT(11) NULL AFTER `idmedida_ref`;
+    ALTER TABLE `conteo_detalles` DROP INDEX `idconteo`, ADD INDEX `idconteo` (`idconteo`, `idinsumo`) USING BTREE;
+
+
+
+STOCK TIPOMOV
+    INSERT INTO `stock_tipomov` (`idtipomov`, `tipomov`) VALUES ('20', 'Devolucion');
+
+
+MODULOS DETALLES 
+    INSERT INTO `modulo_detalle` (`idsubmod`, `idmodulo`, `estado`, `descripcion`, `nombresub`, `pagina`, `mostrar`, `mostrar_nav`, `require_suc`, `target_blank`) VALUES ('613', '1', '1', 'Ordenes de retiro', 'Ordenes Retiro', '/retiros_ordenes/retiros_ordenes.php', '1', 'S', 'N', 'N'), ('614', '42', '1', 'Polizas', 'Polizas', '/poliza/poliza.php', '1', 'S', 'N', 'N');
+    INSERT INTO `modulo_detalle` (`idsubmod`, `idmodulo`, `estado`, `descripcion`, `nombresub`, `pagina`, `mostrar`, `mostrar_nav`, `require_suc`, `target_blank`) VALUES ('615', '42', '1', 'Vehiculos', 'Vehiculos', '/vehiculo/vehiculo.php', '1', 'S', 'N', 'N'), ('616', '42', '1', 'Vehiculo Propietario', 'Propietarios', '/vehiculo_propietario/vehiculo_propietario.php', '1', 'S', 'N', 'N');
+    INSERT INTO `modulo_detalle` (`idsubmod`, `idmodulo`, `estado`, `descripcion`, `nombresub`, `pagina`, `mostrar`, `mostrar_nav`, `require_suc`, `target_blank`) VALUES ('617', '42', '1', 'Cod Origen', 'Cod Origen', '/codigo_origen/codigo_origen.php ', '1', 'S', 'N', 'N'), ('618', '1', '1', 'Excepciones Prod', 'Excepciones Prod', '/excepciones_producto/excepciones_producto.php ', '1', 'S', 'N', 'N');

@@ -1,0 +1,15 @@
+DELETE FROM `insumos_lista` WHERE idinsumo not in (1,2,3,4,5,6,7,8,9);
+DELETE FROM `ingredientes` WHERE 1;
+DELETE FROM `productos` WHERE 1;
+DELETE FROM `recetas_detalles` WHERE 1;
+DELETE FROM `productos_vencimiento` WHERE 1;
+DELETE FROM `costo_productos` WHERE 1;
+DELETE FROM `producto_impresora` WHERE 1;
+DELETE FROM `recetas` WHERE 1;
+  DELETE FROM productos_sucursales WHERE 1;
+
+
+  limpiar marca 
+  DELETE FROM `marca` WHERE 1
+
+  DELETE FROM `proveedores` WHERE 1

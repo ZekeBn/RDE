@@ -1,0 +1,49 @@
+/*! jQuery formHelp - v0.1.6 - 2014-05-17
+* http://www.invetek.nl
+* https://github.com/invetek/jquery-formhelp
+* Copyright (c) 2014 Loran Kloeze | Invetek
+* Licensed MIT 
+*/
+
+.form-helpbox {
+    position: absolute;
+    margin: 20px 0 0 6px;
+    padding:  0 0 0 10px;
+    background-image: url('../img/arrow_left.png');
+    background-position: left 3px;
+    background-repeat: no-repeat;
+    display: none;
+}
+
+.form-helpbox .content {
+    padding: 5px 10px 10px 5px;
+    background-color: #0099cc;
+    width: 125px;
+    color: #EEE;
+    border: solid 1px #222;    
+    border-radius: 3px;
+    box-shadow: 1px 1px 3px #222;
+    opacity: 0.95;
+}
+
+.form-helpbox .tools {
+    text-align: right;
+    display: none;
+}
+
+.form-helpbox .pushpin {
+    width: 11px;
+    height: 11px;
+    background-image: url('../img/pushpin.png');
+    background-repeat: no-repeat;
+
+}
+
+.form-helpbox .pushpin:hover {
+    opacity: 0.8;
+    cursor: pointer;
+}
+
+.form-helpbox .pushpin.pinned {
+    background-position: -11px 0;
+}

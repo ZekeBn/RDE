@@ -1,0 +1,89 @@
+al registrar una venta se dan varios pasos en el script registrar_venta pero las tres lineas
+descontar_stock_general($insu,$cant,$iddeposito_det);
+$costo_insumo_utilizado=descuenta_stock_vent($insu,$cant,$iddeposito_det);
+movimientos_stock($insu,$cant,$iddeposito_det,2,'-',$idventa,$ahora);
+#funciones
+#movimiento de stock
+hace un insert en "stock_movimientos" pero para dejar constancia el movimiento ya se hizo por eso el truco con
+el campo suma o resta ya que como el producto ya se resto la cantidad que tenia disponible en stock antes es 
+sumando lo que se resto anteriormente es decir con suma resta la cantidad y con resta suma la contidad
+#descuenta_stock_vent
+obtine el ultimo costo del insumo
+pregunta en preferencias si se fuerza el ultimo costo forzar_ultcosto
+caso contrario que no este activa la preferencias revisa 
+costo_productos para ver si hay tandas y descuenta en los depositos pero tambien actualiza el costo
+para el costo acumulado en fefo descuenta stock venta tiene que descontar siempre
+pero tambien inserta ficticio
+#descuenta_stock_prod
+obtine el ultimo costo del insumo
+pregunta en preferencias si se fuerza el ultimo costo forzar_ultcosto 
+lo mismo que  descuenta_stock_vent pero ahora para produccion
+pero tambien inserta ficticio
+#traslada_stock
+obtine el ultimo costo del insumo
+verifica si el deposito de donde sale la mercaderia se puede trasladar o no y lo hace insertando en costos_productos
+pero tambien inserta ficticio
+
+
+#descontar_stock_general
+solo descuenta de gest_depositos_stock_gral
+
+
+#aumentar_stock_general
+solo aumenta de gest_depositos_stock_gral
+
+#descuenta_stock_inv
+busca el nombre del insumo
+encuetnra el uultimo costo 
+ verifica las tandas 
+ mismo mas de costos_productos
+ y gest_depositos_stock
+
+#aumentar_stock
+directo aumenta gest_depositos_stock y costos_productos
+
+#descontar_stock
+directo descuenta gest_depositos_stock y costos_productos
+
+
+
+#compra de productos 
+        - se inserta en gest_depositos_stock_gral
+        - se inserta en el detalle del stock pero
+                [*] guardar en la tabla de stock movimiento los ingresos a stock
+                [*] Si el articulo maneja lote  verifica que no exista en el detalle del deposito algun lote con
+                el mismo vencimiento y numero de lote, si no existe crea y si existe hace un update y guarda la fecha de
+                edicion
+                [*]si no maneja lote crea siempre es decir si lote y  vencimiento son nulos
+#venta  los productos pueden 
+- Bloqueo de productos: Estar bloquedaos a la venta es un where not in en un array de id bloqueados
+- Vender sin Stock: , de por si te trae todos los productos y con una verificacion externa le das un
+display none si es que no permite vender sin stock
+        [*]Si no tiene permitido: es decir que no podra mover stock y no se muestra
+        [*]Si tiene permitido vender sin stock: se muestra el producto y el boton no se desabilita al quedar sin stock
+        
+depediendo del cliente en la venta:
+        - El cliente tendra unos dias en los cuales no puede vencer el producto
+        el cliente al hacer la compra tine que recibir mercaderia con vencimientos superiores a una 
+        fecha estipulada en su descripcion. Esta clausula se aplicara solo si el articulo tiene maneja lote es decir si no maneja lote no debe
+        tambien editar el detalle del deposito
+        - Si vende sin stock y no maneja lote(FEFO) entonces se descuenta del deposito general y al producir o 
+        agregar mas stock se agrega normal al stock general
+        - Si vende sin stock y maneja lote()
+        - Al generar la venta en  ventas_detalle  tiene que tener el lote y el vencimiento y la cantidad 
+         
+#para descontar stock 
+- primero se verifica que se descontara una cantidad mayor a cero
+
+- luego se verifica que en costos productso existan productos 
+con disponible mayor a cero contando las columnas que responde
+
+
+
+
+
+
+#//////////////////////
+al crear venta obtener todos los lotes y recorrerlos,
+ verificar si el primero puede cumplir la cuota si no se pasa al siguiente lote hasta que se acabe la mercaderia ya que en teoria no le dejara vender sin lote y sin cupo 
+ similar al traslado o al descuento de funciones gest_depositos_stock

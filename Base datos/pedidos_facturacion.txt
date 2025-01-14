@@ -1,0 +1,33 @@
+actualmente necesita dos permisos 
+DE TESORERIA Y DE COMERCIAL
+TESORERIA TIENE QUE VERIFICAR 
+- Que no tenga deudas pendientes (el cliente)
+- Que no sobrepase el credito actual del cliente
+EN COMERCIAL 
+- Que no tenga bonificacion (que no se le regale algun producto)
+- Que no tenga descuento (sobre la factura total y actualmente no se aplicara por un momento pero puede tener)
+- Que no tenga ningun precio modificado de un articulo
+
+
+un vendedor puede editar precios de articulo preguntar 
+ 
+
+ se carga el codigo del usuario para validar la venta 
+ se carga el codigo del cliente todas las
+
+ valida automaticamente si  no tiene modificaciones de precio algun descuento automatico o manual  y si 
+ no tiene deudas y credito sobrepasado
+ bonificacion es un obsequio
+
+ si tiene deuda por mas que sea conado se hace una autorizacion manual es decir si compro al contado y me llega en 5 dias  y al otro dia hago otra compra tengo la factura pendiente de ayer 
+
+ factura vencidad es una deuda
+ se puede anularr el pedido pero se debe decir el por que
+  se anulo ai no paso todas las verificaciones o no factura_obliga
+
+
+
+  si facturo se puede anular pero se entrea en otro abm 
+  para anular con el numero completo de factura 
+cada cliente tiene un limite para compra que se carhga manmual
+cobranza es el que le decia tesoreria y comercio es carlitos el vendedor 

@@ -1,0 +1,33 @@
+modulo='ORD' idempresa='1' idusu=27
+====================================================================================================
+Select idmodulo,descripcion,modulo as nombre from modulo 
+where
+idmodulo
+		 in 
+		 (
+		 select distinct idmodulo 
+		 from modulo_empresa 
+		 where 
+		 idempresa='1' 
+		 and estado=1 
+		 and idmodulo in (select distinct idmodulo from modulo_usuario where idusu=27 and modulo_usuario.submodulo <> 2)
+		 ) 
+order by nombre asc
+
+====================================================================================================
+
+Select nombresub,descripcion,pagina,idsubmod,target_blank,
+registrado_el 
+from modulo_detalle 
+inner join modulo_usuario on modulo_usuario.submodulo=modulo_detalle.idsubmod
+where 
+modulo_usuario.idmodulo=0
+and modulo_usuario.submodulo <> 2
+and modulo_usuario.estado=1 
+and  modulo_detalle.mostrar = 1 
+and modulo_usuario.idusu=27
+and modulo_detalle.mostrar_nav = 'S'
+and upper(modulo_detalle.nombresub) like upper(%''ORD''%)
+order by nombresub asc
+
+====================================================================================================

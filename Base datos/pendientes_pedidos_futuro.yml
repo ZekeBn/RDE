@@ -1,0 +1,281 @@
+Pendiente para futuro 
+	permitir mas pedidos del mismo cliente 
+	comentario si es que no compro 
+	color al que no compro en el detalle 
+	detalle de compra
+	el contador que sea solo de los clientes que no sume sin son iguales  y atencion que el cliente puede ser de otro dia distinto
+
+
+
+
+MOBILE RDE 
+bonificacion en pedido movil rde
+
+Cambios
+medida dos porner unidades por caja lo mismo para medida 3 #listo
+agregar en insumos add el modal para agregar provedor #listo
+insumos add  sub categoria verificar problema javas #listo
+convertir produto hacer un modal para marca  #listo
+reporte  ppp no cambiar el precio de venta de forma automtica  pero si el costo del insumo #listo
+orden de compra redireccionar a insumo para agregar #listo
+al poner concepto generar producto automatico y te lleve al otro form #listo
+
+
+
+
+set venta en dolar #listo
+agregar compra y venta en cotizaciones  al comprar dolar usamos cambios taza venta #listo
+al vender dolar y nosotros convertimos de dolar a guarani en un banco ellos utiizan ompra en taza #listo
+
+
+orden de compra en reporte a4 ver cantidad de dias  fecha pago estimado y pdf veriificar ajuste  en boton #listo
+
+
+////////////////////////////////////////
+
+
+-guarani sin decimales #listo
+
+
+-a4 codigo del proveedor #listo
+
+-cotizacion a dos decimales en a4 y en la pagina de otizacion #listo
+
+-orden de compra refrescar al cargar la cotizacion  #listo 8am a 10:40pm
+
+- productos solo del proveedor en orden de compra #listo
+
+- orden de compra evento de unidades para llegar a precio en ordenes compra #listo
+- precio en form compras ordenes cambiar decimal de . por , #listo compras ordenes pendiente compras
+- ordenes compra cambiar orden asociada a proforma  y agregar #listo
+
+-proforma dias de credito agregar como en la orden padre #listo falta modal para editar o redirigir a form
+
+-	agregar puerto en embarque como modal #listo
+
+- cuando las unidades son correspondientes con las cajas o pallets que salgan en form de unidades cajas pallets #listo
+
+
+-embarque detalle poner tablas debajo del otro  no en paralelo  #listo
+
+
+-por defecto en compras poner si es importacion dolar  #listo
+
+
+-cambar lupa en cabecera #listo
+
+-en compras en la tabla agregar cajas y unidades   #listo
+
+-en la tabla poner descriptivo en guaranies  de unidades  #listo
+
+- importacion no calcula iva en compras #listo
+
+
+obs_facturas el comentario de compras no descripcion  #listo
+
+/////////////////////////////////NUEVO 
+caja edi de formularios ocultar #listo
+ocultar tiketera y vincular en orde n de compra #listo
+ proforma si hay una pendiente que mande a la pendiente y no deje crear una nueva orden de compra #listo
+ mejorar lo escrito en orden de comprra detalle y dos digitos cambio para el detalle visible formato moneda  #listo
+datos del embarque en la proforma si es que tiene  #listo
+puerto transporte vias de embarque fecha de embarque fecha de llegada y la descripcion #listo
+local en dolares compra #listo
+Agregando cajas pallets a compras ordenes en la grilla #listo
+cambiar el nombre de a4 a pdf  poner en dolares 2 decimales en el pdf de orden de compra  #listo
+ en detalle de creacion dos decimales en tdos #listo
+ en orden de compra realizar el cambio de unidades cajas y pallets #listo
+ 
+uno abajo del otro en detalles embarque #listo
+
+
+compras recalcular vencimiento de factura con la fecha de la compra #listo
+compras ajustar responsive en cabecera #listo
+
+predeterminar deposito en admin deposito para todas las compras  #listo
+compras poner en unidades por defecto al edtar verificar  #listo
+los primeros  cuatro desde habilita compra en si por defecto  hasta modifica precio #listo
+fecha de la factura verificar fecha de vencimiento que no sea menor en compras #listo
+compras formulario edit dos decimales visual #listo
+compras validador en numero de factra para los digitos no mas de 8 #listo
+
+
+en insumos agregar el iva variable que permita cargar el iva al realizar la compra en detalle #PENDIENTE IMPORTANTE
+
+
+
+- concepto abm en insumo  #listo
+- cancelar orden de compra ver por mas que tenga asociado compras anular #listo
+- despacho proveedor #listo
+- ver moneda guarani en descuento al autocompletar #listo
+- tipo de cambio e despacho es despacho  cambiar nombre #listo
+- tipo de comprobante abm preguntar y para importacion timbrado no salga #Creado sin preguntar 
+- embarque camion ver por que no da el acento #listo
+
+- timbrado valdiar  8 digitos 
+- ver por que la orden de compra tiene ese vvalor para orden de compra  id 3
+- costo cambiado ver que pasa con decimales  
+- despacho agregar decimal base imponible - valor proforma  - gastos asociados   
+- infomre de compras importaciones
+-	mudar registro de compra a importacion
+
+
+
+
+
+
+
+
+
+
+
+///////////////////////////////////////////
+- fecha en compras siempre el del dia  y si no el ultimo  #listo
+- en compras fecha de vencimiento dejar cambiar y no alterar la fecha de comrpa  #listo
+- en gastos al finalizr la compra redirigir al detalle de los gastos  #listo
+- modulo de compra en precio  al editar y al precargar con todos los decimales  cambiar el tofixed #listo
+- compras ordenes grilla de orden pade agregar medidas cajas y pallets #listo
+- gest admin deposito ver editar form no anda #listo
+
+
+
+- cambiar titulos #listo
+	[ * ] orden de compra nueva #listo
+	[ * ] orden de compra pendiente #listo
+	[ * ] orden de compra finalizado #listo
+
+- pdf proforma cambio 2 decimales si o si #listo
+- en proforma pdf comentario ir en un recuedro aprate #listo
+
+
+- en compras en la grilla principal para decidir si agregar quitar 
+el boton pequeño de despacho y cambiar la lupa agregar gastos relacionados #listo
+
+- al iniciar la proforma un titulo cargar mas productos  #listo
+  * productos cargados en el carrito titulo   #listo
+  * compras ordenes detalle quitar grilla de productos asociados   #listo
+  * agregar titulo para forzar cierre de orden de compra y agregar el boton al costado #listo
+
+- compras ordenes actualizar la fecha estimada al cambiar la fecha del pedido #listo
+
+- factura numero para despachante opcional 
+- para el proveedor despacho ignorar la cotizacion usar un input para cargar  y ahi cargar el articulo despacho 
+
+
+
+
+- en compras el ultimo costo si bajo poner verde y en rojo si sube y ver la cotizacion en dolar ojo o en otra moneda  # puede ser ahora
+
+
+- agregar modal para agregar insumo en modulo de compra 
+- compras forulario poner precio con iva incluido el label
+- si no tiene medidas alternativas dejar el label  en unidades por defecto 
+- en impuesto  en despacho poner subtotal = total
+
+- al cargar la cotizaion despacho cambiar la cotizacion de la compra a esa y mostrarlo
+
+
+
+
+
+
+
+variable de sesion con id_atc de la mesa
+
+ALTER TABLE `mesas_preferencias` ADD `usa_pin` CHAR(1) NOT NULL DEFAULT 'S' AFTER `mostrar_categorias`;
+ALTER TABLE `mesas_atc` ADD `pin` VARCHAR(20) NULL  COMMENT 'se usara para el pin generado para la web del lado del cliente, es decir el pin que el cliente debe ingresar'; 
+ALTER TABLE `mesas_preferencias` ADD `cliente_gen_pin` CHAR(1) NOT NULL DEFAULT 'S' AFTER `usa_pin`; 
+
+
+
+
+
+
+en gastos quitar boton deposito #listo
+gastos_asociados al volver a la compra #listo
+
+en gasto asociados ocultar orden y embarque #listo
+
+
+
+en tmp compras add  modal de cot agregar y buscar definr mejor #listo
+
+mirar ultimo costo en compras 
+en vez de editar que sea borrar gasto asociado en compras al estar por mover stock
+
+iva en despacho por fotos mirar #listo
+y compra importacion despacho ver porque es importacion y agregarle iva por la excepcion  #listo
+
+proveedores productos categoria  familia sub famila
+
+
+categoria
+idcategoria nombre de categoria, margen de seguridad
+familia
+idfamilia idcategoria nombre de familia, margen de seguridad
+sub-familia
+idsub_familia idfamilia nombre de sub-familia, margen de seguridad
+
+proveedores
+ruc
+nombre
+fantasia
+direccion
+comentarios
+web
+telefono
+email
+contacto
+area Referente al Area/Cargo del contacto destinado a este proveedor.
+email_conta
+diasvence Dias de Credito
+dias_entrega
+persona fisica juridica
+Pais
+moneda
+agente_retencion
+tipo_servicio DESPACHANTE, POLIZA, PROVEEDOR DE MERCADERIAS, PROVEEDOR DE SERVICIO PERSONAL
+origen local importacion
+tipo_compra contado credito
+cuenta_cte_mercaderia Cuenta Contable Mercaderia
+cuenta_cte_deuda Cuenta Contable Deuda Proveedor
+
+
+productos
+nombre del articulo
+concepto Mercaderias, Despacho
+medida (unidades, kilos,litros,mililitros)
+cantidad de unidades por cajas
+cantidad de cajas por pallets
+categoria
+familia
+sub familia
+pais
+dias utiles
+dias stock
+codigo de barras
+costo
+tipo_iva
+idproveedor
+cant_caja_edi
+largo
+ancho
+alto
+peso
+cod_origen
+rs
+rspa
+modifica_precio
+maneja_lote
+regimen_turismo
+es un codigo alternativo
+nombre producto del cual es un codigo alternativo
+
+
+
+
+
+
+
+
+hasta ordenes de retiro para innovasys 15/12/2023

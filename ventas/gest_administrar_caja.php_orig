@@ -1,0 +1,743 @@
+<?php
+require_once("includes/conexion.php");
+require_once("includes/funciones.php");
+// Modulo y submodulo respectivamente
+$modulo="1";
+$submodulo="22";
+require_once("includes/rsusuario.php"); 
+$operacion=intval($_POST['cual']);
+
+// centrar nombre de empresa
+$nombreempresa_centrado=corta_nombreempresa($nombreempresa);
+
+/*--------------------------------------------ESTADOS DE CAJA---------------------------------------*/
+// si se envia fecha
+if (isset($_POST['fecha']) && ($_POST['fecha']!='')){
+		$fecha=antisqlinyeccion($_POST['fecha'],'date');
+		$fechahoy=str_replace("'","",$fecha);
+		$buscar="Select * from caja_super where cajero=$idusu and estado_caja=1 and fecha=$fecha";
+		$rscaja=$conexion->Execute($buscar) or die(errorpg($conexion,$buscar));
+	
+		$idcaja=intval($rscaja->fields['idcaja']);
+		$estadocaja=intval($rscaja->fields['estado_caja']);
+		
+// si no se envia fecha, se busca la ultima caja abierta
+} else {	
+	//vemos si hay una caja abierta
+	//Buscamos datos de la ultima caja abierta
+	$buscar="Select * from caja_super where cajero=$idusu and estado_caja=1 order by fecha desc limit 1";
+	$rscaja=$conexion->Execute($buscar) or die(errorpg($conexion,$buscar));
+	$idcaja=intval($rscaja->fields['idcaja']);
+	$estadocaja=intval($rscaja->fields['estado_caja']);
+	$fechahoy=date("Y-m-d",strtotime($rscaja->fields['fecha']));
+
+}
+// monto de apertura de caja sirve para el cierre
+$montobre=floatval($rscaja->fields['monto_apertura']);
+
+
+if ($idcaja==0){
+	$abrircaja=1;
+	$cerrarcaja=0;
+} else {
+	if ($estadocaja==1){
+		$abrircaja=0;
+		$cerrarcaja=1;
+	}
+	if ($estadocaja==3){
+		//caja ya cerrada
+		$abrircaja=0;
+		$cerrarcaja=0;
+	}
+}
+if ($idcaja==0){
+	//No existe un registro para la caja, por lo cual
+	//Fecha Actual
+	$fechahoy=date("Y-m-d");
+	if (isset($_POST['fecha']) && ($_POST['fecha']!='')){
+		$fecha=antisqlinyeccion($_POST['fecha'],'date');
+		$fechahoy=str_replace("'","",$fecha);
+	}	
+	
+	
+} else {
+	//ya existe una caja,	
+	
+	
+}
+
+
+/*--------------------- INICIO APERTURA DE CAJA -------------------------------------------------*/
+//Vemos si existe POST para apertura
+if(isset($_POST['montoaper']) && intval($_POST['montoaper']) >= 0){
+	
+	$montoabre=intval($_POST['montoaper']);
+	$fechaek=date("Y-m-d",strtotime($_POST['selefe']));
+	
+	//Abrir caja, toda vez que no exista una caja abierta
+	$buscar="Select * from caja_super where estado_caja=1 and cajero=$idusu order by fecha desc limit 1";
+	$rscos=$conexion->Execute($buscar) or die(errorpg($conexion,$buscar));
+	$df=intval($rscos->fields['estado_caja']);
+	
+	// si No hay cajas pendientes de cierre
+	if ($df ==0){
+		
+		
+		
+		$ahora=date("Y-m-d");
+		
+		if ($fechaek < $ahora){
+			
+			
+			$errorfecha=2;
+			
+			
+		} else {
+			
+			$fechasele=antisqlinyeccion($fechahoy,'date');
+			$nf=str_replace("'","",$fechasele);
+			$nueva=date("Y-m-d",strtotime($nf));
+			$nueva2=explode("-",$nueva);
+			$dia=intval($nueva2[2]);
+			$mes=intval($nueva2[1]);
+			$ann=intval($nueva2[0]);
+			
+			
+			
+			
+			//activar esata seccion para entrega por tesoreria
+			$buscar="select * from gest_entrega_valores where date(fechahora)=$fechasele and movimiento_real=1 and estado=1 
+			and cajero=$idusu";
+			//$rsaper=$conexion->Execute($buscar) or die(errorpg($conexion,$buscar));
+			
+			//esta ok para abrir
+			//$buscar="select max(idcaja) as mayor from caja_super where cajero=$idusu";
+			//$rsmayor=$conexion->Execute($buscar) or die(errorpg($conexion,$buscar));
+			//$mayor=intval($rsmayor->fields['mayor'])+1;
+			
+			$ahora=date("Y-m-d H:i:s");
+			$insertar="insert into caja_super
+			(fecha,fecha_apertura,cajero,estado_caja,monto_apertura,monto_cierre,total_cobros_dia,total_pagos_dia,
+			sucursal,pe,dia,mes,ano)
+			values
+			($fechasele,'$ahora',$idusu,1,$montoabre,0,0,0,$idsucursal,$pe,$dia,$mes,$ann)";
+			$conexion->Execute($insertar) or die(errorpg($conexion,$insertar));
+			
+			$buscar="Select * from caja_super where cajero=$idusu order by registrado_el desc limit 1";
+			$rscaj=$conexion->Execute($buscar) or die(errorpg($conexion,$buscar));
+			
+			$idcaja=intval($rscaj->fields['idcaja']);
+			//Terminamos la apertura, ahora se imprime
+			$fechahora=date("d/m/Y H:i:s");
+			//echo $fechahora; 
+			//$fechahora=date("d-m-Y H:i:s",strtotime($rscaj->fields['registrado_el']));
+			$upc=strtoupper($cajero);
+	$tickete="
+----------------------------------------
+$nombreempresa_centrado
+----------------------------------------
+FECHA APERTURA: $fechahora
+CAJERO: $upc - IDC: $idcaja
+MONTO INCIO Gs: $montoabre
+----------------------------------------
+		
+	";
+			
+			$imprimir=1;
+		}
+		
+	// no permite abrir caja por que hay cajas pendientes de cierre	
+	} else {
+		$errorcierre=1;
+	}
+	
+}
+/*--------------------- FIN APERTURA DE CAJA -------------------------------------------------*/
+
+/*--------------------- INICIO CIERRE DE CAJA -------------------------------------------------*/
+if (isset($_POST['cual']) && (intval($_POST['cual'])==3)){
+
+	//cierre de caja
+	//Cierre efectivo de caja
+	//$idcaja=floatval($_POST['ocidcaja']);
+	//$faltante=floatval($_POST['falta']);   
+	//$sobrante=floatval($_POST['sobrante']);
+	$sel=$_POST['selefe'];
+	$sel=str_replace("'","",$sel);
+	
+	$fechahoy2=antisqlinyeccion($sel,'date');
+	
+	//Total de Cobranzas en el dia
+	$buscar="Select  sum(total_cobrado) as tcobra from gest_pagos where cajero=$idusu /*and date(fecha)=$fechahoy2*/ and estado=1 and idcaja=$idcaja";
+	$rscobro=$conexion->Execute($buscar) or die(errorpg($conexion,$buscar));
+	$tcobranza=floatval($rscobro->fields['tcobra']);
+
+	//Total de ventas en el dia
+	$buscar="Select  sum(totalcobrar) as tventa from ventas where registrado_por=$idusu /*and date(fecha)=$fechahoy2*/ and estado=1 and idcaja=$idcaja";
+	$rsventas=$conexion->Execute($buscar) or die(errorpg($conexion,$buscar));
+	$tventa=floatval($rsventas->fields['tventa']);
+	
+	//Cobranza en Efectivo
+	$buscar="Select  sum(efectivo) as efectivogs from gest_pagos where cajero=$idusu /*and date(fecha)=$fechahoy2*/ and estado=1 and idcaja=$idcaja";
+	$rsefe=$conexion->Execute($buscar) or die(errorpg($conexion,$buscar));
+	$tefe=floatval($rsefe->fields['efectivogs']);
+	
+	//Cobranzas  Tarjeta
+	$buscar="Select  sum(montotarjeta) as tarje from gest_pagos where cajero=$idusu /*and date(fecha)=$fechahoy2*/ and estado=1 and idcaja=$idcaja";
+	$rstarje=$conexion->Execute($buscar) or die(errorpg($conexion,$buscar));
+	$tarje=floatval($rstarje->fields['tarje']);
+		
+	//Pagos por caja
+	$buscar="Select sum(montogs) as totalp from caja_pagos where idcaja=$idcaja and cajero=$idusu and estado=1 and idcaja=$idcaja";
+	$rspagca=$conexion->Execute($buscar) or die(errorpg($conexion,$buscar));
+	$tpagos=floatval($rspagca->fields['totalp']);
+				
+				
+	//Retiros(entrega de plata)desde el cajero al supervisor
+	$buscar="Select count(*) as cantidad,sum(monto_retirado) as tretira from caja_retiros
+	where idcaja=$idcaja and cajero=$idusu and estado=1";
+	$rsretiros=$conexion->Execute($buscar) or die(errorpg($conexion,$buscar));
+	$tretiros=intval($rsretiros->fields['cantidad']);
+	$tretirosgs=intval($rsretiros->fields['tretira']);
+				
+	//Reposiciones de Dinero (desde el tesorero al cajero
+	$buscar="Select  sum(monto_recibido) as recibe from caja_reposiciones where idcaja=$idcaja and cajero=$idusu and estado=1";
+	$rsrepo=$conexion->Execute($buscar) or die(errorpg($conexion,$buscar));
+	$trepo=floatval($rsrepo->fields['recibe']);
+	//Disponible actual caja
+	
+	$totalteorico=$tefe+$montobre+$tarje;
+	//echo $totalteorico;
+		
+	//total en monedas extranjeras pero convertidas a gs
+	$buscar="select sum(subtotal) as tmone from caja_moneda_extra where idcaja=$idcaja and cajero=$idusu and estado=1";
+	$extra=$conexion->Execute($buscar) or die(errorpg($conexion,$buscar));
+	$textra=floatval($extra->fields['tmone']);
+		
+
+			
+	//total en monedas arqueadas
+	$buscar="select sum(subtotal) as total from caja_billetes where idcaja=$idcaja and idcajero=$idusu and estado=1";
+	$tarqueo=$conexion->Execute($buscar) or die(errorpg($conexion,$buscar));
+	$tarquegs=intval($tarqueo->fields['total']);
+		
+		// efectivo en moneda extrangera + moneda nacional
+		$neto=$textra+$tarquegs;
+		
+		// todo el efectivo de todas las monedas + tarjetas de credito
+		$subtotal=$neto+$tarje;
+		
+		//Vemos el faltante y sobrante
+		$sobrante=$subtotal-$totalteorico;
+		$faltante=$totalteorico-$subtotal;
+		if ($sobrante < 0){
+			$sobrante=0;
+		}
+		if ($faltante < 0){
+			$faltante=0;
+		}
+		
+	//echo $tretirosgs;
+	//$dispo=(floatval($rscaja->fields['monto_apertura'])+$tefe+$trepo+$textra+$tarquegs+$tarje)-$tretirosgs;
+	$dispo=($subtotal+$trepo)-$tretirosgs;
+	//echo floatval($tefe);
+	//echo $dispo;
+	$ape=$rscaja->fields['monto_apertura'];
+	
+	$dispo=floatval($dispo);
+	$ahora=date("Y-m-d H:i:s");
+	
+	//Registramos 
+	$update="
+		update caja_super set 
+		estado_caja=3,monto_cierre=$dispo,total_cobros_dia=$tcobranza,total_pagos_dia=$tpagos,
+		fecha_cierre='$ahora',faltante=$faltante,sobrante=$sobrante,total_efectivo=$tefe,total_tarjeta=$tarje,
+		total_global_gs=$dispo,total_entrega_gs=$tretirosgs,
+		total_reposiciones_gs=$trepo where idcaja=$idcaja and cajero=$idusu";
+		$conexion->Execute($update) or die(errorpg($conexion,$update));
+		//echo $update;
+		//exit;
+		
+		$now=date("d-m-Y H:i:s")	;
+		//Armamos el tickete de Cierre
+		$buscar="select * from caja_super where estado_caja=3 and cajero=$idusu and idcaja=$idcaja";
+		$rsb=$conexion->Execute($buscar) or die(errorpg($conexion,$buscar));
+		
+		$montoaper=$rsb->fields['monto_apertura'];
+		$fecha_apertura=date("d/m/Y H:i:s",strtotime($rsb->fields['fecha_apertura']));
+		$tefec=$rsb->fields['total_efectivo'];
+		
+		$buscar="Select valor,cantidad,subtotal,registrobill from caja_billetes
+		inner join gest_billetes
+		on gest_billetes.idbillete=caja_billetes.idbillete
+		where caja_billetes.idcajero=$idusu and idcaja=$idcaja and caja_billetes.estado=1
+		order by valor asc";
+		$rsbilletitos=$conexion->Execute($buscar) or die(errorpg($conexion,$buscar));
+		$tbilletes=$rsbilletitos->RecordCount();
+		//echo $buscar;
+		
+		if ($tbilletes > 0){
+			$add1='';
+			while (!$rsbilletitos->EOF){
+				$valor=trim($rsbilletitos->fields['valor']);
+				$cantidad=trim($rsbilletitos->fields['cantidad']);
+				$subtotal=trim($rsbilletitos->fields['subtotal']);
+				
+				$add1=$add1."  $cantidad         ".formatomoneda($valor)."         ".formatomoneda($subtotal)." \n";
+					
+				$rsbilletitos->MoveNext();
+			}
+			
+			
+		}
+		//Monedas extranjeras
+		$buscar="Select descripcion,cantidad,subtotal,sermone from caja_moneda_extra 
+		inner join tipo_moneda on tipo_moneda.idtipo=caja_moneda_extra.moneda 
+		where idcaja=$idcaja and cajero=$idusu and caja_moneda_extra.estado=1";
+		$rsmmone=$conexion->Execute($buscar) or die(errorpg($conexion,$buscar));
+		$tmone=$rsmmone->RecordCount();
+		
+		$teoricogs=$montoaper+$tefec+$tarje;
+		
+		$fecha_cierre=date("d/m/Y H:i:s");
+		$tickete="
+----------------------------------------
+$nombreempresa_centrado
+            CIERRE DE CAJA
+----------------------------------------
+FECHA APERTURA: $fecha_apertura
+FECHA CIERRE: $fecha_cierre
+CAJERO: $cajero
+----------------------------------------
+MONTO APERTURA Gs:            ".formatomoneda($montoaper)."
+EFECTIVO                      ".formatomoneda($tefec)."
+TARJETAS                      ".formatomoneda($tarje)."
+----------------------------------------
+       NETO TEORICO GS: ".formatomoneda($teoricogs). "
+****************************************
+MONEDA NACIONAL               ".formatomoneda($tarquegs)."
+MONEDA EXTRA (CONV)           ".formatomoneda($textra)."
+
+FALTANTE                      ".formatomoneda($faltante)."
+SOBRANTE                      ".formatomoneda($sobrante)."
+****************************************
+             DESGLOCE BILLETES
+CANT         VALOR            SUBTOTAL
+----------------------------------------
+$add1				
+";
+		
+	$imprimir=1;
+		
+		
+}
+
+/*--------------------- FIN CIERRE DE CAJA -------------------------------------------------*/
+
+//traemos las facturas anuladas
+$buscar="Select numero,motivo,fechahora,usuario from facturas_anuladas
+inner join usuarios on usuarios.idusu=facturas_anuladas.cajero";
+$rsfal=$conexion->Execute($buscar) or die(errorpg($conexion,$buscar));
+
+?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<title><?php require("includes/title.php"); ?></title>
+
+<script>
+<?php if ($cerrado==1){?>
+function cerrado(){
+var loadi = '';
+	var central=<?php echo $central?>;
+	var quien='<?php echo "$cajero" ?>';
+	var fechahora=<?php echo "'$fechahora'" ?>;
+	var fechaapertura=<?php echo "'$fechaapertura'" ?>;
+	var apertura=<?php echo $montoapertura ?>;
+	var sobra=<?php echo $sobrantes ?>;
+	var faltante=<?php echo $faltantes ?>;
+	var totalefe=<?php echo $totalefectivo ?>;
+	var tarjetas=<?php echo $totaltarjeta ?>;
+	var tpagosdia=<?php echo $totalpagosdia ?>;
+	var tcobranza=<?php echo $totalcobrosdia ?>;
+	var entregas=<?php echo $totalentregags ?>;
+	var repo=<?php echo $totalreposicionesgs ?>;
+	var idcaja=<?php echo $idcaja?>;
+	
+	
+	var parametros='central='+central+'&quien='+quien+'&fechahora='+fechahora+'&apertura='+apertura+'&sobra='+sobra+'&falta='+faltante+'&efectivo='+totalefe+'&tarjetas='+tarjetas+'&pagosxcaja='+tpagosdia+'&tcobranza='+tcobranza+'&entregas='+entregas+'&repo='+repo+'&idcaja='+idcaja+'&fechacaja='+fechaapertura;
+	OpenPage('http://localhost/impresorweb/ladocliente.php',parametros,'POST','impresion',loadi);
+	
+}
+
+<?php } ?>
+function agregabb(){
+	var billete=document.getElementById('billeton').value;
+	var cantidad=document.getElementById('ofg').value;
+	var sidc=<?php echo $idcaja?>;
+	var parametros='idcaja='+sidc+'&billete='+billete+'&canti='+cantidad;
+	OpenPage('ar_billetes.php',parametros,'POST','billetitos','pred');
+	
+	
+}
+function agregabbm(){
+	var moneda=document.getElementById('moneda').value;
+	var canti=document.getElementById('cantimoneda').value;
+	var coti=document.getElementById('coti').value;
+	var sidc=<?php echo $idcaja?>;
+	var parametros='idcaja='+sidc+'&moneda='+moneda+'&canti='+canti+'&coti='+coti+'&mo=1';
+	OpenPage('ar_billetes.php',parametros,'POST','billetitos','pred');
+	
+	
+}
+function chb(valor){
+		var sidc=<?php echo $idcaja?>;
+	  if (valor!=''){
+	  	var parametros='idcaja='+sidc+'&chau='+valor;
+		OpenPage('ar_billetes.php',parametros,'POST','billetitos','pred');
+	  
+	  }
+  }
+  function chb2(valor){
+		var sidc=<?php echo $idcaja?>;
+	  if (valor!=''){
+	  	var parametros='idcaja='+sidc+'&chacu='+valor;
+		OpenPage('ar_billetes.php',parametros,'POST','billetitos','pred');
+	  
+	  }
+  }
+function recibirvalor(){
+	var errores='';
+	var montorecibe=document.getElementById('montorecibe').value;
+	var codigoauto=document.getElementById('codigoaure').value;
+	if (montorecibe==''){
+		errores=errores+'Debe indicar monto a recibir. \n';
+	} else {
+		if (montorecibe==0){
+			errores=errores+'Debe indicar monto a recibir. \n';
+		} 
+	}
+	if (codigoauto==''){
+		errores=errores+'Debe ingresar clave para autorizar \n';
+	}
+	if (errores!=''){
+		alertar('ATENCION: Algo salio mal.',errores,'error','Lo entiendo!');
+	} else {
+		document.getElementById('recibeval').submit();
+		
+	}
+	
+	
+}
+function sacarvalor(){
+	var errores='';
+	var montoentregar=document.getElementById('montoentrega').value;
+	var codigoauto=document.getElementById('codigoau').value;
+	if (montoentregar==''){
+		errores=errores+'Debe indicar monto a entregar. \n';
+	} else {
+		if (montoentregar==0){
+			errores=errores+'Debe indicar monto a entregar. \n';
+		} else {
+			var disponible=parseInt(document.getElementById('montodispo').value);
+			if (montoentregar > disponible){
+				errores=errores+'No dispone del valor ingresado para entregar. \n';
+				
+			}
+		}
+	}
+	if (codigoauto==''){
+		errores=errores+'Debe ingresar clave para autorizar \n';
+	}
+	if (errores!=''){
+		alertar('ATENCION: Algo salio mal.',errores,'error','Lo entiendo!');
+	} else {
+		document.getElementById('entregaval').submit();
+		
+	}
+	
+}
+function chaucaja(){
+swal({
+    title: "Esta seguro?",
+    text: "La caja no podra ser abierta nuevamente!",
+    type: "warning",
+    showCancelButton: true,
+    confirmButtonColor: '#DD6B55',
+    confirmButtonText: 'Si, cerrar caja.',
+    cancelButtonText: "No, esperar mas.",
+    closeOnConfirm: false,
+    closeOnCancel: false
+ },
+ function(isConfirm){
+
+   if (isConfirm){
+    	document.getElementById('cerrarcaja').submit();
+
+    } else {
+      swal("Cancelado", "La caja continua abierta", "error");
+    }
+ });	
+	
+	
+	
+	
+}
+function confirmado(cual){
+	if (cual==1){
+		 swal("Listo!", "Caja cerrada Correctamente", "success");	
+	}
+}
+<?php if ($imprimir==1){?>
+function imprimir(){
+	
+	var parametros='tk='+document.getElementById('tickete').value;
+	OpenPage('http://localhost/impresorweb/ladocliente.php',parametros,'POST','impresion','pred');
+	setTimeout(function(){ document.body.innerHTML='<meta http-equiv="refresh" content="0; url=gest_administrar_caja.php" />'; }, 200);
+}
+<?php }?>
+</script>
+<script src="js/sweetalert.min.js"></script>
+ <link rel="stylesheet" type="text/css" href="css/sweetalert.css">
+ <script>
+ function refa(){
+		document.getElementById('rf').submit(); 
+	 
+ }
+ function alertar(titulo,error,tipo,boton){
+	swal({   title: titulo,   text: error,   type: tipo,   confirmButtonText: boton });
+	}
+ </script>
+ <script src="js/jquery-1.9.1.js"></script>
+ <!--  Esto modificar para que el logo de cabecera no se deforme -->
+<!--  <link rel="stylesheet" href="css/main.css"> -->
+<!-- <link rel="stylesheet" href="css/docs.css"> -->
+<style>
+/*----- Tabs -----*/
+.tabs {
+    width:100%;
+    display:inline-block;
+}
+ 
+    /*----- Tab Links -----*/
+    /* Clearfix */
+    .tab-links:after {
+        display:block;
+        clear:both;
+        content:'';
+    }
+ 
+    .tab-links li {
+        margin:0px 5px;
+        float:left;
+        list-style:none;
+    }
+ 
+        .tab-links a {
+            padding:9px 15px;
+            display:inline-block;
+            border-radius:3px 3px 0px 0px;
+            background:#7FB5DA;
+            font-size:16px;
+            font-weight:600;
+            color:#4c4c4c;
+            transition:all linear 0.15s;
+        }
+ 
+        .tab-links a:hover {
+            background:#FFFFFF;
+            text-decoration:none;
+        }
+ 
+    li.active a, li.active a:hover {
+        background:#fff;
+        color:#4c4c4c;
+    }
+ 
+    /*----- Content of Tabs -----*/
+    .tab-content {
+        padding:15px;
+        border-radius:3px;
+        box-shadow:-1px 1px 1px rgba(0,0,0,0.15);
+        background:#fff;
+    }
+ 
+        .tab {
+            display:none;
+        }
+ 
+        .tab.active {
+            display:block;
+        }
+		
+</style>
+<script>
+
+  
+  jQuery(document).ready(function() {
+    jQuery('.tabs .tab-links a').on('click', function(e)  {
+        var currentAttrValue = jQuery(this).attr('href');
+ 
+        // Show/Hide Tabs
+        jQuery('.tabs ' + currentAttrValue).show().siblings().hide();
+ 
+        // Change/remove current tab to active
+        jQuery(this).parent('li').addClass('active').siblings().removeClass('active');
+ 
+        e.preventDefault();
+    });
+});
+</script>
+<?php require("includes/head.php"); ?>
+</head>
+<body bgcolor="#FFFFFF" onLoad="<?php if (intval($imprimir)==1){?> imprimir();<?php } ?><?php if ($cerrado==1){?>cerrado();<?php }?>">
+<?php require("includes/cabeza.php"); ?>    
+<div class="clear"></div>
+<div class="cuerpo">
+     
+	<?php if (intval($imprimir)==1){?>
+<textarea style="display:none;" id="tickete"><?php echo $tickete; ?></textarea>
+<?php }?>
+    <div id="impresion">
+    
+    </div>
+    
+    <div class="colcompleto" id="contenedor" style="min-height:1100px;">
+    <div align="center">
+     <a href="index.php"><img src="img/homeblue.png" width="64" height="64" title="Regresar" /></a>
+
+    </div>
+    
+    
+    		 <div class="resumenmini">
+                        <br />  
+               <strong><strong>Cajero:</strong> <span class="resaltarojomini"><?php echo $cajero; ?></span></strong>  
+                 <br /><br />
+                 <div align="center">
+                 <?php if ($errorfecha==2){?>
+                 	<span class="resaltarojomini">No se permite abrir caja de dias anteriores. <br />Seleccionado: <?php echo date("d-m-Y",strtotime($fechaek)); ?> </span>
+                 <?php }?>
+                 </div>
+                 <?php /* ?><form id="bfecha" name="abrecaja" action="gest_administrar_caja.php" method="post">
+                   <input type="date" name="fecha"  id="fecha" value="<?php echo $fechahoy ?>" min="<?php echo $ahora; ?>" />
+                    <input type="submit" name="abp" value="Buscar Caja" />
+       			</form><?php */ ?>
+               <?php if ($idcaja == 0){?>           
+              	
+                
+               <form id="abrecaja" name="abrecaja" action="gest_administrar_caja.php" method="post">
+               <table width="300px">
+               		<tr>
+                    	<td align="center" bgcolor="#C2F3F0"><strong>Fecha Apertura</strong></td>
+                    	<td height="31" align="center" bgcolor="#C2F3F0"><strong>Monto Inicial Gs</strong></td>
+                        <td align="center" bgcolor="#C2F3F0"><strong>Acci&oacute;n</strong></td>
+                    </tr>
+                    <tr>
+                    	<td align="center"><?php echo date("d-m-Y",strtotime($fechahoy)); ?></td>
+                   	  <td align="center"><input type="text" id="montoaper" name="montoaper" value="" style="width:80px;" required="required" onkeypress="return validar(event,'numero')"  onchange="this.value = get_numbers(this.value)" /></td>
+                        <td> <input type="submit" name="ab" value="Abrir Caja" /></td>
+                    </tr>
+               
+               </table>
+               
+                    <input type="hidden" name="abrirm"  id="abrirm" value="<?php echo $abre?>" />
+                    <input type="hidden" name="abrir" id="abrir" value="1" />
+                    <input type="hidden" name="selefe" id="selefe" value="<?php echo $fechahoy ?>" />
+                   
+   			   </form><br />
+               <?php } ?>
+               <?php if ($idcaja > 0){?>
+               
+               		<?php if ($estadocaja==1){ ?>
+                     <form id="cerrarcaja" name="cerrarcaja" action="gest_administrar_caja.php" method="post">
+                    <input type="hidden" name="ocidcaja" id="ocidcaja" value="<?php echo $idcaja?>" />
+                      <input type="hidden" name="cual" id="cual" value="3" />
+                      <input type="hidden" name="selefe" id="selefe" value="<?php echo $fechahoy ?>" />
+                    <input type="button" name="cv" value="Cerrar Caja" onclick="chaucaja()" />
+                    </form><br />
+					<?php }?>
+               
+               <?php } ?>
+   			 </div>
+          	 <div class="main" id="main">
+				<div class="container" style="height:auto;">
+                 <div align="center"><br />
+                 <?php if ($idcaja > 0 && $estadocaja == 1){ ?><br />
+                 <div style="text-align:center; font-weight:bold; cursor:pointer; width:180px; margin:0px auto;" onmouseup="document.location.href='gest_ventas_resto.php';">
+                 
+                 <img src="img/ventas.png" alt="" width="96" height="96"/><br /><br />Ir al Modulo de Ventas </div>
+                 <?php } ?>
+           		 <!----------------TABS----------------->
+          			 <div align="center"> <br />
+                     <hr />
+           				<div class="tabs">
+                            <ul class="tab-links">
+                                <li class="active"><a href="#tab1">Resumen</a></li>
+                                <li><a href="#tab2">Operaciones</a></li>
+                                <li><a href="#tab3">Ventas</a></li>
+                                
+                            </ul>
+                            <!------------------------------CONTENIDO TABS---------------------------------->
+                            <div class="tab-content">
+                                <div id="tab1" class="tab active">
+                               	  <?php require_once("rs_cajamini.php");?>
+                                    <div class="clear"></div>
+                                </div>
+                				 <div id="tab2" class="tab">
+                                 <?php if ($estadocaja==1){?>
+                               		<?php require_once("rs_operaciones.php");?>
+                                    <?php } else {?>
+                                    <span class="resaltarojomini">
+                                    	La caja se encuentra cerrada. no se permiten modificar / agregar operaciones
+                                    </span>
+                                    <?php } ?>
+                                     <div class="clear"></div>
+                                </div>
+                				 <div id="tab3" class="tab">
+                                 <?php if ($estadocaja==1){?>
+                               		<?php require_once("rs_caja_ventas.php");?>
+                                    <?php } else {?>
+                                    <span class="resaltarojomini">
+                                    	La caja se encuentra cerrada. no se permiten modificar / agregar operaciones
+                                    </span>
+                                    <?php } ?>
+                                     <div class="clear"></div>
+                                </div>
+                               
+                                
+                            </div>
+                            <!-------------------TAB CONTENT------------------>
+                        </div>
+					</div>
+       
+            	
+				</div><!-- /CONTAINER -->
+        	</div><!-- /MAIN -->
+     </div>
+	 <script>
+  function openCity(evt, cityName) {
+            var i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("tabcontent");
+            for (i = 0; i <= tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+            tablinks = document.getElementsByClassName("tablinks");
+            for (i = 0; i <= tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" active", "");
+            }
+            document.getElementById(cityName).style.display = "block";
+            evt.currentTarget.className += " active";
+ }
+		$(document).ready(function(){
+			var estado = false;
+ 		});
+       </script>	
+      <div class="clear"></div><!-- clear1 -->
+     </div> <!-- contenedor -->
+     <div class="clear"></div><!-- clear1 -->
+</div> <!-- cuerpo -->
+<div class="clear"></div><!-- clear2 -->
+<?php require("includes/pie.php"); ?>
+</body>
+</html>

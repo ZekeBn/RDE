@@ -1,0 +1,31 @@
+@charset "utf-8";
+/* CSS Document */
+body{
+	background-color:#FFFFFF;
+	
+	
+	
+	
+}
+.contienecentral{
+	background-image:url('../img/03.jpg') ;
+	background-repeat: no-repeat;
+	background-color:#FFF;
+	width:420px;
+	height:300px;
+	margin-top:12%;
+	margin-left:auto;
+	margin-right:auto; 
+	border:1px solid #0A0A0A;    
+	-webkit-box-shadow: 5px 5px 3px 0px rgba(50, 50, 50, 0.75);
+	-moz-box-shadow:    5px 5px 3px 0px rgba(50, 50, 50, 0.75);
+	box-shadow:         5px 5px 3px 0px rgba(50, 50, 50, 0.75);
+	border-radius: 27px 0px 48px 0px;
+  -moz-border-radius: 27px 0px 48px 0px;
+  -webkit-border-radius: 27px 0px 48px 0px;
+	
+	
+	
+	
+	
+}

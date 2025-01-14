@@ -1,0 +1,1 @@
+ALTER TABLE `puertos` CHANGE `descricripcion` `descripcion` VARCHAR(200) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL;
