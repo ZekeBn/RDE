@@ -1,10 +1,10 @@
 <?php
 require_once("../includes/conexion.php");
-require_once("../includes/funciones.php");
-
+    require_once("../includes/funciones.php");
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Leer los datos enviados desde JavaScript (formulario + tabla)
     $data = json_decode(file_get_contents('php://input'), true);
+    echo  "cliente " . $data['cliente'] . " productos " . $data['productos'] ;
 
     if (!empty($data['cliente']) && !empty($data['productos'])) {
         try {
@@ -12,12 +12,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $idcliente = antisqlinyeccion($data['cliente'], 'int');
 
             $consultaCliente = "SELECT nombre, apellido, direccion, documento, celular 
-                                FROM cliente WHERE idcliente = '$idcliente'";
+                                FROM cliente WHERE idcliente = " . $idcliente;
             $rsCliente = $conexion->Execute($consultaCliente) or die(errorpg($conexion, $consultaCliente));
 
             if ($rsCliente->EOF) {
                 throw new Exception('Cliente no encontrado en la base de datos.');
             }
+
+            echo $rsCliente->fields;
 
             $clienteData = $rsCliente->fields;
             $nombres = $clienteData['nombre'];
@@ -58,7 +60,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $totalgs += $subtotal;
 
                 $consultaDetalle = "INSERT INTO pedidos_detalles (
-                    idpedido, cantidad, idprod, precio_venta, subtotal
+                    idpedido, cantidad, cod_articulo, precio_unitario, monto_total
                 ) VALUES (
                     '$idPedido', '$cantidad', '$idprod', '$precio_venta', '$subtotal'
                 )";

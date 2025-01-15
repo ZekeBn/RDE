@@ -31,7 +31,6 @@ if (!empty($cliente)) {
 }
 
 $rs = $conexion->Execute($consulta) or die(errorpg($conexion, $consulta));
-
 ?>
 
 <!DOCTYPE html>

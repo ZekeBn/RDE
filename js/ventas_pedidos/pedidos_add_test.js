@@ -47,6 +47,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Función para finalizar el pedido y enviar todos los datos al servidor
     botonFinalizar.addEventListener('click', () => {
+        console.log("llega boton finalizar");
         const datosPedido = {};
         const formRegistro = document.getElementById('formRegistro');
 
@@ -55,6 +56,7 @@ document.addEventListener('DOMContentLoaded', () => {
         formData.forEach((value, key) => {
             datosPedido[key] = value;
         });
+        console.log(JSON.stringify(datosPedido));
 
         // Capturar los datos de la tabla
         const filas = tablaProductos.getElementsByTagName('tr');
@@ -74,6 +76,9 @@ document.addEventListener('DOMContentLoaded', () => {
             productos.push(filaDatos);
         });
 
+        console.log("filas "+filas);
+        console.log("productos ");
+        console.log(productos);
         datosPedido.productos = productos;
 
         // Enviar los datos al servidor
