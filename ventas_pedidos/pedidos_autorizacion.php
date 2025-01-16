@@ -2,35 +2,26 @@
 require_once("../includes/conexion.php");
 require_once("../includes/funciones.php");
 
-// Module name this file belongs to
+$dirsup = 'S';
 $modulo = "1";
-$submodulo = "2";   
-$dirsup = "S";
+$submodulo = "31";
 require_once("../includes/rsusuario.php");
 
-$sucursal = $_POST['sucursal'] ?? '';
-$fechapedido = $_POST['fechapedido'] ?? '';
-$numpedido = $_POST['numpedido'] ?? '';
-$cliente = $_POST['cliente'] ?? '';
-
-$consulta = "SELECT idpedido, fechapedido, idempresa, idcliente, registrado_por, estado, procesado, totalgs, anulado_el, anulado_por 
-             FROM pedidos
-             WHERE 1=1";
-
-if (!empty($sucursal)) {
-    $consulta .= " AND idsucu = " . $conexion->qstr($sucursal);
-}
-if (!empty($fechapedido)) {
-    $consulta .= " AND fechapedido = " . $conexion->qstr($fechapedido);
-}
-if (!empty($numpedido)) {
-    $consulta .= " AND idpedido = " . $conexion->qstr($numpedido);
-}
-if (!empty($cliente)) {
-    $consulta .= " AND idcliente = " . $conexion->qstr($cliente);
-}
+$consulta = "
+SELECT 
+    p.estado,
+    1 as tipo,
+    2 as serie,
+    3 as nro,
+    p.idcliente,
+    p.fechapedido,
+    p.totalgs
+FROM rde.pedidos p
+LEFT JOIN rde.cliente c ON p.idcliente = c.idcliente
+ORDER BY p.fechapedido DESC";
 
 $rs = $conexion->Execute($consulta) or die(errorpg($conexion, $consulta));
+
 ?>
 
 <!DOCTYPE html>
@@ -65,11 +56,11 @@ $rs = $conexion->Execute($consulta) or die(errorpg($conexion, $consulta));
                                                     <option value="">Seleccione una Sucursal</option>
                                                     <?php
                                                     $consulta = "SELECT idsucu, nombre FROM sucursales;";
-                                                    $rs = $conexion->Execute($consulta) or die(errorpg($conexion, $consulta));
-                                                    while (!$rs->EOF) {
-                                                        $row = $rs->fields;
+                                                    $rs1 = $conexion->Execute($consulta) or die(errorpg($conexion, $consulta));
+                                                    while (!$rs1->EOF) {
+                                                        $row = $rs1->fields;
                                                         echo "<option value=\"{$row['idsucu']}\">{$row['nombre']}</option>";
-                                                        $rs->MoveNext();
+                                                        $rs1->MoveNext();
                                                     }
                                                     ?>
                                                 </select>
@@ -94,11 +85,11 @@ $rs = $conexion->Execute($consulta) or die(errorpg($conexion, $consulta));
                                                     <option value="">Seleccione un Cliente</option>
                                                     <?php
                                                     $consulta = "SELECT idcliente, CONCAT(nombre, ' ', COALESCE(apellido, '')) as nom FROM cliente;";
-                                                    $rs = $conexion->Execute($consulta) or die(errorpg($conexion, $consulta));
-                                                    while (!$rs->EOF) {
-                                                        $row = $rs->fields;
+                                                    $rs2 = $conexion->Execute($consulta) or die(errorpg($conexion, $consulta));
+                                                    while (!$rs2->EOF) {
+                                                        $row = $rs2->fields;
                                                         echo "<option value=\"{$row['idcliente']}\">{$row['nom']}</option>";
-                                                        $rs->MoveNext();
+                                                        $rs2->MoveNext();
                                                     }
                                                     ?>
                                                 </select> 
@@ -136,19 +127,21 @@ $rs = $conexion->Execute($consulta) or die(errorpg($conexion, $consulta));
                                         <tbody>
                                             <?php while (!$rs->EOF) { ?>
                                                 <tr class="estado_<?php echo $rs->fields['estado']; ?>">
-                                                    <td><?php echo $rs->fields['idpedido']; ?></td>
                                                     <td><?php echo $rs->fields['estado']; ?></td>
+                                                    <td>tipo</td>
+                                                    <td>serie</td>
+                                                    <td>nro</td>
+                                                    
                                                     <td><?php echo $rs->fields['fechapedido']; ?></td>
                                                     <td><?php echo $rs->fields['idcliente']; ?></td>
                                                     <td><?php echo $rs->fields['totalgs']; ?></td>
-                                                    <td></td>
-                                                    <td></td>
                                                     <td><input type="checkbox"></td>
-                                                    <td></td>
-                                                    <td></td>
+                                                    <td><input type="text"></td>
+                                                    <td><input type="text"></td>
+                                                    
                                                     <td><input type="checkbox"></td>
-                                                    <td></td>
-                                                    <td></td>
+                                                    <td><input type="text"></td>
+                                                    <td><input type="text"></td>
                                                     <td>
                                                         <a href="pedidos_det.php?idpedido=<?php echo $rs->fields['idpedido']; ?>" class="btn btn-sm btn-success" title="Ver Detalle">
                                                             <i class="fa fa-search"></i>

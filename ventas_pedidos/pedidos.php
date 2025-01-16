@@ -25,11 +25,11 @@ $rs = $conexion->Execute($consulta) or die(errorpg($conexion, $consulta));
 // Función para obtener el estado del pedido
 function obtenerEstadoPedido($estado) {
     switch ($estado) {
-        case 3: return 'Anulado';
-        case 2: return 'Completo';
-        case 0: return 'Pendiente';
-        case 1: return 'Autorizado';
-        default: return 'Desconocido';
+        case 3: return 'anulado'; // Asegúrate de que coincida con la clase CSS
+        case 2: return 'completo';
+        case 0: return 'pendiente';
+        case 1: return 'autorizado';
+        default: return 'desconocido'; // Clase para estados desconocidos
     }
 }
 ?>
@@ -39,10 +39,6 @@ function obtenerEstadoPedido($estado) {
 <head>
     <?php require_once("../includes/head_gen.php"); ?>
     <style>
-        tbody tr:hover td {
-            color: #73879C !important;
-        }
-
         .estado_anulado {
             background: #FF6F61;
             font-weight: bold;
@@ -60,9 +56,14 @@ function obtenerEstadoPedido($estado) {
         }
 
         .estado_autorizado {
-            background:rgb(50, 175, 73);
+            background: rgb(50, 175, 73);
             font-weight: bold;
             color: white;
+        }
+
+        .estado_desconocido {
+            background: #f0f0f0;
+            font-weight: bold;
         }
     </style>
 </head>
@@ -90,8 +91,7 @@ function obtenerEstadoPedido($estado) {
                             <div class="x_content">
                                 <p>
                                     <a href="pedidos_add.php" class="btn btn-sm btn-primary"><span class="fa fa-plus"></span> Nuevo Pedido</a>
-                                    <a href="pedidos_genera_factura.php" class="btn btn-sm btn-primary"><span class="fa fa-file"></span> Generar Factura</a>
-                                    
+                                    <a href="pedidos_genera_factura.php" class="btn btn-sm btn-primary"><span class="fa fa-file"></span> Generar Factura</a>                                  
                                 </p>
                                 <div class="table-responsive">
                                     <table class="table table-striped table-bordered jambo_table bulk_action">
@@ -107,22 +107,20 @@ function obtenerEstadoPedido($estado) {
                                         </thead>
                                         <tbody>
                                             <?php while (!$rs->EOF) { 
-                                                $estado = strtolower(obtenerEstadoPedido($rs->fields['estado']));
+                                                $estado = obtenerEstadoPedido($rs->fields['estado']); // Aquí obtenemos el estado correctamente
                                             ?>
-                                                <tr class="estado_<?php echo $estado; ?>">
+                                                <tr class="estado_<?php echo $estado; ?>"> <!-- Aplicamos la clase correcta -->
                                                     <td><?php echo $rs->fields['idpedido']; ?></td>
                                                     <td><?php echo date("d/m/Y H:i", strtotime($rs->fields['fechapedido'])); ?></td>
                                                     <td><?php echo $rs->fields['cliente_nombre'] . ' ' . $rs->fields['cliente_apellido']; ?></td>
                                                     <td><?php echo number_format($rs->fields['totalgs'], 2, ',', '.'); ?></td>
-                                                    <td><?php echo obtenerEstadoPedido($rs->fields['estado']); ?></td>
+                                                    <td><?php echo ucfirst($estado); ?></td>
                                                     <td>
                                                         <div class="btn-group">
                                                             <a href="pedidos_det.php?id=<?php echo $rs->fields['idpedido']; ?>" class="btn btn-sm btn-info" title="Ver Detalle"><i class="fa fa-eye"></i></a>
                                                             <a href="pedidos_edit.php?id=<?php echo $rs->fields['idpedido']; ?>" class="btn btn-sm btn-warning" title="Editar Pedido"><i class="fa fa-edit"></i></a>
-                                                            <a href="pedidos_del.php?id=<?php echo $rs->fields['idpedido']; ?>" class="btn btn-sm btn-danger" title="Eliminar Pedido" onclick="return confirm('¿Está seguro de eliminar este pedido?');"><i class="fa fa-trash"></i></a>
-                                                            <a href="pedidos_autorizacion.php?id=<?php echo $rs->fields['idpedido']; ?>&accion=autorizar" class="btn btn-sm btn-success" title="Autorizar Pedido"><i class="fa fa-check"></i></a>
-                                                            <a href="pedidos_autorizacion.php?id=<?php echo $rs->fields['idpedido']; ?>&accion=anular" class="btn btn-sm btn-secondary" title="Anular Pedido"><i class="fa fa-times"></i></a>
-                                                        </div>
+                                                            <a href="pedidos_autorizacion.php?id=<?php echo $rs->fields['idpedido']; ?>" class="btn btn-sm btn-success" title="Autorizaciones"><i class="fa fa-check"></i></a>
+                                                         </div>
                                                     </td>
                                                 </tr>
                                             <?php $rs->MoveNext();
@@ -130,14 +128,13 @@ function obtenerEstadoPedido($estado) {
                                         </tbody>
                                     </table>
                                 </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
             <?php require_once("../includes/pie_gen.php"); ?>
         </div>
     </div>
     <?php require_once("../includes/footer_gen.php"); ?>
 </body>
-
 </html>
