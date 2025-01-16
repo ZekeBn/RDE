@@ -166,6 +166,56 @@ if (!file_exists($img)) {
     font-weight: bold;
     width: 100%;
   }
+
+  #sidebar-menu {
+    height: calc(100vh - 60px);
+    overflow-y: auto;
+    overflow-x: hidden;
+    background-color: #2A3F54;
+    padding: 10px;
+  }
+
+  /* Estilo para la barra de scroll */
+#sidebar-menu::-webkit-scrollbar {
+  width: 8px; /* Ancho de la barra */
+}
+
+#sidebar-menu::-webkit-scrollbar-thumb:hover {
+  background-color: #3E5368; /* Color de la barra al pasar el cursor */
+}
+
+#menu_left {
+    position: fixed; /* Fija el menú lateral */
+    top: 0;
+    left: 0;
+    height: 100%; 
+    overflow-y: auto; 
+    z-index: 9999;
+    width: 250px; 
+}
+
+.right_col {
+    margin-left: 250px;
+    padding-top: 50px; 
+    overflow-y: auto;
+    height: 100vh; 
+}
+
+/* Si usas un scroll en el contenido principal */
+.right_col::-webkit-scrollbar {
+    width: 8px;
+}
+
+.right_col::-webkit-scrollbar-thumb {
+    background-color: #73879C;
+    border-radius: 4px;
+}
+
+.right_col::-webkit-scrollbar-track {
+    background-color: #f1f1f1;
+}
+
+
 </style>
 
 <div class="col-md-3 left_col">
